@@ -25,7 +25,7 @@ export function LeadsTable({ leads }: LeadsTableProps) {
           <thead className="bg-[rgba(255,255,255,0.04)] text-xs uppercase tracking-[0.2em] text-slate-500">
             <tr>
               <th className="px-5 py-4">Клиент</th>
-              <th className="px-5 py-4">Услуга</th>
+              <th className="px-5 py-4">Услуга и модель</th>
               <th className="px-5 py-4">Комментарий</th>
               <th className="px-5 py-4">Статус</th>
               <th className="px-5 py-4">Дата</th>
@@ -49,7 +49,10 @@ export function LeadsTable({ leads }: LeadsTableProps) {
                   </div>
                 </td>
                 <td className="px-5 py-5 text-sm text-slate-300">
-                  {lead.service || "Не выбрано"}
+                  <div className="grid gap-2">
+                    <span>{lead.service || "Не выбрано"}</span>
+                    <span className="text-slate-500">Модель: {lead.model || "Не выбрано"}</span>
+                  </div>
                 </td>
                 <td className="px-5 py-5 text-sm leading-7 text-slate-400">
                   {lead.comment || "Без комментария"}

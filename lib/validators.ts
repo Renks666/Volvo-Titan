@@ -1,17 +1,16 @@
 import { z } from "zod";
 
+const phonePattern = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
+
 export const leadFormSchema = z.object({
   name: z.string().trim().max(120, "Слишком длинное имя"),
   phone: z
     .string()
     .trim()
-    .min(6, "Укажите телефон")
-    .max(32, "Слишком длинный номер"),
+    .regex(phonePattern, "Укажите телефон в формате +7 (999) 123-45-67"),
+  model: z.string().trim().max(120, "Слишком длинное название модели"),
   service: z.string().trim().max(120, "Слишком длинное название услуги"),
-  comment: z
-    .string()
-    .trim()
-    .max(1000, "Комментарий слишком длинный"),
+  comment: z.string().trim().max(1000, "Комментарий слишком длинный"),
 });
 
 export const adminSignInSchema = z.object({

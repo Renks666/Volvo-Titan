@@ -4,6 +4,7 @@ export interface LeadRecord {
   id: string;
   name: string | null;
   phone: string;
+  model: string | null;
   service: string | null;
   comment: string | null;
   status: LeadStatus;
@@ -13,6 +14,7 @@ export interface LeadRecord {
 export interface LeadFormValues {
   name: string;
   phone: string;
+  model: string;
   service: string;
   comment: string;
 }

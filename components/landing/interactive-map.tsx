@@ -29,7 +29,18 @@ type YandexMapsNamespace = {
   templateLayoutFactory: {
     createClass: (template: string) => unknown;
   };
+  geocode: (query: string, options?: Record<string, unknown>) => Promise<YandexGeocodeResult>;
   ready: (callback: () => void) => void;
+};
+
+type YandexGeocodeResult = {
+  geoObjects: {
+    get: (index: number) => {
+      geometry?: {
+        getCoordinates: () => [number, number];
+      };
+    } | null;
+  };
 };
 
 type YandexMapInstance = {
@@ -42,6 +53,11 @@ type YandexMapInstance = {
   behaviors: {
     disable: (behaviorName: string) => void;
   };
+  options?: {
+    set: (name: string, value: unknown) => void;
+  };
+  getZoom: () => number;
+  setZoom: (zoom: number, options?: Record<string, unknown>) => void;
   destroy: () => void;
   container: {
     fitToViewport: () => void;
@@ -59,12 +75,21 @@ const MAP_COORDINATES: [number, number] = [
   CONTACT_INFO.coordinates.latitude,
   CONTACT_INFO.coordinates.longitude,
 ];
+const MAP_MARKER_ADDRESS_LINE_1 = "Москва, ул. Измайловского";
+const MAP_MARKER_ADDRESS_LINE_2 = "Зверинца 8, подъезд 1А";
 
 const CUSTOM_MARKER_TEMPLATE = `
   <div class="vt-map-marker" role="presentation">
-    <div class="vt-map-marker__core">
-      <span class="vt-map-marker__ring"></span>
-      <span class="vt-map-marker__logo">VT</span>
+    <div class="vt-map-marker__pill">
+      <div class="vt-map-marker__logo-frame">
+        <span class="vt-map-marker__logo" aria-hidden="true"></span>
+      </div>
+      <div class="vt-map-marker__content">
+        <span class="vt-map-marker__address">
+          <span class="vt-map-marker__address-line">${MAP_MARKER_ADDRESS_LINE_1}</span>
+          <span class="vt-map-marker__address-line">${MAP_MARKER_ADDRESS_LINE_2}</span>
+        </span>
+      </div>
     </div>
     <div class="vt-map-marker__shadow"></div>
   </div>
@@ -123,6 +148,24 @@ export function InteractiveMap() {
   const [hasScriptError, setHasScriptError] = useState(false);
   const [isMapReady, setIsMapReady] = useState(false);
 
+  const handleZoom = (direction: "in" | "out") => {
+    const map = mapRef.current;
+
+    if (!map) {
+      return;
+    }
+
+    const currentZoom = map.getZoom();
+    const nextZoom = direction === "in" ? currentZoom + 1 : currentZoom - 1;
+    const boundedZoom = Math.min(19, Math.max(12, nextZoom));
+
+    if (boundedZoom === currentZoom) {
+      return;
+    }
+
+    map.setZoom(boundedZoom, { duration: 180 });
+  };
+
   useEffect(() => {
     if (!API_KEY || !scriptReady || hasScriptError || !mapNodeRef.current) {
       return;
@@ -136,71 +179,93 @@ export function InteractiveMap() {
     let cancelled = false;
 
     ymaps.ready(() => {
-      if (cancelled || !mapNodeRef.current || mapRef.current) {
-        return;
-      }
-
-      const markerLayout = ymaps.templateLayoutFactory.createClass(CUSTOM_MARKER_TEMPLATE);
-      const map = new ymaps.Map(
-        mapNodeRef.current,
-        {
-          center: MAP_COORDINATES,
-          zoom: CONTACT_INFO.mapZoom,
-          controls: [],
-        },
-        {
-          suppressMapOpenBlock: true,
-          yandexMapDisablePoiInteractivity: true,
-        },
-      );
-
-      const placemark = new ymaps.Placemark(
-        MAP_COORDINATES,
-        {
-          balloonContentHeader: CONTACT_INFO.companyName,
-          balloonContentBody: CONTACT_INFO.address,
-          hintContent: CONTACT_INFO.mapHint,
-        },
-        {
-          iconLayout: markerLayout,
-          iconShape: {
-            type: "Rectangle",
-            coordinates: [
-              [-28, -70],
-              [28, 0],
-            ],
-          },
-        },
-      );
-
-      map.geoObjects.add(placemark);
-      map.behaviors.disable("scrollZoom");
-
-      const controlsToRemove = [
-        "searchControl",
-        "trafficControl",
-        "typeSelector",
-        "fullscreenControl",
-        "zoomControl",
-        "rulerControl",
-        "geolocationControl",
-      ];
-
-      controlsToRemove.forEach((controlName) => {
-        try {
-          map.controls.remove(controlName);
-        } catch {
-          // The control might be absent depending on provider defaults.
+      void (async () => {
+        if (cancelled || !mapNodeRef.current || mapRef.current) {
+          return;
         }
-      });
 
-      placemark.events?.add("click", () => {
-        window.open(CONTACT_INFO.mapOpenUrl, "_blank", "noopener,noreferrer");
-      });
+        let resolvedCoordinates = MAP_COORDINATES;
 
-      map.container.fitToViewport();
-      mapRef.current = map;
-      setIsMapReady(true);
+        try {
+          const geocodeResult = await ymaps.geocode(CONTACT_INFO.address, {
+            results: 1,
+          });
+          const firstGeoObject = geocodeResult.geoObjects.get(0);
+          const geocodedCoordinates = firstGeoObject?.geometry?.getCoordinates();
+
+          if (geocodedCoordinates) {
+            resolvedCoordinates = geocodedCoordinates;
+          }
+        } catch {
+          // Keep fallback coordinates if geocoding is temporarily unavailable.
+        }
+
+        if (cancelled || !mapNodeRef.current || mapRef.current) {
+          return;
+        }
+
+        const markerLayout = ymaps.templateLayoutFactory.createClass(CUSTOM_MARKER_TEMPLATE);
+        const map = new ymaps.Map(
+          mapNodeRef.current,
+          {
+            center: resolvedCoordinates,
+            zoom: CONTACT_INFO.mapZoom,
+            controls: [],
+          },
+          {
+            suppressMapOpenBlock: true,
+            yandexMapDisablePoiInteractivity: true,
+          },
+        );
+
+        const placemark = new ymaps.Placemark(
+          resolvedCoordinates,
+          {
+            balloonContentHeader: CONTACT_INFO.companyName,
+            balloonContentBody: CONTACT_INFO.address,
+            hintContent: CONTACT_INFO.mapHint,
+          },
+          {
+            iconLayout: markerLayout,
+            iconShape: {
+              type: "Rectangle",
+              coordinates: [
+                [-286, -40],
+                [0, 40],
+              ],
+            },
+          },
+        );
+
+        map.geoObjects.add(placemark);
+        map.options?.set("minZoom", 12);
+        map.options?.set("maxZoom", 19);
+
+        const controlsToRemove = [
+          "searchControl",
+          "trafficControl",
+          "typeSelector",
+          "fullscreenControl",
+          "rulerControl",
+          "geolocationControl",
+        ];
+
+        controlsToRemove.forEach((controlName) => {
+          try {
+            map.controls.remove(controlName);
+          } catch {
+            // The control might be absent depending on provider defaults.
+          }
+        });
+
+        placemark.events?.add("click", () => {
+          window.open(CONTACT_INFO.mapOpenUrl, "_blank", "noopener,noreferrer");
+        });
+
+        map.container.fitToViewport();
+        mapRef.current = map;
+        setIsMapReady(true);
+      })();
     });
 
     return () => {
@@ -215,7 +280,7 @@ export function InteractiveMap() {
   }
 
   return (
-    <div className="relative h-full w-full overflow-hidden bg-[radial-gradient(circle_at_20%_20%,rgba(126,164,255,0.18),transparent_30%),linear-gradient(180deg,rgba(5,12,22,0.92),rgba(6,10,17,0.98))]">
+    <div className="relative h-full w-full overflow-hidden bg-[linear-gradient(180deg,rgba(7,13,24,0.06),rgba(7,13,24,0.12))]">
       <Script
         id="yandex-maps-api"
         src={`https://api-maps.yandex.ru/2.1/?apikey=${API_KEY}&lang=ru_RU`}
@@ -247,9 +312,28 @@ export function InteractiveMap() {
         }
       />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(3,7,13,0),rgba(3,7,13,0.82))]" />
-      <div className="pointer-events-none absolute left-4 top-4 rounded-full border border-white/10 bg-[rgba(6,13,23,0.78)] px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-[var(--steel)] backdrop-blur-md md:left-6 md:top-6">
-        Volvo Titan
+      <div className="absolute left-3 top-1/2 z-[5] flex -translate-y-1/2 flex-col gap-2 md:left-4">
+        <button
+          type="button"
+          aria-label="Приблизить карту"
+          onClick={() => handleZoom("in")}
+          className="vt-map-zoom-button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" className="vt-map-zoom-icon">
+            <path d="M12 7v10" />
+            <path d="M7 12h10" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          aria-label="Отдалить карту"
+          onClick={() => handleZoom("out")}
+          className="vt-map-zoom-button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" className="vt-map-zoom-icon">
+            <path d="M7 12h10" />
+          </svg>
+        </button>
       </div>
     </div>
   );

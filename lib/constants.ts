@@ -37,7 +37,7 @@ export const CONTACT_INFO = {
 export const NAV_ITEMS = [
   { href: "#benefits", label: "Преимущества" },
   { href: "#services", label: "Услуги" },
-  { href: "#lead-form", label: "Запись" },
+  { href: "#lead", label: "Запись" },
   { href: "#contacts", label: "Контакты" },
 ] as const;
 
@@ -83,9 +83,32 @@ export const SERVICES = [
   { slug: "bodywork", name: "Кузовной ремонт", price: "по запросу" },
 ] as const;
 
-export const SERVICE_OPTIONS = SERVICES.map((service) => ({
-  value: service.name,
-  label: service.name,
+export const SERVICE_OPTIONS: Array<{ value: string; label: string }> = [
+  ...SERVICES.map((service) => ({
+    value: service.name,
+    label: service.name,
+  })),
+  { value: "Другое", label: "Другое" },
+];
+
+export const VOLVO_MODEL_OPTIONS = [
+  "XC90",
+  "XC60",
+  "XC70",
+  "XC40",
+  "S60",
+  "S80",
+  "S90",
+  "V40",
+  "V60",
+  "V70",
+  "V90",
+  "C30",
+  "C70",
+  "Другая модель",
+].map((model) => ({
+  value: model,
+  label: model,
 }));
 
 export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {

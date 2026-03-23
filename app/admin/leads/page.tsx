@@ -50,7 +50,7 @@ export default async function AdminLeadsPage({ searchParams }: LeadsPageProps) {
   if (query) {
     const escapedQuery = query.replace(/,/g, " ");
     leadQuery = leadQuery.or(
-      `name.ilike.%${escapedQuery}%,phone.ilike.%${escapedQuery}%,comment.ilike.%${escapedQuery}%`,
+      `name.ilike.%${escapedQuery}%,phone.ilike.%${escapedQuery}%,model.ilike.%${escapedQuery}%,comment.ilike.%${escapedQuery}%`,
     );
   }
 

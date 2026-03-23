@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import { logoutAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
+import { Select } from "@/components/ui/select";
 import { CONTACT_INFO, LEAD_STATUS_OPTIONS, SERVICE_OPTIONS } from "@/lib/constants";
 
 interface DashboardShellProps {
@@ -29,7 +30,7 @@ export function DashboardShell({ children, counts, filters }: DashboardShellProp
             <h1 className="mt-3 font-heading text-3xl text-white">Заявки автосервиса</h1>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400">
               Вся входящая лидогенерация с сайта складывается сюда. Меняйте статус,
-              ищите по телефону или услуге и держите ответы клиентам под контролем.
+              ищите по телефону, модели или услуге и держите ответы клиентам под контролем.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -70,41 +71,30 @@ export function DashboardShell({ children, counts, filters }: DashboardShellProp
                 <input
                   name="q"
                   defaultValue={filters.query}
-                  placeholder="Имя, телефон, комментарий"
+                  placeholder="Имя, телефон, модель, комментарий"
                   className="h-12 w-full rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.06)] pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-white/30"
                 />
               </div>
             </label>
             <label className="grid gap-2 text-sm text-slate-300">
               Статус
-              <select
+              <Select
+                id="admin-status-filter"
                 name="status"
                 defaultValue={filters.status}
-                className="h-12 rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.06)] px-4 text-sm text-white outline-none focus:border-white/30"
-              >
-                {LEAD_STATUS_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value} className="bg-slate-950">
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+                options={LEAD_STATUS_OPTIONS}
+                placeholder="Все статусы"
+              />
             </label>
             <label className="grid gap-2 text-sm text-slate-300">
               Услуга
-              <select
+              <Select
+                id="admin-service-filter"
                 name="service"
                 defaultValue={filters.service}
-                className="h-12 rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.06)] px-4 text-sm text-white outline-none focus:border-white/30"
-              >
-                <option value="all" className="bg-slate-950">
-                  Все услуги
-                </option>
-                {SERVICE_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value} className="bg-slate-950">
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+                options={[{ value: "all", label: "Все услуги" }, ...SERVICE_OPTIONS]}
+                placeholder="Все услуги"
+              />
             </label>
             <Button type="submit" variant="secondary" className="w-full lg:w-auto">
               <BarChart3 className="mr-2 h-4 w-4" />

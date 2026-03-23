@@ -1,15 +1,28 @@
 "use client";
 
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useEffectEvent, useMemo, useState } from "react";
 import { Menu, PhoneCall, X } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
+import {
+  OverlayBackdrop,
+  OverlayPanel,
+  useBodyScrollLock,
+  useEscapeKey,
+} from "@/components/ui/overlay";
 import { CONTACT_INFO, NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/utils/cn";
 import { trackCtaEvent } from "@/utils/analytics";
 
-const NAVBAR_SECTION_IDS = ["hero", "benefits", "services", "lead-form", "contacts"] as const;
+const LANDING_TOP_ID = "top";
+const HERO_SECTION_ID = "hero";
+const NAVBAR_SCROLL_OFFSET = 104;
+const NAVBAR_SCROLL_OFFSETS: Record<string, number> = {
+  services: 35,
+  contacts: 40,
+};
 
 type SiteNavbarProps = {
   items?: ReadonlyArray<{
@@ -21,17 +34,21 @@ type SiteNavbarProps = {
 export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeId, setActiveId] = useState<string>("hero");
+  const [activeId, setActiveId] = useState<string>(HERO_SECTION_ID);
 
   const navItems = useMemo(() => items.map((item) => ({ ...item })), [items]);
+  const trackedSectionIds = useMemo(
+    () => [HERO_SECTION_ID, ...navItems.map((item) => item.href.replace(/^#/, ""))],
+    [navItems],
+  );
 
   const syncNavbarState = useEffectEvent(() => {
     const scrollY = window.scrollY;
     setIsScrolled(scrollY > 20);
 
-    let currentSection = "hero";
+    let currentSection = HERO_SECTION_ID;
 
-    for (const sectionId of NAVBAR_SECTION_IDS) {
+    for (const sectionId of trackedSectionIds) {
       const section = document.getElementById(sectionId);
 
       if (!section) {
@@ -48,6 +65,25 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
     setActiveId(currentSection);
   });
 
+  const scrollToHref = (href: string) => {
+    const targetId = href.replace(/^#/, "");
+    const isTopTarget = targetId === LANDING_TOP_ID;
+    const target = document.getElementById(targetId);
+    const scrollOffset = NAVBAR_SCROLL_OFFSETS[targetId] ?? NAVBAR_SCROLL_OFFSET;
+
+    if (!target) {
+      return;
+    }
+
+    const nextTop = isTopTarget
+      ? 0
+      : Math.max(window.scrollY + target.getBoundingClientRect().top - scrollOffset, 0);
+
+    window.history.pushState(null, "", href);
+    window.scrollTo({ top: nextTop, behavior: "smooth" });
+    setActiveId(isTopTarget ? HERO_SECTION_ID : targetId);
+  };
+
   useEffect(() => {
     syncNavbarState();
 
@@ -62,33 +98,20 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
     };
   }, []);
 
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
-
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    }
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [isOpen]);
+  useBodyScrollLock(isOpen);
+  useEscapeKey(isOpen, () => setIsOpen(false));
 
   const closeMenu = () => setIsOpen(false);
-
   const getIsActive = (href: string) => href === `#${activeId}`;
+  const handleAnchorNavigation = (href: string, options?: { closeMenu?: boolean }) => {
+    if (options?.closeMenu) {
+      setIsOpen(false);
+      window.setTimeout(() => scrollToHref(href), 20);
+      return;
+    }
+
+    scrollToHref(href);
+  };
 
   return (
     <>
@@ -105,7 +128,10 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
             href="#top"
             className="group flex items-center rounded-full px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
             aria-label="Volvo Titan — вверх страницы"
-            onClick={closeMenu}
+            onClick={(event) => {
+              event.preventDefault();
+              handleAnchorNavigation("#top", { closeMenu: isOpen });
+            }}
           >
             <Image
               src="/brand/volvo-titan-mark-mobile.png"
@@ -131,6 +157,10 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                   "rounded-full px-4 py-2 text-sm font-medium text-slate-300 transition hover:bg-white/8 hover:text-white",
                   getIsActive(item.href) && "bg-white/10 text-white",
                 )}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleAnchorNavigation(item.href);
+                }}
               >
                 {item.label}
               </a>
@@ -146,8 +176,12 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               {CONTACT_INFO.phoneDisplay}
             </a>
             <a
-              href="#lead-form"
-              onClick={() => trackCtaEvent("lead_cta_click", { location: "navbar" })}
+              href="#lead"
+              onClick={(event) => {
+                event.preventDefault();
+                trackCtaEvent("lead_cta_click", { location: "navbar" });
+                handleAnchorNavigation("#lead");
+              }}
             >
               <Button className="h-11 px-5">
                 <PhoneCall className="mr-2 h-4 w-4" />
@@ -162,75 +196,80 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
             aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={isOpen}
             aria-controls="mobile-nav-drawer"
-            onClick={() => setIsOpen((value) => !value)}
+            onClick={() => setIsOpen((current) => !current)}
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </header>
       </div>
 
-      <div
-        className={cn(
-          "fixed inset-0 z-[65] bg-[rgba(2,6,14,0.58)] transition duration-300 lg:hidden",
-          isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-        )}
-        aria-hidden={!isOpen}
-        onClick={closeMenu}
-      />
-
-      <aside
-        id="mobile-nav-drawer"
-        className={cn(
-          "fixed right-4 top-[5.25rem] z-[75] w-[min(24rem,calc(100vw-2rem))] rounded-[2rem] transition duration-300 lg:hidden",
-          isOpen
-            ? "pointer-events-auto translate-y-0 opacity-100"
-            : "pointer-events-none -translate-y-4 opacity-0",
-        )}
-        aria-hidden={!isOpen}
-      >
-        <div className="glass-panel metal-border overflow-hidden rounded-[2rem] p-4">
-          <nav className="grid gap-2" aria-label="Мобильная навигация">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "rounded-[1.25rem] px-4 py-3 text-base font-medium text-slate-200 transition hover:bg-white/8 hover:text-white",
-                  getIsActive(item.href) && "bg-white/10 text-white",
-                )}
-                onClick={closeMenu}
+      <AnimatePresence>
+        {isOpen ? (
+          <>
+            <OverlayBackdrop
+              className="z-[65] lg:hidden"
+              aria-hidden
+              onClick={closeMenu}
+            />
+            <div className="fixed inset-x-0 top-[5.25rem] z-[75] px-4 lg:hidden">
+              <OverlayPanel
+                id="mobile-nav-drawer"
+                variant="drawer"
+                aria-hidden={!isOpen}
+                className="mx-auto w-full max-w-sm rounded-[2rem] p-4"
               >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+                <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(236,243,255,0.18),transparent_72%)]" />
+                <div className="relative">
+                  <nav className="grid gap-2" aria-label="Мобильная навигация">
+                    {navItems.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                          "rounded-[1.25rem] px-4 py-3 text-base font-medium text-slate-200 transition hover:bg-white/8 hover:text-white",
+                          getIsActive(item.href) && "bg-white/10 text-white",
+                        )}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          handleAnchorNavigation(item.href, { closeMenu: true });
+                        }}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </nav>
 
-          <div className="mt-4 grid gap-3 border-t border-white/10 pt-4">
-            <a
-              href={CONTACT_INFO.phoneHref}
-              className="rounded-[1.25rem] border border-white/10 bg-black/15 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/8 hover:text-white"
-              onClick={() => {
-                closeMenu();
-                trackCtaEvent("phone_click", { location: "navbar_mobile" });
-              }}
-            >
-              {CONTACT_INFO.phoneDisplay}
-            </a>
-            <a
-              href="#lead-form"
-              onClick={() => {
-                closeMenu();
-                trackCtaEvent("lead_cta_click", { location: "navbar_mobile" });
-              }}
-            >
-              <Button className="w-full">
-                <PhoneCall className="mr-2 h-4 w-4" />
-                Записаться
-              </Button>
-            </a>
-          </div>
-        </div>
-      </aside>
+                  <div className="mt-4 grid gap-3 border-t border-white/10 pt-4">
+                    <a
+                      href={CONTACT_INFO.phoneHref}
+                      className="rounded-[1.25rem] border border-white/10 bg-black/15 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/8 hover:text-white"
+                      onClick={() => {
+                        closeMenu();
+                        trackCtaEvent("phone_click", { location: "navbar_mobile" });
+                      }}
+                    >
+                      {CONTACT_INFO.phoneDisplay}
+                    </a>
+                    <a
+                      href="#lead"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        trackCtaEvent("lead_cta_click", { location: "navbar_mobile" });
+                        handleAnchorNavigation("#lead", { closeMenu: true });
+                      }}
+                    >
+                      <Button className="w-full">
+                        <PhoneCall className="mr-2 h-4 w-4" />
+                        Записаться
+                      </Button>
+                    </a>
+                  </div>
+                </div>
+              </OverlayPanel>
+            </div>
+          </>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }

@@ -82,7 +82,7 @@ export function HeroSection() {
                   </Button>
                 </a>
                 <a
-                  href="#lead-form"
+                  href="#lead"
                   onClick={() => trackCtaEvent("lead_cta_click", { location: "hero" })}
                 >
                   <Button className="w-full sm:w-auto" variant="secondary">

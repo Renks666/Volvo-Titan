@@ -16,7 +16,7 @@ export function ServicesSection() {
             description="Работаем с автомобилями Volvo всех популярных поколений. Если услуга не указана в списке, подскажем по телефону."
           />
           <a
-            href="#lead-form"
+            href="#lead"
             className="inline-flex items-center gap-2 text-sm text-slate-300 transition hover:text-white"
           >
             Записаться на сервис

@@ -26,6 +26,7 @@ export async function submitLeadAction(values: LeadFormValues): Promise<ActionRe
     const payload = {
       name: parsedValues.data.name || null,
       phone: parsedValues.data.phone,
+      model: parsedValues.data.model || null,
       service: parsedValues.data.service || null,
       comment: parsedValues.data.comment || null,
       status: "new" as const,

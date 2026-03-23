@@ -29,7 +29,9 @@ body {
 }
 
 html {
-  scroll-padding-top: 7rem;
+  --landing-nav-offset: 6.5rem;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--landing-nav-offset);
 }
 
 body {

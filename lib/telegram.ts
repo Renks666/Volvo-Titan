@@ -16,6 +16,7 @@ export async function sendTelegramLeadNotification(
     "",
     `Имя: ${normalizeOptionalText(payload.name)}`,
     `Телефон: ${payload.phone}`,
+    `Модель: ${normalizeOptionalText(payload.model)}`,
     `Услуга: ${normalizeOptionalText(payload.service)}`,
     `Комментарий: ${normalizeOptionalText(payload.comment)}`,
     `Дата: ${formatTelegramDate(payload.createdAt)}`,
