@@ -19,7 +19,7 @@ import { trackCtaEvent } from "@/utils/analytics";
 
 const LANDING_TOP_ID = "top";
 const HERO_SECTION_ID = "hero";
-const NAVBAR_SCROLL_GAP = 8;
+const NAVBAR_SCROLL_GAP = 4;
 
 const LABELS = {
   top: "Volvo Titan \u2014 \u043d\u0430\u0432\u0435\u0440\u0445 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b",
@@ -67,6 +67,20 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
     return Math.max(Math.ceil(headerHeight + NAVBAR_SCROLL_GAP), 0);
   };
 
+  const getAnchorElement = (targetId: string) => {
+    const target = document.getElementById(targetId);
+
+    if (!target) {
+      return null;
+    }
+
+    if (targetId === HERO_SECTION_ID || targetId === LANDING_TOP_ID) {
+      return target;
+    }
+
+    return target.querySelector<HTMLElement>(".section-shell") ?? target;
+  };
+
   const syncLandingNavOffset = () => {
     const nextOffset = getNavbarOffset();
 
@@ -85,7 +99,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
     let currentSection = HERO_SECTION_ID;
 
     for (const sectionId of trackedSectionIds) {
-      const section = document.getElementById(sectionId);
+      const section = getAnchorElement(sectionId);
 
       if (!section) {
         continue;
@@ -104,7 +118,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
   const scrollToHref = (href: string) => {
     const targetId = href.replace(/^#/, "");
     const isTopTarget = targetId === LANDING_TOP_ID;
-    const target = document.getElementById(targetId);
+    const target = getAnchorElement(targetId);
     const scrollOffset = getNavbarOffset();
 
     if (!target) {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Orbitron } from "next/font/google";
 
 import { BackgroundScene } from "@/components/background-scene";
@@ -59,6 +59,14 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/brand/volvo-titan-logo.jpg",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
