@@ -29,7 +29,7 @@ body {
 }
 
 html {
-  --landing-nav-offset: 6.5rem;
+  --landing-nav-offset: calc(var(--mobile-header-height) + var(--safe-area-top) + 0.5rem);
   scroll-behavior: smooth;
   scroll-padding-top: var(--landing-nav-offset);
 }
@@ -64,6 +64,6 @@ textarea {
 
 @media (max-width: 640px) {
   html {
-    --landing-nav-offset: calc(var(--mobile-header-height) + 0.9rem);
+    --landing-nav-offset: calc(var(--mobile-header-height) + var(--safe-area-top) + 0.5rem);
   }
 }

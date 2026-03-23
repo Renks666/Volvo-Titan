@@ -1,20 +1,22 @@
-export function getSupabaseEnv() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+function getRequiredEnv(name: "NEXT_PUBLIC_SUPABASE_URL" | "NEXT_PUBLIC_SUPABASE_ANON_KEY" | "SUPABASE_SERVICE_ROLE_KEY") {
+  const value = process.env[name];
 
-  if (!url || !anonKey) {
-    throw new Error("Supabase environment variables are not configured.");
+  if (!value) {
+    const message = `Missing required environment variable: ${name}`;
+    console.error(message);
+    throw new Error(message);
   }
 
-  return { url, anonKey };
+  return value;
+}
+
+export function getSupabaseEnv() {
+  return {
+    url: getRequiredEnv("NEXT_PUBLIC_SUPABASE_URL"),
+    anonKey: getRequiredEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
+  };
 }
 
 export function getSupabaseServiceRoleKey() {
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!serviceRoleKey) {
-    throw new Error("SUPABASE_SERVICE_ROLE_KEY is not configured.");
-  }
-
-  return serviceRoleKey;
+  return getRequiredEnv("SUPABASE_SERVICE_ROLE_KEY");
 }

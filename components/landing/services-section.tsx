@@ -7,7 +7,10 @@ import { SectionHeading } from "./section-heading";
 
 export function ServicesSection() {
   return (
-    <section id="services" className="px-0 py-[var(--landing-section-space)] scroll-mt-28 md:py-24">
+    <section
+      id="services"
+      className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-24"
+    >
       <div className="section-shell">
         <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
@@ -36,8 +39,7 @@ export function ServicesSection() {
                   </span>
                 </div>
                 <p className="mt-3 text-sm leading-6 text-slate-400 sm:mt-5 sm:leading-7">
-                  Подберем понятный сценарий ремонта и заранее объясним, где критичный износ, а
-                  где можно не торопиться.
+                  {service.description}
                 </p>
               </article>
             </Reveal>

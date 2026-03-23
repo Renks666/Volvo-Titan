@@ -19,11 +19,23 @@ import { trackCtaEvent } from "@/utils/analytics";
 
 const LANDING_TOP_ID = "top";
 const HERO_SECTION_ID = "hero";
-const NAVBAR_SCROLL_OFFSET = 104;
-const NAVBAR_SCROLL_OFFSETS: Record<string, number> = {
-  services: 35,
-  contacts: 40,
-};
+const NAVBAR_SCROLL_GAP = 8;
+
+const LABELS = {
+  top: "Volvo Titan \u2014 \u043d\u0430\u0432\u0435\u0440\u0445 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b",
+  mobileTagline: "\u0441\u0435\u0440\u0432\u0438\u0441 Volvo",
+  primaryNav: "\u041e\u0441\u043d\u043e\u0432\u043d\u0430\u044f \u043d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f",
+  call: "\u041f\u043e\u0437\u0432\u043e\u043d\u0438\u0442\u044c",
+  callShort: "\u0417\u0432\u043e\u043d\u043e\u043a",
+  closeMenu: "\u0417\u0430\u043a\u0440\u044b\u0442\u044c \u043c\u0435\u043d\u044e",
+  openMenu: "\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043c\u0435\u043d\u044e",
+  book: "\u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f",
+  mobileMenu: "\u041c\u043e\u0431\u0438\u043b\u044c\u043d\u043e\u0435 \u043c\u0435\u043d\u044e",
+  contacts: "\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u044b",
+  bookService: "\u0417\u0430\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f \u043d\u0430 \u0441\u0435\u0440\u0432\u0438\u0441",
+  mobileNav: "\u041c\u043e\u0431\u0438\u043b\u044c\u043d\u0430\u044f \u043d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f",
+  serviceAddress: "\u0410\u0434\u0440\u0435\u0441 \u0441\u0435\u0440\u0432\u0438\u0441\u0430",
+} as const;
 
 type SiteNavbarProps = {
   items?: ReadonlyArray<{
@@ -36,6 +48,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeId, setActiveId] = useState<string>(HERO_SECTION_ID);
+  const headerRef = useRef<HTMLElement | null>(null);
   const menuPanelRef = useRef<HTMLDivElement | null>(null);
   const primaryActionRef = useRef<HTMLAnchorElement | null>(null);
 
@@ -49,8 +62,24 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
     [],
   );
 
+  const getNavbarOffset = () => {
+    const headerHeight = headerRef.current?.offsetHeight ?? 0;
+    return Math.max(Math.ceil(headerHeight + NAVBAR_SCROLL_GAP), 0);
+  };
+
+  const syncLandingNavOffset = () => {
+    const nextOffset = getNavbarOffset();
+
+    if (nextOffset > 0) {
+      document.documentElement.style.setProperty("--landing-nav-offset", `${nextOffset}px`);
+    }
+  };
+
   const syncNavbarState = useEffectEvent(() => {
+    syncLandingNavOffset();
+
     const scrollY = window.scrollY;
+    const currentOffset = getNavbarOffset();
     setIsScrolled(scrollY > 20);
 
     let currentSection = HERO_SECTION_ID;
@@ -64,7 +93,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
 
       const { top } = section.getBoundingClientRect();
 
-      if (top <= 140) {
+      if (top <= currentOffset + 32) {
         currentSection = sectionId;
       }
     }
@@ -76,7 +105,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
     const targetId = href.replace(/^#/, "");
     const isTopTarget = targetId === LANDING_TOP_ID;
     const target = document.getElementById(targetId);
-    const scrollOffset = NAVBAR_SCROLL_OFFSETS[targetId] ?? NAVBAR_SCROLL_OFFSET;
+    const scrollOffset = getNavbarOffset();
 
     if (!target) {
       return;
@@ -146,10 +175,11 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] px-0 pt-[var(--safe-area-top)] md:px-6 md:pt-4">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] px-0 md:px-6 md:pt-4">
         <header
+          ref={headerRef}
           className={cn(
-            "pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 border-b border-white/10 px-4 py-3 transition duration-300 md:rounded-[1.75rem] md:border md:px-4",
+            "pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 border-b border-white/10 px-4 pb-3 pt-[calc(0.75rem+var(--safe-area-top))] transition duration-300 md:rounded-[1.75rem] md:border md:px-4 md:py-3",
             isScrolled
               ? "bg-[rgba(5,10,18,0.96)] shadow-[0_14px_34px_rgba(0,0,0,0.34)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.82)] md:shadow-[0_18px_48px_rgba(0,0,0,0.34)] md:backdrop-blur-2xl"
               : "bg-[rgba(6,10,17,0.92)] shadow-[0_10px_24px_rgba(0,0,0,0.2)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.42)] md:shadow-[0_10px_30px_rgba(0,0,0,0.16)]",
@@ -158,7 +188,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
           <a
             href="#top"
             className="group flex min-w-0 items-center rounded-full py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
-            aria-label="Volvo Titan — наверх страницы"
+            aria-label={LABELS.top}
             onClick={(event) => {
               event.preventDefault();
               handleAnchorNavigation("#top", { closeMenu: isOpen });
@@ -177,7 +207,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                 Volvo Titan
               </p>
               <p className="mt-1 text-[0.62rem] uppercase tracking-[0.18em] text-slate-400">
-                сервис Volvo
+                {LABELS.mobileTagline}
               </p>
             </div>
             <div className="hidden min-w-0 md:block">
@@ -187,7 +217,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
             </div>
           </a>
 
-          <nav className="hidden items-center gap-2 lg:flex" aria-label="Основная навигация">
+          <nav className="hidden items-center gap-2 lg:flex" aria-label={LABELS.primaryNav}>
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -213,14 +243,14 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               onClick={() => trackCtaEvent("phone_click", { location: "navbar_mobile_primary" })}
             >
               <PhoneCall className="mr-2 h-4 w-4 shrink-0 text-[var(--highlight)]" />
-              <span className="hidden truncate min-[390px]:inline md:inline">Позвонить</span>
-              <span className="truncate min-[390px]:hidden md:hidden">Звонок</span>
+              <span className="hidden truncate min-[390px]:inline md:inline">{LABELS.call}</span>
+              <span className="truncate min-[390px]:hidden md:hidden">{LABELS.callShort}</span>
             </a>
 
             <button
               type="button"
               className="inline-flex h-11 w-11 shrink-0 items-center justify-center border-r border-white/10 text-white transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] md:h-10 md:w-10 md:rounded-[1.1rem] md:border md:bg-white/6 md:hover:bg-white/10"
-              aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
+              aria-label={isOpen ? LABELS.closeMenu : LABELS.openMenu}
               aria-expanded={isOpen}
               aria-controls="mobile-nav-drawer"
               onClick={() => setIsOpen((current) => !current)}
@@ -247,7 +277,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
             >
               <Button className="h-11 px-5">
                 <PhoneCall className="mr-2 h-4 w-4" />
-                Записаться
+                {LABELS.book}
               </Button>
             </a>
           </div>
@@ -258,22 +288,22 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
         {isOpen ? (
           <>
             <OverlayBackdrop className="z-[65] lg:hidden" aria-hidden onClick={closeMenu} />
-            <div className="fixed inset-x-0 top-[calc(var(--mobile-header-height)+var(--safe-area-top))] z-[75] px-0 lg:hidden">
+            <div className="fixed inset-x-0 top-[var(--landing-nav-offset)] z-[75] px-0 lg:hidden">
               <OverlayPanel
                 ref={menuPanelRef}
                 id="mobile-nav-drawer"
                 variant="dialog"
                 aria-hidden={!isOpen}
-                aria-label="Мобильное меню"
+                aria-label={LABELS.mobileMenu}
                 tabIndex={-1}
-                className="mx-auto flex min-h-[calc(100dvh-var(--mobile-header-height)-var(--safe-area-top))] w-full max-w-none flex-col rounded-none border-x-0 border-b-0 border-t border-white/10 bg-[linear-gradient(180deg,rgba(9,13,20,0.98),rgba(7,10,17,0.985))] p-0 md:hidden"
+                className="mx-auto flex min-h-[calc(100dvh-var(--landing-nav-offset))] w-full max-w-none flex-col rounded-none border-x-0 border-b-0 border-t border-white/10 bg-[linear-gradient(180deg,rgba(9,13,20,0.98),rgba(7,10,17,0.985))] p-0 md:hidden"
               >
                 <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(236,243,255,0.08),transparent_72%)]" />
                 <div className="relative flex min-h-full flex-1 flex-col">
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] border-b border-white/10">
                     <div className="border-r border-white/10 px-4 py-3.5">
                       <p className="text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-500">
-                        Контакты
+                        {LABELS.contacts}
                       </p>
                       <p className="mt-2 text-sm font-semibold text-white">
                         {CONTACT_INFO.phoneDisplay}
@@ -288,7 +318,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                         trackCtaEvent("phone_click", { location: "navbar_mobile_menu_phone" });
                       }}
                     >
-                      Позвонить
+                      {LABELS.call}
                     </a>
                   </div>
 
@@ -305,13 +335,13 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                     >
                       <span className="flex items-center gap-2">
                         <PhoneCall className="h-4 w-4 text-[var(--highlight)]" />
-                        Записаться на сервис
+                        {LABELS.bookService}
                       </span>
                       <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                     </a>
                   </div>
 
-                  <nav className="grid" aria-label="Мобильная навигация">
+                  <nav className="grid" aria-label={LABELS.mobileNav}>
                     {navItems.map((item) => (
                       <a
                         key={item.href}
@@ -359,7 +389,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                     </div>
                     <div className="border-t border-white/10 px-4 py-3.5">
                       <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500">
-                        Адрес сервиса
+                        {LABELS.serviceAddress}
                       </p>
                       <p className="mt-2 max-w-[28rem] text-sm leading-6 text-slate-300">
                         {CONTACT_INFO.address}

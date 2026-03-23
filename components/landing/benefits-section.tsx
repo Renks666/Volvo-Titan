@@ -5,7 +5,10 @@ import { SectionHeading } from "./section-heading";
 
 export function BenefitsSection() {
   return (
-    <section id="benefits" className="px-0 py-[var(--landing-section-space)] scroll-mt-28 md:py-24">
+    <section
+      id="benefits"
+      className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-24"
+    >
       <div className="section-shell">
         <SectionHeading
           eyebrow="Почему нам доверяют"

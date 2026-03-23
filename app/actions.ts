@@ -39,12 +39,16 @@ export async function submitLeadAction(values: LeadFormValues): Promise<ActionRe
       throw error;
     }
 
-    await sendTelegramLeadNotification({
-      ...parsedValues.data,
-      createdAt,
-    });
-
     revalidatePath("/admin/leads");
+
+    try {
+      await sendTelegramLeadNotification({
+        ...parsedValues.data,
+        createdAt,
+      });
+    } catch (error) {
+      console.error("sendTelegramLeadNotification", error);
+    }
 
     return {
       success: true,

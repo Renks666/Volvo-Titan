@@ -72,15 +72,60 @@ export const TRUST_METRICS = [
 ];
 
 export const SERVICES = [
-  { slug: "suspension-diagnostics", name: "Диагностика ходовой", price: "1500 ₽" },
-  { slug: "computer-diagnostics", name: "Компьютерная диагностика", price: "1500 ₽" },
-  { slug: "maintenance", name: "ТО", price: "от 800 ₽" },
-  { slug: "unit-replacement", name: "Замена агрегатов", price: "по запросу" },
-  { slug: "unit-rebuild", name: "Переборка агрегатов", price: "по запросу" },
-  { slug: "chassis-repair", name: "Ремонт ходовой", price: "по запросу" },
-  { slug: "tire-service", name: "Шиномонтаж", price: "по запросу" },
-  { slug: "electrician", name: "Электрика", price: "по запросу" },
-  { slug: "bodywork", name: "Кузовной ремонт", price: "по запросу" },
+  {
+    slug: "suspension-diagnostics",
+    name: "Диагностика ходовой",
+    price: "1500 ₽",
+    description: "Найдём люфты, стуки и износ до того, как мелкая проблема превратится в дорогой ремонт.",
+  },
+  {
+    slug: "computer-diagnostics",
+    name: "Компьютерная диагностика",
+    price: "1500 ₽",
+    description: "Считаем ошибки, проверим системы и по-человечески объясним, что действительно требует внимания.",
+  },
+  {
+    slug: "maintenance",
+    name: "ТО",
+    price: "от 800 ₽",
+    description: "Проведём обслуживание Volvo без лишних работ, чтобы машина оставалась надёжной каждый день.",
+  },
+  {
+    slug: "unit-replacement",
+    name: "Замена агрегатов",
+    price: "по запросу",
+    description: "Аккуратно заменим узел и подберём разумное решение под состояние автомобиля и ваш бюджет.",
+  },
+  {
+    slug: "unit-rebuild",
+    name: "Переборка агрегатов",
+    price: "по запросу",
+    description: "Восстановим агрегат с пониманием ресурса, когда ремонт выгоднее поспешной полной замены.",
+  },
+  {
+    slug: "chassis-repair",
+    name: "Ремонт ходовой",
+    price: "по запросу",
+    description: "Вернём подвеске собранность, тишину и уверенное поведение автомобиля на любой дороге.",
+  },
+  {
+    slug: "tire-service",
+    name: "Шиномонтаж",
+    price: "по запросу",
+    description: "Быстро и бережно переобуем автомобиль, чтобы сохранить диски, баланс и комфорт в движении.",
+  },
+  {
+    slug: "electrician",
+    name: "Электрика",
+    price: "по запросу",
+    description: "Найдём даже плавающие неисправности и устраним причину, а не только внешние симптомы.",
+  },
+  {
+    slug: "bodywork",
+    name: "Кузовной ремонт",
+    price: "по запросу",
+    description: "Аккуратно восстановим кузов, геометрию и внешний вид, чтобы машина снова выглядела достойно.",
+  },
 ] as const;
 
 export const SERVICE_OPTIONS: Array<{ value: string; label: string }> = [

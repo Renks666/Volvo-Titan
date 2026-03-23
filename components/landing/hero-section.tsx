@@ -36,7 +36,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative isolate overflow-hidden px-0 pb-[var(--landing-section-space)] pt-[calc(var(--mobile-header-height)+1rem)] scroll-mt-[calc(var(--mobile-header-height)+1rem)] sm:pt-28 md:scroll-mt-28 md:pb-28 md:pt-32"
+      className="relative isolate overflow-hidden px-0 pb-[var(--landing-section-space)] pt-[calc(var(--landing-nav-offset)+0.5rem)] scroll-mt-[var(--landing-nav-offset)] sm:pt-28 md:pb-28 md:pt-32"
     >
       <div className="section-shell">
         <div className="glass-panel metal-border relative overflow-hidden rounded-[var(--landing-card-radius)] px-[var(--landing-card-padding-lg)] py-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:px-6 sm:py-8 md:px-10 md:py-12">

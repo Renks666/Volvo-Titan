@@ -7,7 +7,10 @@ import { SectionHeading } from "./section-heading";
 
 export function ContactSection() {
   return (
-    <section id="contacts" className="px-0 py-[var(--landing-section-space)] scroll-mt-28 md:py-24">
+    <section
+      id="contacts"
+      className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-24"
+    >
       <div className="section-shell">
         <div className="grid gap-4 sm:gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <Reveal>
