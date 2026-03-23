@@ -33,6 +33,23 @@ const heroHighlights = [
 export function HeroSection() {
   const parallaxOffset = useParallax(0.16);
 
+  const scrollToLeadSection = () => {
+    const target = document.getElementById("lead")?.querySelector<HTMLElement>(".section-shell");
+
+    if (!target) {
+      return;
+    }
+
+    const landingNavOffset = Number.parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue("--landing-nav-offset"),
+    );
+    const scrollOffset = Number.isFinite(landingNavOffset) ? landingNavOffset : 0;
+    const nextTop = Math.max(window.scrollY + target.getBoundingClientRect().top - scrollOffset, 0);
+
+    window.history.pushState(null, "", "#lead");
+    window.scrollTo({ top: nextTop, behavior: "smooth" });
+  };
+
   return (
     <section
       id="hero"
@@ -83,7 +100,11 @@ export function HeroSection() {
                 </a>
                 <a
                   href="#lead"
-                  onClick={() => trackCtaEvent("lead_cta_click", { location: "hero" })}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    trackCtaEvent("lead_cta_click", { location: "hero" });
+                    scrollToLeadSection();
+                  }}
                 >
                   <Button className="w-full sm:w-auto" variant="secondary">
                     Записаться

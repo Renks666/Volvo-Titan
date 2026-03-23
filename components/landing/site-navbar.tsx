@@ -19,7 +19,8 @@ import { trackCtaEvent } from "@/utils/analytics";
 
 const LANDING_TOP_ID = "top";
 const HERO_SECTION_ID = "hero";
-const NAVBAR_SCROLL_GAP = 4;
+const MOBILE_NAVBAR_SCROLL_GAP = 8;
+const DESKTOP_NAVBAR_SCROLL_GAP = 20;
 
 const LABELS = {
   top: "Volvo Titan \u2014 \u043d\u0430\u0432\u0435\u0440\u0445 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b",
@@ -64,7 +65,12 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
 
   const getNavbarOffset = () => {
     const headerHeight = headerRef.current?.offsetHeight ?? 0;
-    return Math.max(Math.ceil(headerHeight + NAVBAR_SCROLL_GAP), 0);
+    const scrollGap =
+      typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches
+        ? DESKTOP_NAVBAR_SCROLL_GAP
+        : MOBILE_NAVBAR_SCROLL_GAP;
+
+    return Math.max(Math.ceil(headerHeight + scrollGap), 0);
   };
 
   const getAnchorElement = (targetId: string) => {
