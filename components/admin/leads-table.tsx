@@ -60,9 +60,9 @@ export function LeadsTable({ leads }: LeadsTableProps) {
                   {lead.model || "\u041d\u0435 \u0432\u044b\u0431\u0440\u0430\u043d\u043e"}
                 </span>
               </div>
-              <div className="min-w-0 grid gap-1">
+              <div className="min-w-0 max-w-full overflow-hidden grid gap-1">
                 <span className="text-[11px] uppercase tracking-[0.18em] text-slate-500">{"\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0439"}</span>
-                <p className="break-words whitespace-pre-wrap [overflow-wrap:anywhere] leading-6 text-slate-400">
+                <p className="min-w-0 max-w-full break-all whitespace-pre-wrap leading-6 text-slate-400">
                   {lead.comment || "\u0411\u0435\u0437 \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u044f"}
                 </p>
               </div>
