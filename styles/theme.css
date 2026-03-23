@@ -92,6 +92,11 @@
   background: var(--overlay-panel-top-glow);
 }
 
+.overlay-panel.overlay-panel--flat::after,
+.overlay-panel.overlay-panel--flat::before {
+  content: none;
+}
+
 .overlay-panel[data-overlay-variant="popover"]::after,
 .overlay-panel[data-overlay-variant="popover"]::before {
   content: none;

@@ -72,7 +72,7 @@ export function ConfirmDialog({
             aria-labelledby={titleId}
             aria-describedby={descriptionId}
             tabIndex={-1}
-            className="z-[1] w-full max-w-md rounded-[1.9rem] border-white/0 bg-[linear-gradient(180deg,rgba(10,16,27,0.98),rgba(7,12,22,0.96))] p-6 shadow-none before:content-none after:content-none sm:p-7"
+            className="overlay-panel--flat z-[1] w-full max-w-md rounded-[1.9rem] border-white/0 bg-[linear-gradient(180deg,rgba(10,16,27,0.98),rgba(7,12,22,0.96))] p-6 shadow-none sm:p-7"
           >
             <div className="relative">
               <p
