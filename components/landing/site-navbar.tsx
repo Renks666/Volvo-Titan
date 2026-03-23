@@ -3,6 +3,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { ArrowRight, Menu, PhoneCall, X } from "lucide-react";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -163,6 +164,14 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               handleAnchorNavigation("#top", { closeMenu: isOpen });
             }}
           >
+            <Image
+              src="/brand/volvo-titan-mark-mobile.png"
+              alt="Volvo Titan"
+              width={812}
+              height={785}
+              priority
+              className="mr-3 h-10 w-auto object-contain md:hidden"
+            />
             <div className="min-w-0 md:hidden">
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white">
                 Volvo Titan

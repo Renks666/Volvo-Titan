@@ -105,7 +105,7 @@ export function HeroSection() {
                 ))}
               </div>
             </div>
-            <div className="relative">
+            <div className="relative hidden sm:block">
               <motion.div
                 className="glass-panel metal-border relative mx-auto max-w-sm overflow-hidden rounded-[1.5rem] p-3.5 sm:max-w-md sm:rounded-[2rem] sm:p-5"
                 style={{ y: parallaxOffset * -0.22 }}
