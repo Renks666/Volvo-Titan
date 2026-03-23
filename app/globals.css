@@ -64,6 +64,6 @@ textarea {
 
 @media (max-width: 640px) {
   html {
-    --landing-nav-offset: 5.5rem;
+    --landing-nav-offset: calc(var(--mobile-header-height) + 0.9rem);
   }
 }

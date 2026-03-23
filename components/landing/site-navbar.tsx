@@ -44,6 +44,10 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
     () => [HERO_SECTION_ID, ...navItems.map((item) => item.href.replace(/^#/, ""))],
     [navItems],
   );
+  const shortAddress = useMemo(
+    () => CONTACT_INFO.address.split(", ").slice(0, 2).join(", "),
+    [],
+  );
 
   const syncNavbarState = useEffectEvent(() => {
     const scrollY = window.scrollY;
@@ -142,18 +146,18 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] px-3 pt-[calc(0.75rem+var(--safe-area-top))] sm:px-4 md:px-6 md:pt-4">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] px-0 pt-[var(--safe-area-top)] md:px-6 md:pt-4">
         <header
           className={cn(
-            "pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 rounded-[1.4rem] border border-white/10 px-2.5 py-2.5 transition duration-300 sm:rounded-[1.75rem] sm:px-3 sm:py-3 md:px-4",
+            "pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 border-b border-white/10 px-4 py-3 transition duration-300 md:rounded-[1.75rem] md:border md:px-4",
             isScrolled
-              ? "bg-[rgba(7,13,24,0.82)] shadow-[0_18px_48px_rgba(0,0,0,0.34)] backdrop-blur-2xl"
-              : "bg-[rgba(7,13,24,0.42)] shadow-[0_10px_30px_rgba(0,0,0,0.16)] backdrop-blur-xl",
+              ? "bg-[rgba(5,10,18,0.96)] shadow-[0_14px_34px_rgba(0,0,0,0.34)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.82)] md:shadow-[0_18px_48px_rgba(0,0,0,0.34)] md:backdrop-blur-2xl"
+              : "bg-[rgba(6,10,17,0.92)] shadow-[0_10px_24px_rgba(0,0,0,0.2)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.42)] md:shadow-[0_10px_30px_rgba(0,0,0,0.16)]",
           )}
         >
           <a
             href="#top"
-            className="group flex min-w-0 items-center rounded-full px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
+            className="group flex min-w-0 items-center gap-3 rounded-full py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
             aria-label="Volvo Titan — наверх страницы"
             onClick={(event) => {
               event.preventDefault();
@@ -166,9 +170,17 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               width={812}
               height={785}
               priority
-              className="h-9 w-auto object-contain sm:hidden"
+              className="h-10 w-auto object-contain md:hidden"
             />
-            <div className="hidden min-w-0 sm:block">
+            <div className="min-w-0 md:hidden">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white">
+                Volvo Titan
+              </p>
+              <p className="mt-1 text-[0.62rem] uppercase tracking-[0.18em] text-slate-400">
+                сервис Volvo
+              </p>
+            </div>
+            <div className="hidden min-w-0 md:block">
               <p className="font-heading text-sm uppercase tracking-[0.24em] text-white">
                 Volvo Titan
               </p>
@@ -194,19 +206,20 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-0 lg:hidden">
             <a
               href={CONTACT_INFO.phoneHref}
-              className="inline-flex h-10 min-w-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.07] px-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
+              className="inline-flex h-11 min-w-0 items-center justify-center border-x border-white/10 px-3 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] md:h-10 md:rounded-full md:border md:bg-white/[0.07] md:px-3 md:text-sm md:font-medium md:tracking-normal md:hover:bg-white/10"
               onClick={() => trackCtaEvent("phone_click", { location: "navbar_mobile_primary" })}
             >
               <PhoneCall className="mr-2 h-4 w-4 shrink-0 text-[var(--highlight)]" />
-              <span className="truncate">Позвонить</span>
+              <span className="hidden truncate min-[390px]:inline md:inline">Позвонить</span>
+              <span className="truncate min-[390px]:hidden md:hidden">Звонок</span>
             </a>
 
             <button
               type="button"
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[1.1rem] border border-white/10 bg-white/6 text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center border-r border-white/10 text-white transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] md:h-10 md:w-10 md:rounded-[1.1rem] md:border md:bg-white/6 md:hover:bg-white/10"
               aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
               aria-expanded={isOpen}
               aria-controls="mobile-nav-drawer"
@@ -245,7 +258,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
         {isOpen ? (
           <>
             <OverlayBackdrop className="z-[65] lg:hidden" aria-hidden onClick={closeMenu} />
-            <div className="fixed inset-x-0 top-[calc(4.55rem+var(--safe-area-top))] z-[75] px-3 sm:px-4 lg:hidden">
+            <div className="fixed inset-x-0 top-[calc(var(--mobile-header-height)+var(--safe-area-top))] z-[75] px-0 lg:hidden">
               <OverlayPanel
                 ref={menuPanelRef}
                 id="mobile-nav-drawer"
@@ -253,15 +266,37 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                 aria-hidden={!isOpen}
                 aria-label="Мобильное меню"
                 tabIndex={-1}
-                className="mx-auto w-full max-w-md rounded-[1.65rem] p-3 sm:rounded-[1.9rem] sm:p-4"
+                className="mx-auto flex min-h-[calc(100dvh-var(--mobile-header-height)-var(--safe-area-top))] w-full max-w-none flex-col rounded-none border-x-0 border-b-0 border-t border-white/10 bg-[linear-gradient(180deg,rgba(9,13,20,0.98),rgba(7,10,17,0.985))] p-0 md:hidden"
               >
-                <div className="absolute inset-x-0 top-0 h-20 bg-[radial-gradient(circle_at_top,rgba(236,243,255,0.16),transparent_72%)]" />
-                <div className="relative">
-                  <div className="grid gap-2.5">
+                <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(236,243,255,0.08),transparent_72%)]" />
+                <div className="relative flex min-h-full flex-1 flex-col">
+                  <div className="grid grid-cols-[minmax(0,1fr)_auto] border-b border-white/10">
+                    <div className="border-r border-white/10 px-4 py-3.5">
+                      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-500">
+                        Контакты
+                      </p>
+                      <p className="mt-2 text-sm font-semibold text-white">
+                        {CONTACT_INFO.phoneDisplay}
+                      </p>
+                      <p className="mt-1 text-xs leading-5 text-slate-400">{shortAddress}</p>
+                    </div>
+                    <a
+                      href={CONTACT_INFO.phoneHref}
+                      className="flex min-h-full items-center justify-center px-5 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[var(--highlight)] transition hover:bg-white/6 hover:text-white"
+                      onClick={() => {
+                        closeMenu();
+                        trackCtaEvent("phone_click", { location: "navbar_mobile_menu_phone" });
+                      }}
+                    >
+                      Позвонить
+                    </a>
+                  </div>
+
+                  <div className="border-b border-white/10 px-4 py-3">
                     <a
                       ref={primaryActionRef}
                       href="#lead"
-                      className="group flex items-center justify-between rounded-[1.25rem] border border-white/12 bg-[linear-gradient(135deg,rgba(238,244,255,0.96),rgba(183,197,220,0.9))] px-4 py-3 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5"
+                      className="group flex items-center justify-between bg-[linear-gradient(135deg,rgba(238,244,255,0.94),rgba(183,197,220,0.88))] px-4 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-slate-950 transition hover:brightness-105"
                       onClick={(event) => {
                         event.preventDefault();
                         trackCtaEvent("lead_cta_click", { location: "navbar_mobile_menu_primary" });
@@ -274,27 +309,16 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                       </span>
                       <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                     </a>
-
-                    <a
-                      href={CONTACT_INFO.phoneHref}
-                      className="rounded-[1.15rem] border border-white/10 bg-black/15 px-4 py-3 text-sm text-slate-100 transition hover:bg-white/8 hover:text-white"
-                      onClick={() => {
-                        closeMenu();
-                        trackCtaEvent("phone_click", { location: "navbar_mobile_menu_phone" });
-                      }}
-                    >
-                      {CONTACT_INFO.phoneDisplay}
-                    </a>
                   </div>
 
-                  <nav className="mt-3 grid gap-1.5" aria-label="Мобильная навигация">
+                  <nav className="grid" aria-label="Мобильная навигация">
                     {navItems.map((item) => (
                       <a
                         key={item.href}
                         href={item.href}
                         className={cn(
-                          "rounded-[1.15rem] px-4 py-3 text-[0.95rem] font-medium text-slate-300 transition hover:bg-white/8 hover:text-white",
-                          getIsActive(item.href) && "bg-white/[0.08] text-white",
+                          "border-b border-white/10 px-4 py-4 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-slate-300 transition hover:bg-white/6 hover:text-white",
+                          getIsActive(item.href) && "bg-white/[0.05] text-white",
                         )}
                         onClick={(event) => {
                           event.preventDefault();
@@ -306,31 +330,41 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                     ))}
                   </nav>
 
-                  <div className="mt-4 grid gap-2 border-t border-white/10 pt-4">
-                    <a
-                      href={CONTACT_INFO.whatsappUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="rounded-[1.15rem] border border-white/10 bg-black/15 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/8 hover:text-white"
-                      onClick={() => {
-                        closeMenu();
-                        trackCtaEvent("messenger_click", { location: "navbar_mobile_whatsapp" });
-                      }}
-                    >
-                      WhatsApp
-                    </a>
-                    <a
-                      href={CONTACT_INFO.telegramUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="rounded-[1.15rem] border border-white/10 bg-black/15 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/8 hover:text-white"
-                      onClick={() => {
-                        closeMenu();
-                        trackCtaEvent("messenger_click", { location: "navbar_mobile_telegram" });
-                      }}
-                    >
-                      Telegram
-                    </a>
+                  <div className="mt-auto border-t border-white/10">
+                    <div className="grid grid-cols-2">
+                      <a
+                        href={CONTACT_INFO.whatsappUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="border-r border-white/10 px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white"
+                        onClick={() => {
+                          closeMenu();
+                          trackCtaEvent("messenger_click", { location: "navbar_mobile_whatsapp" });
+                        }}
+                      >
+                        WhatsApp
+                      </a>
+                      <a
+                        href={CONTACT_INFO.telegramUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white"
+                        onClick={() => {
+                          closeMenu();
+                          trackCtaEvent("messenger_click", { location: "navbar_mobile_telegram" });
+                        }}
+                      >
+                        Telegram
+                      </a>
+                    </div>
+                    <div className="border-t border-white/10 px-4 py-3.5">
+                      <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500">
+                        Адрес сервиса
+                      </p>
+                      <p className="mt-2 max-w-[28rem] text-sm leading-6 text-slate-300">
+                        {CONTACT_INFO.address}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </OverlayPanel>

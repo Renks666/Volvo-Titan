@@ -8,6 +8,7 @@
   --landing-card-radius: 1.5rem;
   --landing-card-padding: 1rem;
   --landing-card-padding-lg: 1.5rem;
+  --mobile-header-height: 4.75rem;
   --background: #050913;
   --background-soft: #0c1525;
   --background-elevated: rgba(8, 16, 28, 0.82);
@@ -144,6 +145,21 @@
 
 .page-bottom-safe {
   padding-bottom: calc(5.75rem + var(--safe-area-bottom));
+}
+
+.vt-mobile-map-frame {
+  width: 100%;
+  padding-top: 0.5rem;
+}
+
+.vt-mobile-map-surface {
+  position: relative;
+  width: 100%;
+  min-height: 26rem;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 9, 19, 0.84);
 }
 
 .page-background {
@@ -641,6 +657,7 @@
     --landing-card-radius: 1.35rem;
     --landing-card-padding: 0.95rem;
     --landing-card-padding-lg: 1.1rem;
+    --mobile-header-height: 4.75rem;
   }
 
   .glass-panel {
@@ -685,6 +702,19 @@
   .vt-map-marker {
     width: 224px;
     height: 68px;
+  }
+
+  .vt-mobile-map-frame {
+    padding-top: 0;
+  }
+
+  .vt-mobile-map-surface {
+    min-height: 27rem;
+    border-top-color: rgba(255, 255, 255, 0.12);
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 18px 42px rgba(0, 0, 0, 0.24);
   }
 
   .vt-map-zoom-button {
@@ -737,5 +767,6 @@
     --landing-card-radius: 1.65rem;
     --landing-card-padding: 1.15rem;
     --landing-card-padding-lg: 1.35rem;
+    --mobile-header-height: 4.9rem;
   }
 }
