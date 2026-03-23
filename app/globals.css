@@ -42,6 +42,10 @@ body {
   overflow-x: hidden;
 }
 
+body[data-mobile-menu-open="true"] {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -56,4 +60,10 @@ textarea {
 
 ::selection {
   background: rgba(191, 214, 255, 0.24);
+}
+
+@media (max-width: 640px) {
+  html {
+    --landing-nav-offset: 5.5rem;
+  }
 }

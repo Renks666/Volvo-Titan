@@ -233,7 +233,7 @@ export function Select({
           id={selectId}
           type="button"
           className={cn(
-            "flex h-12 w-full items-center justify-between rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.06)] px-4 text-left text-sm text-white outline-none transition",
+            "flex h-11 w-full items-center justify-between rounded-[1.15rem] border border-white/10 bg-[rgba(255,255,255,0.06)] px-3.5 text-left text-sm text-white outline-none transition sm:h-12 sm:rounded-2xl sm:px-4",
             "focus-visible:border-white/30 focus-visible:bg-white/10 focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]",
             "disabled:cursor-not-allowed disabled:opacity-60",
             isOpen && "border-white/24 bg-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.22)]",

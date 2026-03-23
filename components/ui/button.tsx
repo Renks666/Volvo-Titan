@@ -13,7 +13,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={cn(
-          "cta-shimmer inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] disabled:cursor-not-allowed disabled:opacity-50",
+          "cta-shimmer inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] disabled:cursor-not-allowed disabled:opacity-50 sm:h-12 sm:px-6",
           variant === "primary" &&
             "bg-[linear-gradient(135deg,#eef4ff_0%,#b7c5dc_45%,#eef4ff_100%)] text-slate-950 shadow-[0_12px_40px_rgba(188,204,233,0.24)] hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[0_18px_44px_rgba(188,204,233,0.34)]",
           variant === "secondary" &&

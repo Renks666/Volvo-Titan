@@ -50,9 +50,6 @@ type YandexMapInstance = {
   controls: {
     remove: (controlName: string) => void;
   };
-  behaviors: {
-    disable: (behaviorName: string) => void;
-  };
   options?: {
     set: (name: string, value: unknown) => void;
   };
@@ -100,9 +97,7 @@ function MapSkeleton() {
     <div className="vt-map-skeleton flex h-full w-full items-center justify-center">
       <div className="vt-map-skeleton__glow" />
       <div className="vt-map-skeleton__panel">
-        <p className="text-xs uppercase tracking-[0.34em] text-[var(--steel)]">
-          Загружаем карту
-        </p>
+        <p className="text-xs uppercase tracking-[0.34em] text-[var(--steel)]">Загружаем карту</p>
         <p className="mt-3 text-sm leading-7 text-slate-300">
           Подготавливаем интерактивную карту и точку сервиса Volvo Titan.
         </p>
@@ -120,14 +115,14 @@ function MapFallback({ reason }: { reason: "missing-key" | "load-error" }) {
       : "Сейчас можно открыть точку сервиса напрямую в Яндекс Картах.";
 
   return (
-    <div className="vt-map-fallback flex h-full w-full items-center justify-center p-6 md:p-8">
+    <div className="vt-map-fallback flex h-full w-full items-center justify-center p-4 sm:p-6 md:p-8">
       <div className="vt-map-fallback__card max-w-md text-center">
         <p className="text-xs uppercase tracking-[0.34em] text-[var(--steel)]">Карта</p>
         <h3 className="mt-4 text-2xl font-heading text-white">{title}</h3>
         <p className="mt-4 text-sm leading-7 text-slate-300">{description}</p>
         <p className="mt-4 text-sm leading-7 text-slate-400">{CONTACT_INFO.address}</p>
         <a
-          className="cta-shimmer mt-6 inline-flex h-12 items-center justify-center rounded-full border border-white/12 bg-white/8 px-6 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-white/24 hover:bg-white/12"
+          className="cta-shimmer mt-6 inline-flex h-11 items-center justify-center rounded-full border border-white/12 bg-white/8 px-6 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-white/24 hover:bg-white/12 sm:h-12"
           data-tone="dark"
           href={CONTACT_INFO.mapOpenUrl}
           rel="noreferrer"
@@ -230,7 +225,7 @@ export function InteractiveMap() {
             iconShape: {
               type: "Rectangle",
               coordinates: [
-                [-286, -40],
+                [-224, -34],
                 [0, 40],
               ],
             },
@@ -312,7 +307,7 @@ export function InteractiveMap() {
         }
       />
 
-      <div className="absolute left-3 top-1/2 z-[5] flex -translate-y-1/2 flex-col gap-2 md:left-4">
+      <div className="absolute left-2.5 top-1/2 z-[5] flex -translate-y-1/2 flex-col gap-2 sm:left-3 md:left-4">
         <button
           type="button"
           aria-label="Приблизить карту"

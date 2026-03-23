@@ -98,8 +98,8 @@ export function LeadForm() {
   });
 
   return (
-    <form id="lead-form" className="grid gap-4" onSubmit={onSubmit}>
-      <div className="grid gap-4 md:grid-cols-2">
+    <form id="lead-form" className="grid gap-3 sm:gap-4" onSubmit={onSubmit}>
+      <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
         <label className="grid gap-2 text-sm text-slate-300">
           Имя
           <Input placeholder="Как к вам обращаться" {...register("name")} />
@@ -136,7 +136,7 @@ export function LeadForm() {
           {errors.phone ? <span className="text-xs text-rose-300">{errors.phone.message}</span> : null}
         </label>
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
         <label className="grid gap-2 text-sm text-slate-300">
           Услуга
           <Controller

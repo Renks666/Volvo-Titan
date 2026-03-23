@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       <SiteNavbar />
-      <main id="top" className="relative overflow-hidden">
+      <main id="top" className="page-bottom-safe relative overflow-hidden md:pb-0">
         <HeroSection />
         <div className="section-atmosphere">
           <TrustStrip />
@@ -55,8 +55,8 @@ export default function Home() {
           __html: JSON.stringify(localBusinessSchema),
         }}
       />
-      <footer className="border-t border-white/10 bg-black/50 px-6 py-8 text-sm text-slate-400 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <footer className="border-t border-white/10 bg-black/50 px-4 py-6 text-sm text-slate-400 backdrop-blur-xl sm:px-6 sm:py-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 sm:gap-3 md:flex-row md:items-center md:justify-between">
           <p>Volvo Titan. Специализированный сервис Volvo в Москве.</p>
           <div className="flex flex-col gap-1 text-slate-500 md:text-right">
             <a className="transition hover:text-white" href={CONTACT_INFO.phoneHref}>

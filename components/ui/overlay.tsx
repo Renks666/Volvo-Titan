@@ -8,10 +8,11 @@ import {
 import type {
   ComponentProps,
   MutableRefObject,
+  ForwardedRef,
   ReactNode,
   RefObject,
 } from "react";
-import { useEffect, useEffectEvent } from "react";
+import { forwardRef, useEffect, useEffectEvent } from "react";
 
 import { cn } from "@/utils/cn";
 
@@ -100,16 +101,15 @@ interface OverlayPanelProps extends ComponentProps<typeof motion.div> {
   children: ReactNode;
 }
 
-export function OverlayPanel({
-  children,
-  className,
-  variant = "dialog",
-  ...props
-}: OverlayPanelProps) {
+export const OverlayPanel = forwardRef(function OverlayPanel(
+  { children, className, variant = "dialog", ...props }: OverlayPanelProps,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.div
+      ref={ref}
       className={cn(
         "glass-panel metal-border overlay-panel rounded-[2rem]",
         "before:pointer-events-none before:absolute before:inset-x-6 before:top-0 before:z-[1] before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/70 before:to-transparent",
@@ -122,7 +122,9 @@ export function OverlayPanel({
       {children}
     </motion.div>
   );
-}
+});
+
+OverlayPanel.displayName = "OverlayPanel";
 
 export function useBodyScrollLock(active: boolean) {
   useEffect(() => {
