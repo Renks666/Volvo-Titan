@@ -143,6 +143,21 @@ export function InteractiveMap() {
   const [hasScriptError, setHasScriptError] = useState(false);
   const [isMapReady, setIsMapReady] = useState(false);
 
+  useEffect(() => {
+    if (!isMapReady || !mapRef.current) {
+      return;
+    }
+
+    const fitMap = () => mapRef.current?.container.fitToViewport();
+    fitMap();
+
+    window.addEventListener("resize", fitMap);
+
+    return () => {
+      window.removeEventListener("resize", fitMap);
+    };
+  }, [isMapReady]);
+
   const handleZoom = (direction: "in" | "out") => {
     const map = mapRef.current;
 
@@ -302,8 +317,8 @@ export function InteractiveMap() {
         aria-label={CONTACT_INFO.mapTitle}
         className={
           isMapReady && !hasScriptError
-            ? "h-full w-full"
-            : "pointer-events-none h-full w-full opacity-0"
+            ? "absolute inset-0 h-full w-full"
+            : "pointer-events-none absolute inset-0 h-full w-full opacity-0"
         }
       />
 

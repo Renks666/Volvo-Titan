@@ -155,7 +155,7 @@
 .vt-mobile-map-surface {
   position: relative;
   width: 100%;
-  min-height: 26rem;
+  height: 26rem;
   overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -709,7 +709,7 @@
   }
 
   .vt-mobile-map-surface {
-    min-height: 27rem;
+    height: 27rem;
     border-top-color: rgba(255, 255, 255, 0.12);
     border-bottom-color: rgba(255, 255, 255, 0.12);
     box-shadow:

@@ -3,7 +3,6 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { ArrowRight, Menu, PhoneCall, X } from "lucide-react";
-import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -157,21 +156,13 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
         >
           <a
             href="#top"
-            className="group flex min-w-0 items-center gap-3 rounded-full py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
+            className="group flex min-w-0 items-center rounded-full py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
             aria-label="Volvo Titan — наверх страницы"
             onClick={(event) => {
               event.preventDefault();
               handleAnchorNavigation("#top", { closeMenu: isOpen });
             }}
           >
-            <Image
-              src="/brand/volvo-titan-mark-mobile.png"
-              alt="Volvo Titan"
-              width={812}
-              height={785}
-              priority
-              className="h-10 w-auto object-contain md:hidden"
-            />
             <div className="min-w-0 md:hidden">
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white">
                 Volvo Titan
@@ -296,7 +287,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                     <a
                       ref={primaryActionRef}
                       href="#lead"
-                      className="group flex items-center justify-between bg-[linear-gradient(135deg,rgba(238,244,255,0.94),rgba(183,197,220,0.88))] px-4 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-slate-950 transition hover:brightness-105"
+                      className="group flex items-center justify-between rounded-[1.15rem] border border-[rgba(126,164,255,0.28)] bg-[linear-gradient(135deg,rgba(27,46,81,0.98),rgba(12,21,38,0.98))] px-4 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white shadow-[0_16px_34px_rgba(3,8,18,0.26)] transition hover:-translate-y-0.5 hover:border-[rgba(126,164,255,0.42)] hover:bg-[linear-gradient(135deg,rgba(33,56,96,0.98),rgba(14,24,42,0.98))]"
                       onClick={(event) => {
                         event.preventDefault();
                         trackCtaEvent("lead_cta_click", { location: "navbar_mobile_menu_primary" });
@@ -304,7 +295,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                       }}
                     >
                       <span className="flex items-center gap-2">
-                        <PhoneCall className="h-4 w-4" />
+                        <PhoneCall className="h-4 w-4 text-[var(--highlight)]" />
                         Записаться на сервис
                       </span>
                       <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />

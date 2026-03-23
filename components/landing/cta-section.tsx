@@ -12,13 +12,12 @@ export function CtaSection() {
           <div className="glass-panel metal-border grid gap-5 rounded-[var(--landing-card-radius)] px-[var(--landing-card-padding-lg)] py-[var(--landing-card-padding-lg)] sm:gap-8 sm:rounded-[2rem] sm:px-6 sm:py-8 md:grid-cols-[0.85fr_1.15fr] md:px-10 md:py-10">
             <div className="max-w-xl">
               <SectionHeading
-                eyebrow="Заявка"
+                eyebrow="Р—Р°СЏРІРєР°"
                 title={CTA_COPY.sectionTitle}
                 description={CTA_COPY.sectionSubtitle}
               />
               <div className="mt-5 grid gap-2 text-sm leading-6 text-slate-400 sm:mt-8 sm:gap-3">
-                <p>Ответим по телефону, WhatsApp или Telegram, если так удобнее.</p>
-                <p>Форма уходит сразу в CRM и дублируется уведомлением в Telegram.</p>
+                <p>РћС‚РІРµС‚РёРј РїРѕ С‚РµР»РµС„РѕРЅСѓ, WhatsApp РёР»Рё Telegram, РµСЃР»Рё С‚Р°Рє СѓРґРѕР±РЅРµРµ.</p>
               </div>
             </div>
             <div className="rounded-[1.25rem] border border-white/10 bg-black/20 p-4 sm:rounded-[1.75rem] sm:p-5 md:p-6">
