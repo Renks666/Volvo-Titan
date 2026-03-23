@@ -72,9 +72,8 @@ export function ConfirmDialog({
             aria-labelledby={titleId}
             aria-describedby={descriptionId}
             tabIndex={-1}
-            className="z-[1] w-full max-w-md rounded-[1.9rem] p-6 sm:p-7"
+            className="z-[1] w-full max-w-md rounded-[1.9rem] p-6 before:content-none after:content-none sm:p-7"
           >
-            <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(231,240,255,0.18),transparent_72%)]" />
             <div className="relative">
               <p
                 id={titleId}
