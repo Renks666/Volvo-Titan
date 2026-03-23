@@ -3,6 +3,10 @@ import type { LeadStatus } from "@/lib/types";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://volvo-titan.ru";
 
+const YANDEX_MAPS_ADDRESS_QUERY = encodeURIComponent(
+  "Москва, ул. Измайловского Зверинца 8, подъезд 1А",
+);
+
 export const CONTACT_INFO = {
   companyName: "Volvo Titan",
   heroTitle: "Ремонт Volvo в Москве с 1995 года",
@@ -26,8 +30,7 @@ export const CONTACT_INFO = {
   mapTitle: "Volvo Titan на карте",
   mapHint: "Volvo Titan. Специализированный сервис Volvo в Москве.",
   mapZoom: 16,
-  mapOpenUrl:
-    "https://yandex.ru/maps/?ll=37.760153%2C55.788934&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjczNzM0NhJd0KDQvtGB0YHQuNGPLCDQnNC-0YHQutCy0LAsINGD0LvQuNGG0LAg0JjQt9C80LDQudC70L7QstGB0LrQvtCz0L4g0JfQstC10YDQuNC90YbQsCwgOCIKDXnzFUIVr39fQg%2C%2C&z=16",
+  mapOpenUrl: `https://yandex.ru/maps/?text=${YANDEX_MAPS_ADDRESS_QUERY}&z=16`,
   coordinates: {
     latitude: 55.788934,
     longitude: 37.760153,
