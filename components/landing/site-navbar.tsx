@@ -195,11 +195,11 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] px-0 md:px-6 md:pt-4">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] bg-[rgb(6,10,17)] pt-[var(--safe-area-top)] md:bg-transparent md:px-6 md:pt-4">
         <header
           ref={headerRef}
           className={cn(
-            "pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 border-b border-white/10 px-4 pb-3 pt-[var(--safe-area-top)] transition duration-300 md:rounded-[1.75rem] md:border md:px-4 md:py-3",
+            "pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 border-b border-white/10 px-4 pb-3 pt-0 transition duration-300 md:rounded-[1.75rem] md:border md:px-4 md:py-3",
             isScrolled
               ? "bg-[rgba(5,10,18,0.96)] shadow-[0_14px_34px_rgba(0,0,0,0.34)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.82)] md:shadow-[0_18px_48px_rgba(0,0,0,0.34)] md:backdrop-blur-2xl"
               : "bg-[rgba(6,10,17,0.92)] shadow-[0_10px_24px_rgba(0,0,0,0.2)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.42)] md:shadow-[0_10px_30px_rgba(0,0,0,0.16)]",
