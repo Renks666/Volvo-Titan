@@ -282,10 +282,17 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
           <div className="hidden items-center gap-3 lg:flex">
             <a
               href={CONTACT_INFO.phoneHref}
-              className="rounded-full px-3 py-2 text-sm text-slate-300 transition hover:text-white"
+              className="rounded-full px-3 py-2.5 text-sm text-slate-300 transition hover:text-white"
               onClick={() => trackCtaEvent("phone_click", { location: "navbar" })}
             >
-              {CONTACT_INFO.phoneDisplay}
+              <span className="flex flex-col gap-2 leading-none">
+                <span className="text-[0.95rem] font-semibold text-white">
+                  {CONTACT_INFO.phoneDisplay}
+                </span>
+                <span className="pl-px text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
+                  {CONTACT_INFO.phoneContactName}
+                </span>
+              </span>
             </a>
             <a
               href="#lead"
@@ -325,9 +332,14 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                       <p className="text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-500">
                         {LABELS.contacts}
                       </p>
-                      <p className="mt-2 text-sm font-semibold text-white">
-                        {CONTACT_INFO.phoneDisplay}
-                      </p>
+                      <div className="mt-2 space-y-2.5">
+                        <p className="text-base font-semibold leading-none text-white">
+                          {CONTACT_INFO.phoneDisplay}
+                        </p>
+                        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-slate-300">
+                          {CONTACT_INFO.phoneContactName}
+                        </p>
+                      </div>
                       <p className="mt-1 text-xs leading-5 text-slate-400">{shortAddress}</p>
                     </div>
                     <a

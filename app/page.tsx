@@ -59,8 +59,16 @@ export default function Home() {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 sm:gap-3 md:flex-row md:items-center md:justify-between">
           <p>Volvo Titan. Специализированный сервис Volvo в Москве.</p>
           <div className="flex flex-col gap-1 text-slate-500 md:text-right">
-            <a className="transition hover:text-white" href={CONTACT_INFO.phoneHref}>
-              {CONTACT_INFO.phoneDisplay}
+            <a
+              className="flex flex-col gap-2 transition hover:text-white md:items-end"
+              href={CONTACT_INFO.phoneHref}
+            >
+              <span className="text-[0.98rem] font-semibold leading-none text-slate-200">
+                {CONTACT_INFO.phoneDisplay}
+              </span>
+              <span className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
+                {CONTACT_INFO.phoneContactName}
+              </span>
             </a>
             <p>{CONTACT_INFO.address}</p>
           </div>

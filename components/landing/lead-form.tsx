@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle, Send } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
@@ -64,11 +64,34 @@ export function LeadForm() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<LeadFormValues>({
     resolver: zodResolver(leadFormSchema),
     defaultValues,
   });
+
+  useEffect(() => {
+    const handleSelectedService = (event: Event) => {
+      const customEvent = event as CustomEvent<{ serviceName?: string }>;
+      const serviceName = customEvent.detail?.serviceName;
+
+      if (!serviceName) {
+        return;
+      }
+
+      setValue("service", serviceName, {
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+    };
+
+    window.addEventListener("lead-service:selected", handleSelectedService as EventListener);
+
+    return () => {
+      window.removeEventListener("lead-service:selected", handleSelectedService as EventListener);
+    };
+  }, [setValue]);
 
   const movePhoneCaret = () => {
     const input = phoneInputRef.current;

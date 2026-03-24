@@ -28,9 +28,14 @@ export function ContactSection() {
                   </div>
                   <a
                     href={CONTACT_INFO.phoneHref}
-                    className="mt-2 inline-block text-base text-slate-200 transition hover:text-white sm:mt-3 sm:text-lg"
+                    className="mt-3 inline-flex max-w-full flex-col gap-2.5 text-base text-slate-200 transition hover:text-white sm:mt-4 sm:text-lg"
                   >
-                    {CONTACT_INFO.phoneDisplay}
+                    <span className="break-words text-[1.02rem] font-semibold leading-none text-white sm:text-[1.12rem]">
+                      {CONTACT_INFO.phoneDisplay}
+                    </span>
+                    <span className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-slate-300 sm:text-[0.68rem]">
+                      {CONTACT_INFO.phoneContactName}
+                    </span>
                   </a>
                 </div>
                 <div className="rounded-[1.15rem] border border-white/10 bg-black/20 p-4 sm:rounded-[1.5rem] sm:p-5">

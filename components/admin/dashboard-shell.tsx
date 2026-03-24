@@ -42,7 +42,14 @@ export function DashboardShell({ children, counts, filters }: DashboardShellProp
               href={CONTACT_INFO.phoneHref}
               className="rounded-full border border-white/10 px-4 py-2.5 text-center text-sm text-slate-200 transition hover:border-white/20 hover:text-white sm:py-3"
             >
-              {CONTACT_INFO.phoneDisplay}
+              <span className="flex flex-col gap-2 leading-none">
+                <span className="text-[0.95rem] font-semibold text-white">
+                  {CONTACT_INFO.phoneDisplay}
+                </span>
+                <span className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
+                  {CONTACT_INFO.phoneContactName}
+                </span>
+              </span>
             </a>
             <form action={logoutAction}>
               <Button variant="ghost" type="submit" className="w-full sm:w-auto">

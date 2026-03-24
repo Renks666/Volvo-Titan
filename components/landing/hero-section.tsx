@@ -72,7 +72,7 @@ export function HeroSection() {
               <h1 className="mt-4 max-w-[12ch] font-heading text-[2.35rem] leading-[1.02] text-white sm:mt-5 sm:max-w-[14ch] sm:text-5xl md:mt-6 md:max-w-3xl md:text-6xl">
                 <span className="mr-3 inline-block">Ремонт</span>
                 <span
-                  className="inline-block align-baseline text-[1em] font-bold leading-none tracking-[0.05em] text-[#1f4698] md:text-[1.04em]"
+                  className="inline-block align-baseline text-[1.18em] font-bold leading-none tracking-[0.05em] text-[#1f4698] md:text-[1.24em]"
                   style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
                 >
                   VOLVO
@@ -155,9 +155,14 @@ export function HeroSection() {
                     <span>Телефон</span>
                     <a
                       href={CONTACT_INFO.phoneHref}
-                      className="text-white transition hover:text-[var(--chrome)]"
+                      className="flex max-w-[12rem] flex-col items-end gap-2.5 text-right text-white transition hover:text-[var(--chrome)] sm:max-w-[14rem]"
                     >
-                      {CONTACT_INFO.phoneDisplay}
+                      <span className="text-[0.95rem] font-semibold leading-none">
+                        {CONTACT_INFO.phoneDisplay}
+                      </span>
+                      <span className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-slate-300">
+                        {CONTACT_INFO.phoneContactName}
+                      </span>
                     </a>
                   </div>
                   <div className="flex items-center justify-between text-sm text-slate-300">
