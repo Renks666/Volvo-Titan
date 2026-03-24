@@ -8,6 +8,23 @@ import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
 export function ServicesSection() {
+  const scrollToLeadSection = () => {
+    const target = document.getElementById("lead")?.querySelector<HTMLElement>(".section-shell");
+
+    if (!target) {
+      return;
+    }
+
+    const landingNavOffset = Number.parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue("--landing-nav-offset"),
+    );
+    const scrollOffset = Number.isFinite(landingNavOffset) ? landingNavOffset : 0;
+    const nextTop = Math.max(window.scrollY + target.getBoundingClientRect().top - scrollOffset, 0);
+
+    window.history.pushState(null, "", "#lead");
+    window.scrollTo({ top: nextTop, behavior: "smooth" });
+  };
+
   const handleServiceSelect = (serviceName: string) => {
     window.dispatchEvent(
       new CustomEvent("lead-service:selected", {
@@ -15,10 +32,7 @@ export function ServicesSection() {
       }),
     );
 
-    document.getElementById("lead")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    scrollToLeadSection();
   };
 
   return (
@@ -36,6 +50,10 @@ export function ServicesSection() {
           <a
             href="#lead"
             className="inline-flex items-center gap-2 text-sm text-slate-300 transition hover:text-white"
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToLeadSection();
+            }}
           >
             Записаться на сервис
             <ArrowUpRight className="h-4 w-4" />
