@@ -6,6 +6,7 @@ import { CtaSection } from "@/components/landing/cta-section";
 import { FloatingContactBar } from "@/components/landing/floating-contact-bar";
 import { HeroSection } from "@/components/landing/hero-section";
 import { MapSection } from "@/components/landing/map-section";
+import { MechanicSection } from "@/components/landing/mechanic-section";
 import { ServicesSection } from "@/components/landing/services-section";
 import { SiteNavbar } from "@/components/landing/site-navbar";
 import { TrustStrip } from "@/components/landing/trust-strip";
@@ -31,6 +32,9 @@ export default function Home() {
         <HeroSection />
         <div className="section-atmosphere">
           <TrustStrip />
+        </div>
+        <div className="section-atmosphere">
+          <MechanicSection />
         </div>
         <div className="section-atmosphere">
           <BenefitsSection />

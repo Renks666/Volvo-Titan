@@ -71,7 +71,7 @@ export const BENEFITS = [
 export const TRUST_METRICS = [
   { value: "30+", label: "лет опыта" },
   { value: "1 день", label: "средний старт работ" },
-  { value: "Volvo only", label: "узкая специализация" },
+  { value: "VOLVO only", label: "узкая специализация" },
   { value: "100%", label: "прозрачный расчет" },
 ] as const;
 

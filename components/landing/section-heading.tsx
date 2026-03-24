@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
+
 import { cn } from "@/utils/cn";
 
 interface SectionHeadingProps {
   eyebrow?: string;
-  title: string;
-  description?: string;
+  title: ReactNode;
+  description?: ReactNode;
   align?: "left" | "center";
 }
 

@@ -17,7 +17,15 @@ export function ContactSection() {
             <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-6 md:p-8">
               <SectionHeading
                 eyebrow="Контакты"
-                title="Приезжайте в Volvo Titan или позвоните прямо сейчас"
+                title={
+                  <>
+                    Приезжайте в{" "}
+                    <span className="font-heading uppercase tracking-[0.08em] text-[var(--chrome)]">
+                      Volvo Titan
+                    </span>{" "}
+                    или позвоните прямо сейчас
+                  </>
+                }
                 description="Если автомобиль ведет себя нестабильно, лучше записаться заранее: так мы сразу заложим время под диагностику."
               />
               <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4">
