@@ -323,7 +323,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                 aria-hidden={!isOpen}
                 aria-label={LABELS.mobileMenu}
                 tabIndex={-1}
-                className="mx-auto flex min-h-[calc(100dvh-var(--landing-nav-offset))] w-full max-w-none flex-col rounded-none border-x-0 border-b-0 border-t border-white/10 bg-[linear-gradient(180deg,rgba(9,13,20,0.98),rgba(7,10,17,0.985))] p-0 before:content-none after:content-none md:hidden"
+                className="mx-auto flex min-h-[calc(100dvh-var(--landing-nav-offset))] w-full max-w-none flex-col rounded-none border-x-0 border-b-0 border-t border-white/10 !bg-[rgb(31,38,52)] !bg-none !shadow-none !backdrop-blur-none p-0 before:content-none after:content-none md:hidden"
               >
                 <div className="relative flex min-h-full flex-1 flex-col">
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] border-b border-white/10">
