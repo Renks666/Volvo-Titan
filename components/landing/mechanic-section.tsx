@@ -52,6 +52,44 @@ export function MechanicSection() {
                 />
               </div>
 
+              {hasMechanicImage ? (
+                <div className="relative mx-auto mt-5 w-full max-w-[21rem] overflow-hidden rounded-[1.35rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)),linear-gradient(180deg,rgba(9,17,29,0.92),rgba(6,12,22,0.9))] shadow-[0_22px_60px_rgba(0,0,0,0.26)] sm:hidden">
+                  <div className="relative aspect-[4/5] max-h-[26rem]">
+                    <Image
+                      src={mechanicImagePublicSrc}
+                      alt="Механик Volvo Titan в сервисной зоне"
+                      fill
+                      sizes="(max-width: 640px) min(84vw, 21rem), 21rem"
+                      className="object-cover object-center object-top"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="relative mt-5 overflow-hidden rounded-[1.35rem] border border-dashed border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01)),linear-gradient(180deg,rgba(10,18,32,0.94),rgba(6,12,22,0.92))] p-5 sm:hidden">
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-[12%_14%_auto] h-32 rounded-full bg-[radial-gradient(circle,rgba(126,164,255,0.18),transparent_72%)] blur-2xl"
+                  />
+                  <div className="relative flex min-h-[23rem] flex-col justify-between">
+                    <div className="max-w-[18rem] rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
+                      Место под фото механика
+                    </div>
+                    <div>
+                      <h3 className="max-w-[12ch] font-heading text-[1.9rem] leading-[1.04] text-white">
+                        Секция уже готова к реальному фото
+                      </h3>
+                      <p className="mt-3 max-w-[28rem] text-sm leading-6 text-slate-400">
+                        Добавьте файл{" "}
+                        <span className="font-semibold text-slate-200">
+                          `public/brand/mechanic-volvo-titan.png`
+                        </span>
+                        , и блок автоматически начнет показывать фото с мобильным и десктопным кадрированием.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="mt-5 grid gap-3 sm:mt-6 sm:gap-4">
                 {mechanicPoints.map((point) => (
                   <div
@@ -75,34 +113,20 @@ export function MechanicSection() {
 
             <div className="order-1 lg:order-2">
               {hasMechanicImage ? (
-                <>
-                  <div className="relative mx-auto w-full max-w-[21rem] overflow-hidden rounded-[1.35rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)),linear-gradient(180deg,rgba(9,17,29,0.92),rgba(6,12,22,0.9))] shadow-[0_22px_60px_rgba(0,0,0,0.26)] sm:hidden">
-                    <div className="relative aspect-[4/5] max-h-[26rem]">
-                      <Image
-                        src={mechanicImagePublicSrc}
-                        alt="Механик Volvo Titan в сервисной зоне"
-                        fill
-                        sizes="(max-width: 640px) min(84vw, 21rem), 21rem"
-                        className="object-cover object-center object-top"
-                      />
-                    </div>
+                <div className="relative mx-auto hidden w-full max-w-[30rem] overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)),linear-gradient(180deg,rgba(9,17,29,0.92),rgba(6,12,22,0.9))] shadow-[0_30px_70px_rgba(0,0,0,0.3)] sm:block lg:max-w-[28rem] xl:max-w-[30rem]">
+                  <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
+                  <div className="relative aspect-[5/6] max-h-[40rem] md:aspect-[4/5]">
+                    <Image
+                      src={mechanicImagePublicSrc}
+                      alt="Механик Volvo Titan в сервисной зоне"
+                      fill
+                      sizes="(max-width: 640px) 0px, (max-width: 1024px) min(70vw, 30rem), (max-width: 1280px) min(38vw, 28rem), 30rem"
+                      className="object-cover object-center object-top"
+                    />
                   </div>
-
-                  <div className="relative mx-auto hidden w-full max-w-[30rem] overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)),linear-gradient(180deg,rgba(9,17,29,0.92),rgba(6,12,22,0.9))] shadow-[0_30px_70px_rgba(0,0,0,0.3)] sm:block lg:max-w-[28rem] xl:max-w-[30rem]">
-                    <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
-                    <div className="relative aspect-[5/6] max-h-[40rem] md:aspect-[4/5]">
-                      <Image
-                        src={mechanicImagePublicSrc}
-                        alt="Механик Volvo Titan в сервисной зоне"
-                        fill
-                        sizes="(max-width: 640px) 0px, (max-width: 1024px) min(70vw, 30rem), (max-width: 1280px) min(38vw, 28rem), 30rem"
-                        className="object-cover object-center object-top"
-                      />
-                    </div>
-                  </div>
-                </>
+                </div>
               ) : (
-                <div className="relative overflow-hidden rounded-[1.35rem] border border-dashed border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01)),linear-gradient(180deg,rgba(10,18,32,0.94),rgba(6,12,22,0.92))] p-5 sm:rounded-[1.75rem] sm:p-6">
+                <div className="relative hidden overflow-hidden rounded-[1.35rem] border border-dashed border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01)),linear-gradient(180deg,rgba(10,18,32,0.94),rgba(6,12,22,0.92))] p-5 sm:block sm:rounded-[1.75rem] sm:p-6">
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-[12%_14%_auto] h-32 rounded-full bg-[radial-gradient(circle,rgba(126,164,255,0.18),transparent_72%)] blur-2xl"
@@ -116,8 +140,11 @@ export function MechanicSection() {
                         Секция уже готова к реальному фото
                       </h3>
                       <p className="mt-3 max-w-[28rem] text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">
-                        Добавьте файл <span className="font-semibold text-slate-200">`public/brand/mechanic-volvo-titan.png`</span>,
-                        и блок автоматически начнет показывать фото с мобильным и десктопным кадрированием.
+                        Добавьте файл{" "}
+                        <span className="font-semibold text-slate-200">
+                          `public/brand/mechanic-volvo-titan.png`
+                        </span>
+                        , и блок автоматически начнет показывать фото с мобильным и десктопным кадрированием.
                       </p>
                     </div>
                   </div>

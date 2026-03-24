@@ -199,7 +199,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
         <header
           ref={headerRef}
           className={cn(
-            "pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 border-b border-white/10 px-4 pb-3 pt-[calc(0.75rem+var(--safe-area-top))] transition duration-300 md:rounded-[1.75rem] md:border md:px-4 md:py-3",
+            "pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 border-b border-white/10 px-4 pb-3 pt-[var(--safe-area-top)] transition duration-300 md:rounded-[1.75rem] md:border md:px-4 md:py-3",
             isScrolled
               ? "bg-[rgba(5,10,18,0.96)] shadow-[0_14px_34px_rgba(0,0,0,0.34)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.82)] md:shadow-[0_18px_48px_rgba(0,0,0,0.34)] md:backdrop-blur-2xl"
               : "bg-[rgba(6,10,17,0.92)] shadow-[0_10px_24px_rgba(0,0,0,0.2)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.42)] md:shadow-[0_10px_30px_rgba(0,0,0,0.16)]",
@@ -325,7 +325,6 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                 tabIndex={-1}
                 className="mx-auto flex min-h-[calc(100dvh-var(--landing-nav-offset))] w-full max-w-none flex-col rounded-none border-x-0 border-b-0 border-t border-white/10 bg-[linear-gradient(180deg,rgba(9,13,20,0.98),rgba(7,10,17,0.985))] p-0 md:hidden"
               >
-                <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(236,243,255,0.08),transparent_72%)]" />
                 <div className="relative flex min-h-full flex-1 flex-col">
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] border-b border-white/10">
                     <div className="border-r border-white/10 px-4 py-3.5">
