@@ -1,4 +1,4 @@
-import { Clock3, MapPin, MessageCircleMore, Phone } from "lucide-react";
+import { Clock3, MapPin, Phone } from "lucide-react";
 
 import { CONTACT_INFO } from "@/lib/constants";
 
@@ -79,14 +79,19 @@ export function ContactSection() {
                 title="Быстрый канал связи, если звонок неудобен"
                 description="Откройте мессенджер и оставьте сообщение с моделью Volvo и симптомами. Мы вернемся с ориентиром по ремонту."
               />
-              <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2">
+              <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-3">
                 <a
                   href={CONTACT_INFO.whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="glass-panel metal-border rounded-[1.25rem] p-4 transition hover:-translate-y-0.5 sm:rounded-[1.75rem] sm:p-5"
                 >
-                  <MessageCircleMore className="h-5 w-5 text-[var(--highlight)]" />
+                  <img
+                    src="/icons/whatsapp.svg"
+                    alt=""
+                    aria-hidden="true"
+                    className="h-6 w-6 shrink-0 object-contain"
+                  />
                   <h3 className="mt-4 text-lg font-semibold text-white">WhatsApp</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-400 sm:leading-7">
                     Для быстрых фото, голосовых и уточнения деталей ремонта.
@@ -98,10 +103,33 @@ export function ContactSection() {
                   rel="noreferrer"
                   className="glass-panel metal-border rounded-[1.25rem] p-4 transition hover:-translate-y-0.5 sm:rounded-[1.75rem] sm:p-5"
                 >
-                  <MessageCircleMore className="h-5 w-5 text-[var(--highlight)]" />
+                  <img
+                    src="/icons/telegram.svg"
+                    alt=""
+                    aria-hidden="true"
+                    className="h-6 w-6 shrink-0 object-contain"
+                  />
                   <h3 className="mt-4 text-lg font-semibold text-white">Telegram</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-400 sm:leading-7">
                     Удобный резервный канал, если предпочитаете писать вместо звонка.
+                  </p>
+                </a>
+                <a
+                  href={CONTACT_INFO.maxUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glass-panel metal-border rounded-[1.25rem] p-4 transition hover:-translate-y-0.5 sm:rounded-[1.75rem] sm:p-5"
+                >
+                  <img
+                    src="/icons/max.svg"
+                    alt=""
+                    aria-hidden="true"
+                    className="h-6 w-6 shrink-0 object-contain"
+                  />
+                  <h3 className="mt-4 text-lg font-semibold text-white">MAX</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-400 sm:leading-7">
+                    Можно написать на тот же контакт {CONTACT_INFO.phoneDisplay}, если вам удобнее
+                    MAX.
                   </p>
                 </a>
               </div>

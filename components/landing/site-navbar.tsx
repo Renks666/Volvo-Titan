@@ -397,7 +397,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                   </nav>
 
                   <div className="mt-auto border-t border-white/10">
-                    <div className="grid grid-cols-2">
+                    <div className="grid grid-cols-3">
                       <a
                         href={CONTACT_INFO.whatsappUrl}
                         target="_blank"
@@ -414,13 +414,25 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                         href={CONTACT_INFO.telegramUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white"
+                        className="border-r border-white/10 px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white"
                         onClick={() => {
                           closeMenu();
                           trackCtaEvent("messenger_click", { location: "navbar_mobile_telegram" });
                         }}
                       >
                         Telegram
+                      </a>
+                      <a
+                        href={CONTACT_INFO.maxUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white"
+                        onClick={() => {
+                          closeMenu();
+                          trackCtaEvent("messenger_click", { location: "navbar_mobile_max" });
+                        }}
+                      >
+                        MAX
                       </a>
                     </div>
                     <div className="border-t border-white/10 px-4 py-3.5">
