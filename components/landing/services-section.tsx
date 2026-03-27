@@ -43,9 +43,9 @@ export function ServicesSection() {
       <div className="section-shell">
         <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
-            eyebrow="Услуги"
-            title="От базовой диагностики до ремонта сложных узлов"
-            description="Работаем с автомобилями Volvo всех популярных поколений. Если услуги нет в списке, сориентируем по телефону."
+            eyebrow="Услуги и цены"
+            title="Услуги и цены — без скрытых наценок"
+            description="Работаем с Volvo всех популярных поколений. Цену называем до начала работ. Кликните на услугу — перейдёте к форме записи."
           />
           <a
             href="#lead"
@@ -72,9 +72,15 @@ export function ServicesSection() {
                   <h3 className="max-w-44 text-lg font-semibold leading-6 text-white sm:max-w-52 sm:text-xl">
                     {service.name}
                   </h3>
-                  <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-1 text-[0.68rem] text-slate-300 transition group-hover:border-white/20 group-hover:text-white sm:px-3 sm:text-xs">
-                    {service.price}
-                  </span>
+                  {"badge" in service && service.badge === "free" ? (
+                    <span className="shrink-0 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[0.68rem] font-semibold text-emerald-400 sm:px-3 sm:text-xs">
+                      {service.price}
+                    </span>
+                  ) : service.price ? (
+                    <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-1 text-[0.68rem] text-slate-300 transition group-hover:border-white/20 group-hover:text-white sm:px-3 sm:text-xs">
+                      {service.price}
+                    </span>
+                  ) : null}
                 </div>
                 <p className="mt-3 text-sm leading-6 text-slate-400 transition group-hover:text-slate-300 sm:mt-5 sm:leading-7">
                   {service.description}

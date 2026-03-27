@@ -2,10 +2,11 @@
 
 import {
   ArrowRight,
-  Clock3,
+  BadgeCheck,
+  Calendar,
   PhoneCall,
-  SearchCheck,
   ShieldCheck,
+  Star,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -17,16 +18,16 @@ import { trackCtaEvent } from "@/utils/analytics";
 
 const heroHighlights = [
   {
-    icon: Clock3,
-    text: "Минимальная очередь",
+    icon: Calendar,
+    text: "Работаем с 1995 года",
   },
   {
-    icon: ShieldCheck,
-    text: "Гарантия на работы",
+    icon: Star,
+    text: "5 000+ авто обслужено",
   },
   {
-    icon: SearchCheck,
-    text: "Диагностика без навязывания",
+    icon: BadgeCheck,
+    text: "Диагностика — бесплатно",
   },
 ] as const;
 
@@ -67,7 +68,7 @@ export function HeroSection() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.18em] text-slate-300 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.25em]">
                 <ShieldCheck className="h-4 w-4 text-[var(--highlight)]" />
-                Специализированный сервис Volvo
+                Специализированный сервис Volvo · Москва
               </div>
               <h1 className="mt-4 max-w-[12ch] font-heading text-[2.35rem] leading-[1.02] text-white sm:mt-5 sm:max-w-[14ch] sm:text-5xl md:mt-6 md:max-w-3xl md:text-6xl">
                 <span className="mr-3 inline-block">Ремонт</span>
@@ -79,25 +80,14 @@ export function HeroSection() {
                 </span>
                 <br className="hidden sm:block" />
                 <span className="block h-1.5 sm:hidden" aria-hidden />
-                в Москве
+                без переплат и лишних работ
               </h1>
-              <p className="mt-3 text-[0.82rem] font-medium uppercase tracking-[0.18em] text-slate-400 sm:text-sm sm:tracking-[0.28em] md:text-base">
-                Работаем с 1995 года
-              </p>
               <p className="mt-4 max-w-[36rem] text-[0.98rem] leading-7 text-slate-300 sm:mt-5 sm:text-lg sm:leading-8">
-                {CONTACT_INFO.heroSubtitle} Принимаем быстро, объясняем по делу и держим фокус
-                на надежности, а не на продаже ненужных работ.
+                Диагностируем честно, объясняем понятно.
+                <br />
+                Только то, что реально нужно вашему авто.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:gap-4">
-                <a
-                  href={CONTACT_INFO.phoneHref}
-                  onClick={() => trackCtaEvent("phone_click", { location: "hero" })}
-                >
-                  <Button className="w-full sm:w-auto">
-                    <PhoneCall className="mr-2 h-4 w-4" />
-                    Позвонить
-                  </Button>
-                </a>
                 <a
                   href="#lead"
                   onClick={(event) => {
@@ -106,11 +96,26 @@ export function HeroSection() {
                     scrollToLeadSection();
                   }}
                 >
-                  <Button className="w-full sm:w-auto" variant="secondary">
-                    Записаться
+                  <Button className="w-full sm:w-auto">
+                    Записаться онлайн
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </a>
+                <a
+                  href={CONTACT_INFO.phoneHref}
+                  onClick={() => trackCtaEvent("phone_click", { location: "hero" })}
+                >
+                  <Button className="w-full sm:w-auto" variant="secondary">
+                    <PhoneCall className="mr-2 h-4 w-4" />
+                    Позвонить
+                  </Button>
+                </a>
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-[var(--highlight)]/20 bg-[var(--highlight)]/5 px-4 py-2.5 text-sm text-slate-200 sm:mt-5 sm:inline-flex">
+                <span className="text-[var(--highlight)]">🔧</span>
+                <span className="font-medium">Бесплатная диагностика при записи сегодня</span>
+                <span className="hidden text-slate-500 sm:inline">·</span>
+                <span className="text-slate-400">Замена масла от 1 500 ₽</span>
               </div>
               <div className="mt-6 grid gap-2 sm:mt-8 sm:grid-cols-2 lg:flex lg:flex-nowrap">
                 {heroHighlights.map(({ icon: Icon, text }) => (
