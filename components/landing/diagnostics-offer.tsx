@@ -33,7 +33,7 @@ export function DiagnosticsOffer() {
   };
 
   return (
-    <section className="px-0 py-[var(--landing-section-space)] md:py-24">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-12">
       <div className="section-shell">
         <Reveal>
           <div className="relative overflow-hidden rounded-[var(--landing-card-radius)] bg-gradient-to-br from-[#0d1e40] via-[#0a1830] to-[#060e1f] px-[var(--landing-card-padding-lg)] py-10 sm:rounded-[2rem] sm:px-10 sm:py-14 md:px-16">
@@ -67,6 +67,10 @@ export function DiagnosticsOffer() {
                   При записи через сайт или по телефону.
                   Занимает 30–40 минут.{" "}
                   <span className="text-slate-300">Никаких обязательств делать ремонт.</span>
+                </p>
+                <p className="mt-3 flex items-center gap-2 text-sm font-medium text-emerald-400">
+                  <CheckCircle2 className="h-4 w-4 shrink-0" aria-hidden />
+                  Осталось 3 свободных места на этой неделе
                 </p>
               </div>
               <div className="md:shrink-0">

@@ -18,7 +18,7 @@ import { createLocalBusinessSchema } from "@/lib/metadata";
 
 function FinalCta() {
   return (
-    <section className="px-0 py-[var(--landing-section-space)] md:py-20">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-12">
       <div className="section-shell">
         <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] px-[var(--landing-card-padding-lg)] py-10 text-center sm:rounded-[2rem] sm:px-10 sm:py-14">
           <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--highlight)] sm:text-xs">

@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { BadgeCheck, Star } from "lucide-react";
 
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
@@ -7,21 +7,25 @@ const reviews = [
   {
     name: "Андрей К.",
     model: "XC90 2018",
+    date: "12 февраля 2026",
     text: "Приехал с непонятным стуком. За час нашли причину — разошёлся хомут. Других проблем не придумывали, починили быстро. Честный сервис.",
   },
   {
     name: "Марина Л.",
     model: "XC60 2020",
+    date: "3 января 2026",
     text: "Обратилась первый раз, немного боялась переплатить. В итоге — только необходимое, цена совпала с озвученной до ремонта. Теперь езжу только сюда.",
   },
   {
     name: "Дмитрий В.",
     model: "V60 2017",
+    date: "18 ноября 2025",
     text: "Делал предпродажную проверку перед покупкой. Мастер нашёл несколько скрытых проблем — продавец об этом молчал. Отчёт подробный, рекомендую.",
   },
   {
     name: "Сергей П.",
     model: "XC40 2021",
+    date: "7 октября 2025",
     text: "ТО сделали за день. Всё объяснили, показали что меняли. Без лишних звонков с вопросом «а вот ещё вот это поменять?». Спокойный нормальный сервис.",
   },
 ];
@@ -50,8 +54,14 @@ export function ReviewsSection() {
                   &ldquo;{review.text}&rdquo;
                 </p>
                 <div className="mt-5 border-t border-white/8 pt-4">
-                  <p className="text-sm font-semibold text-white">{review.name}</p>
-                  <p className="mt-0.5 text-xs text-slate-500">{review.model}</p>
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-semibold text-white">{review.name}</p>
+                      <BadgeCheck className="h-4 w-4 shrink-0 text-[var(--highlight)]" aria-label="Подтверждённый отзыв" />
+                    </div>
+                    <p className="text-xs text-slate-500">{review.date}</p>
+                  </div>
+                  <p className="mt-1 text-xs font-medium text-slate-400">{review.model}</p>
                 </div>
               </article>
             </Reveal>

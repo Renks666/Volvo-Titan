@@ -80,7 +80,7 @@ export const BENEFITS = [
 ];
 
 export const TRUST_METRICS = [
-  { value: "30+", label: "лет на Volvo" },
+  { value: "30+", label: "лет опыта с Volvo" },
   { value: "5000+", label: "авто обслужено" },
   { value: "БЕСПЛАТНО", label: "диагностика при записи" },
   { value: "100%", label: "прозрачный расчёт" },
