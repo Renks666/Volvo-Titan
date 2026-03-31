@@ -1,9 +1,33 @@
-import { Clock3, MapPin, Phone } from "lucide-react";
+import { Clock3, ExternalLink, MapPin, Phone } from "lucide-react";
 
 import { CONTACT_INFO } from "@/lib/constants";
 
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
+
+const MESSENGER_ITEMS = [
+  {
+    title: "WhatsApp",
+    href: CONTACT_INFO.whatsappUrl,
+    iconSrc: "/icons/whatsapp.svg",
+    meta: "Открыть чат",
+    type: "link" as const,
+  },
+  {
+    title: "Telegram",
+    href: CONTACT_INFO.telegramUrl,
+    iconSrc: "/icons/telegram.svg",
+    meta: "Написать",
+    type: "link" as const,
+  },
+  {
+    title: "MAX",
+    value: CONTACT_INFO.phoneDisplay,
+    iconSrc: "/icons/max.svg",
+    meta: "По номеру",
+    type: "static" as const,
+  },
+] as const;
 
 export function ContactSection() {
   return (
@@ -12,134 +36,150 @@ export function ContactSection() {
       className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-24"
     >
       <div className="section-shell">
-        <div className="grid gap-4 sm:gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <Reveal>
-            <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-6 md:p-8">
-              <SectionHeading
-                eyebrow="Контакты"
-                title={
-                  <>
-                    Приезжайте в{" "}
-                    <span className="font-heading uppercase tracking-[0.08em] text-[var(--chrome)]">
-                      Volvo Titan
-                    </span>{" "}
-                    или позвоните прямо сейчас
-                  </>
-                }
-                description="Если автомобиль ведет себя нестабильно, лучше записаться заранее: так мы сразу заложим время под диагностику."
-              />
-              <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4">
-                <div className="rounded-[1.15rem] border border-white/10 bg-black/20 p-4 sm:rounded-[1.5rem] sm:p-5">
-                  <div className="flex items-center gap-3 text-white">
-                    <Phone className="h-5 w-5 text-[var(--highlight)]" />
-                    <span className="font-semibold">Телефон</span>
-                  </div>
-                  <a
-                    href={CONTACT_INFO.phoneHref}
-                    className="mt-3 inline-flex max-w-full flex-col gap-2.5 text-base text-slate-200 transition hover:text-white sm:mt-4 sm:text-lg"
-                  >
-                    <span className="break-words text-[1.02rem] font-semibold leading-none text-white sm:text-[1.12rem]">
-                      {CONTACT_INFO.phoneDisplay}
-                    </span>
-                    <span className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-slate-300 sm:text-[0.68rem]">
-                      {CONTACT_INFO.phoneContactName}
-                    </span>
-                  </a>
+        <Reveal>
+          <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-5 md:p-6">
+            <SectionHeading
+              eyebrow="Контакты"
+              title={
+                <>
+                  Свяжитесь с{" "}
+                  <span className="font-heading uppercase tracking-[0.08em] text-[var(--chrome)]">
+                    Volvo Titan
+                  </span>{" "}
+                  удобным способом
+                </>
+              }
+              description="Звоните, пишите в мессенджеры или приезжайте сразу в сервис."
+            />
+
+            {/* Asymmetric 2-column layout */}
+            <div className="mt-5 grid gap-3 sm:mt-6 sm:gap-3.5 md:grid-cols-[3fr_2fr] md:items-stretch">
+
+              {/* LEFT: Hero phone card */}
+              <div className="flex flex-col rounded-[1.35rem] border border-[var(--highlight)]/25 bg-black/25 p-5 ring-1 ring-[var(--highlight)]/10 sm:p-6">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-slate-400">
+                  {CONTACT_INFO.phoneContactName}
+                </p>
+
+                <a
+                  href={CONTACT_INFO.phoneHref}
+                  className="mt-1.5 block font-heading text-[1.7rem] leading-none tracking-[0.04em] text-[var(--chrome)] transition hover:text-white sm:text-[2rem] lg:text-[2.2rem]"
+                >
+                  {CONTACT_INFO.phoneDisplay}
+                </a>
+
+                <a
+                  href={CONTACT_INFO.phoneHref}
+                  className="cta-shimmer mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--highlight)] py-3 text-sm font-bold text-white transition sm:py-3.5 sm:text-base"
+                >
+                  <Phone className="h-4 w-4 shrink-0" />
+                  Позвонить
+                </a>
+
+                {/* Messenger pills */}
+                <div className="mt-3 grid gap-2 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
+                  {MESSENGER_ITEMS.map((item) =>
+                    item.type === "link" ? (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2.5 rounded-[0.95rem] border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-slate-200 transition hover:border-[var(--highlight)]/40 hover:bg-white/[0.07] hover:text-white"
+                      >
+                        <img
+                          src={item.iconSrc}
+                          alt=""
+                          aria-hidden="true"
+                          className="h-5 w-5 shrink-0 object-contain"
+                        />
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold leading-none text-white">
+                            {item.title}
+                          </p>
+                          <p className="mt-0.5 text-[0.62rem] uppercase tracking-[0.14em] text-slate-400">
+                            {item.meta}
+                          </p>
+                        </div>
+                      </a>
+                    ) : (
+                      <div
+                        key={item.title}
+                        className="flex items-center gap-2.5 rounded-[0.95rem] border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-slate-200"
+                      >
+                        <img
+                          src={item.iconSrc}
+                          alt=""
+                          aria-hidden="true"
+                          className="h-5 w-5 shrink-0 object-contain"
+                        />
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold leading-none text-white">
+                            {item.title}
+                          </p>
+                          <p className="mt-0.5 break-words text-[0.72rem] leading-5 text-slate-300">
+                            {item.value}
+                          </p>
+                        </div>
+                      </div>
+                    ),
+                  )}
                 </div>
-                <div className="rounded-[1.15rem] border border-white/10 bg-black/20 p-4 sm:rounded-[1.5rem] sm:p-5">
-                  <div className="flex items-center gap-3 text-white">
-                    <MapPin className="h-5 w-5 text-[var(--highlight)]" />
-                    <span className="font-semibold">Адрес</span>
+              </div>
+
+              {/* RIGHT: Address + Hours stacked */}
+              <div className="grid gap-3 sm:grid-cols-2 sm:gap-3.5 md:grid-cols-1">
+
+                {/* Address card */}
+                <div className="flex flex-col rounded-[1.35rem] border border-white/10 bg-black/20 p-4 sm:p-5">
+                  <div className="flex items-center gap-2.5 text-white">
+                    <MapPin className="h-4.5 w-4.5 shrink-0 text-[var(--highlight)]" />
+                    <span className="text-sm font-semibold uppercase tracking-[0.1em] text-slate-300">
+                      Адрес
+                    </span>
                   </div>
-                  <p className="mt-2 text-sm leading-6 text-slate-300 sm:mt-3 sm:text-base">
+                  <p className="mt-2.5 grow text-sm leading-[1.65] text-slate-200 sm:text-[0.94rem]">
                     {CONTACT_INFO.address}
                   </p>
+                  <a
+                    href={CONTACT_INFO.mapOpenUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center gap-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-[var(--highlight)] transition hover:text-white"
+                  >
+                    Открыть на карте
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
                 </div>
-                <div className="rounded-[1.15rem] border border-white/10 bg-black/20 p-4 sm:rounded-[1.5rem] sm:p-5">
-                  <div className="flex items-center gap-3 text-white">
-                    <Clock3 className="h-5 w-5 text-[var(--highlight)]" />
-                    <span className="font-semibold">Часы работы</span>
+
+                {/* Working hours card */}
+                <div className="rounded-[1.35rem] border border-white/10 bg-black/20 p-4 sm:p-5">
+                  <div className="flex items-center gap-2.5 text-white">
+                    <Clock3 className="h-4.5 w-4.5 shrink-0 text-[var(--highlight)]" />
+                    <span className="text-sm font-semibold uppercase tracking-[0.1em] text-slate-300">
+                      Часы работы
+                    </span>
                   </div>
-                  <div className="mt-2 grid gap-2 text-sm text-slate-300 sm:mt-3 sm:text-base">
+                  <div className="mt-3 grid gap-2.5">
                     {CONTACT_INFO.workHours.map((item) => (
-                      <div key={item.label} className="flex justify-between gap-3">
-                        <span>{item.label}</span>
-                        <span>{item.value}</span>
+                      <div
+                        key={item.label}
+                        className="flex items-center justify-between gap-3 text-sm text-slate-300 sm:text-[0.94rem]"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="text-[0.55rem] text-[var(--highlight)]">●</span>
+                          {item.label}
+                        </span>
+                        <span className="font-semibold text-white">{item.value}</span>
                       </div>
                     ))}
                   </div>
                 </div>
+
               </div>
             </div>
-          </Reveal>
-          <Reveal delay={0.12}>
-            <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-6 md:p-8">
-              <SectionHeading
-                eyebrow="Мессенджеры"
-                title="Быстрый канал связи, если звонок неудобен"
-                description="Откройте мессенджер и оставьте сообщение с моделью Volvo и симптомами. Мы вернемся с ориентиром по ремонту."
-              />
-              <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-3">
-                <a
-                  href={CONTACT_INFO.whatsappUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="glass-panel metal-border rounded-[1.25rem] p-4 transition hover:-translate-y-0.5 sm:rounded-[1.75rem] sm:p-5"
-                >
-                  <img
-                    src="/icons/whatsapp.svg"
-                    alt=""
-                    aria-hidden="true"
-                    className="h-6 w-6 shrink-0 object-contain"
-                  />
-                  <h3 className="mt-4 text-lg font-semibold text-white">WhatsApp</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-400 sm:leading-7">
-                    Для быстрых фото, голосовых и уточнения деталей ремонта.
-                  </p>
-                </a>
-                <a
-                  href={CONTACT_INFO.telegramUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="glass-panel metal-border rounded-[1.25rem] p-4 transition hover:-translate-y-0.5 sm:rounded-[1.75rem] sm:p-5"
-                >
-                  <img
-                    src="/icons/telegram.svg"
-                    alt=""
-                    aria-hidden="true"
-                    className="h-6 w-6 shrink-0 object-contain"
-                  />
-                  <h3 className="mt-4 text-lg font-semibold text-white">Telegram</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-400 sm:leading-7">
-                    Удобный резервный канал, если предпочитаете писать вместо звонка.
-                  </p>
-                </a>
-                <a
-                  href={CONTACT_INFO.maxUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="glass-panel metal-border rounded-[1.25rem] p-4 transition hover:-translate-y-0.5 sm:rounded-[1.75rem] sm:p-5"
-                >
-                  <img
-                    src="/icons/max.svg"
-                    alt=""
-                    aria-hidden="true"
-                    className="h-6 w-6 shrink-0 object-contain"
-                  />
-                  <h3 className="mt-4 text-lg font-semibold text-white">MAX</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-400 sm:leading-7">
-                    Можно написать на тот же контакт {CONTACT_INFO.phoneDisplay}, если вам удобнее
-                    MAX.
-                  </p>
-                </a>
-              </div>
-              <div className="mt-6 rounded-[1.25rem] border border-dashed border-white/15 p-4 text-sm leading-6 text-slate-400 sm:mt-8 sm:rounded-[1.75rem] sm:p-5">
-                Для production лучше заменить `NEXT_PUBLIC_TELEGRAM_CONTACT_URL` на прямую ссылку
-                на ваш Telegram-контакт.
-              </div>
-            </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

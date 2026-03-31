@@ -397,12 +397,12 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                   </nav>
 
                   <div className="mt-auto border-t border-white/10">
-                    <div className="grid grid-cols-3">
+                    <div className="grid gap-px bg-white/10 sm:grid-cols-3 sm:gap-0">
                       <a
                         href={CONTACT_INFO.whatsappUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="border-r border-white/10 px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white"
+                        className="bg-[rgb(31,38,52)] px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white sm:border-r sm:border-white/10"
                         onClick={() => {
                           closeMenu();
                           trackCtaEvent("messenger_click", { location: "navbar_mobile_whatsapp" });
@@ -414,7 +414,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                         href={CONTACT_INFO.telegramUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="border-r border-white/10 px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white"
+                        className="bg-[rgb(31,38,52)] px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white sm:border-r sm:border-white/10"
                         onClick={() => {
                           closeMenu();
                           trackCtaEvent("messenger_click", { location: "navbar_mobile_telegram" });
@@ -422,18 +422,14 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                       >
                         Telegram
                       </a>
-                      <a
-                        href={CONTACT_INFO.maxUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white"
-                        onClick={() => {
-                          closeMenu();
-                          trackCtaEvent("messenger_click", { location: "navbar_mobile_max" });
-                        }}
-                      >
-                        MAX
-                      </a>
+                      <div className="bg-[rgb(31,38,52)] px-4 py-4 text-center">
+                        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
+                          MAX
+                        </p>
+                        <p className="mt-2 text-sm font-semibold text-white">
+                          {CONTACT_INFO.phoneDisplay}
+                        </p>
+                      </div>
                     </div>
                     <div className="border-t border-white/10 px-4 py-3.5">
                       <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500">

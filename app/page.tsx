@@ -11,6 +11,7 @@ import { MechanicSection } from "@/components/landing/mechanic-section";
 import { ProcessSection } from "@/components/landing/process-section";
 import { ReviewsSection } from "@/components/landing/reviews-section";
 import { ServicesSection } from "@/components/landing/services-section";
+import { Footer } from "@/components/landing/footer";
 import { SiteNavbar } from "@/components/landing/site-navbar";
 import { TrustStrip } from "@/components/landing/trust-strip";
 import { CONTACT_INFO, SITE_URL } from "@/lib/constants";
@@ -110,25 +111,7 @@ export default function Home() {
           __html: JSON.stringify(localBusinessSchema),
         }}
       />
-      <footer className="border-t border-white/10 bg-black/50 px-4 py-6 text-sm text-slate-400 backdrop-blur-xl sm:px-6 sm:py-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 sm:gap-3 md:flex-row md:items-center md:justify-between">
-          <p>Volvo Titan. Специализированный сервис Volvo в Москве.</p>
-          <div className="flex flex-col gap-1 text-slate-500 md:text-right">
-            <a
-              className="flex flex-col gap-2 transition hover:text-white md:items-end"
-              href={CONTACT_INFO.phoneHref}
-            >
-              <span className="text-[0.98rem] font-semibold leading-none text-slate-200">
-                {CONTACT_INFO.phoneDisplay}
-              </span>
-              <span className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
-                {CONTACT_INFO.phoneContactName}
-              </span>
-            </a>
-            <p>{CONTACT_INFO.address}</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
