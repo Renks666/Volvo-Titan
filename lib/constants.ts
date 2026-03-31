@@ -25,7 +25,7 @@ export const CONTACT_INFO = {
     "https://wa.me/79104541419?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20Volvo%20Titan.",
   telegramUrl:
     process.env.NEXT_PUBLIC_TELEGRAM_CONTACT_URL ||
-    "https://t.me/share/url?url=https%3A%2F%2Fvolvo-titan.ru&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20Volvo%20Titan.",
+    "https://t.me/volvo_titan?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20Volvo%20Titan.",
   mapEmbedUrl:
     "https://yandex.ru/map-widget/v1/?um=constructor%3A9f0d122dce0d58d1596c73e93fefd9d9f31c72d65a821d34016b2b8680f0d18f&source=constructor",
   mapTitle: "Volvo Titan на карте",
