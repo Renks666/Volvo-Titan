@@ -44,8 +44,8 @@ export function ServicesSection() {
         <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
             eyebrow="Услуги и цены"
-            title="Услуги и цены — без скрытых наценок"
-            description="Работаем с Volvo всех популярных поколений. Цену называем до начала работ. Кликните на услугу — перейдёте к форме записи."
+            title="Без скрытых наценок"
+            description="Все работы — по фиксированной цене до начала."
           />
           <a
             href="#lead"

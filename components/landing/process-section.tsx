@@ -61,8 +61,7 @@ export function ProcessSection() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Как это работает"
-          title="Как это работает — 5 шагов"
-          description="Прозрачный процесс от первого звонка до выдачи автомобиля."
+          title="5 шагов — от заявки до выдачи"
         />
         <div className="mt-7 sm:mt-10">
           <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
@@ -73,7 +72,7 @@ export function ProcessSection() {
                     <button
                       type="button"
                       onClick={scrollToLead}
-                      className="glass-panel metal-border flex h-full w-full flex-col rounded-[var(--landing-card-radius)] p-5 text-left transition hover:border-[var(--highlight)]/40 hover:bg-[var(--highlight)]/5 sm:rounded-[2rem] sm:p-6"
+                      className="glass-panel metal-border flex h-full w-full flex-col rounded-[var(--landing-card-radius)] p-4 text-left transition hover:border-[var(--highlight)]/40 hover:bg-[var(--highlight)]/5 sm:rounded-[2rem] sm:p-6"
                     >
                       <p
                         className="font-heading text-4xl font-bold leading-none text-[var(--highlight)]/50 sm:text-5xl"
@@ -89,7 +88,7 @@ export function ProcessSection() {
                       </p>
                     </button>
                   ) : (
-                    <div className="glass-panel metal-border flex h-full flex-col rounded-[var(--landing-card-radius)] p-5 sm:rounded-[2rem] sm:p-6">
+                    <div className="glass-panel metal-border flex h-full flex-col rounded-[var(--landing-card-radius)] p-4 sm:rounded-[2rem] sm:p-6">
                       <p
                         className="font-heading text-4xl font-bold leading-none text-[var(--highlight)]/30 sm:text-5xl"
                         aria-hidden

@@ -56,7 +56,7 @@ export function ContactSection() {
             <div className="mt-5 grid gap-3 sm:mt-6 sm:gap-3.5 md:grid-cols-[3fr_2fr] md:items-stretch">
 
               {/* LEFT: Hero phone card */}
-              <div className="flex flex-col rounded-[1.35rem] border border-[var(--highlight)]/25 bg-black/25 p-5 ring-1 ring-[var(--highlight)]/10 sm:p-6">
+              <div className="flex flex-col rounded-[1.35rem] border border-[var(--highlight)]/25 bg-black/25 p-4 ring-1 ring-[var(--highlight)]/10 sm:p-6">
                 <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-slate-400">
                   {CONTACT_INFO.phoneContactName}
                 </p>

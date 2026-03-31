@@ -658,7 +658,7 @@
 @media (max-width: 640px) {
   :root {
     --landing-shell-inline: 1rem;
-    --landing-section-space: 3.25rem;
+    --landing-section-space: 2.75rem;
     --landing-card-radius: 1.35rem;
     --landing-card-padding: 0.95rem;
     --landing-card-padding-lg: 1.1rem;

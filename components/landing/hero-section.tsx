@@ -80,12 +80,10 @@ export function HeroSection() {
                 </span>
                 <br className="hidden sm:block" />
                 <span className="block h-1.5 sm:hidden" aria-hidden />
-                без переплат и лишних работ
+                без переплат
               </h1>
               <p className="mt-4 max-w-[36rem] text-[0.98rem] leading-7 text-slate-300 sm:mt-5 sm:text-lg sm:leading-8">
-                Диагностируем честно, объясняем понятно.
-                <br />
-                Только то, что реально нужно вашему авто.
+                Диагностируем честно, объясняем понятно — только то, что реально нужно.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:gap-4">
                 <a
@@ -113,7 +111,7 @@ export function HeroSection() {
               </div>
               <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-[var(--highlight)]/20 bg-[var(--highlight)]/5 px-4 py-2.5 text-sm text-slate-200 sm:mt-5 sm:inline-flex">
                 <span className="text-[var(--highlight)]">🔧</span>
-                <span className="font-medium">Бесплатная диагностика при записи сегодня</span>
+                <span className="font-medium">Диагностика бесплатно</span>
                 <span className="hidden text-slate-500 sm:inline">·</span>
                 <span className="text-slate-400">Замена масла от 1 500 ₽</span>
               </div>
