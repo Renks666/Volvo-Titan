@@ -1,0 +1,22 @@
+name: Deploy to Beget
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.BEGET_HOST }}
+          username: ${{ secrets.BEGET_USER }}
+          password: ${{ secrets.BEGET_PASSWORD }}
+          script: |
+            cd ${{ secrets.BEGET_PROJECT_PATH }}
+            git pull origin main
+            npm install --production
+            npm run build
+            pm2 restart volvo-titan --update-env
