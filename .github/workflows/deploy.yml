@@ -15,8 +15,8 @@ jobs:
           username: ${{ secrets.BEGET_USER }}
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
-            cd ${{ secrets.BEGET_PROJECT_PATH }}
+            cd /var/www/html/Volvo-Titan
             git pull origin main
-            npm install --production
+            npm install
             npm run build
             pm2 restart volvo-titan --update-env
