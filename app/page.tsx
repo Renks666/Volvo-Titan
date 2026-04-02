@@ -5,12 +5,14 @@ import { ContactSection } from "@/components/landing/contact-section";
 import { CtaSection } from "@/components/landing/cta-section";
 import { DiagnosticsOffer } from "@/components/landing/diagnostics-offer";
 import { FloatingContactBar } from "@/components/landing/floating-contact-bar";
+import { GallerySection } from "@/components/landing/gallery-section";
 import { HeroSection } from "@/components/landing/hero-section";
 import { MapSection } from "@/components/landing/map-section";
 import { MechanicSection } from "@/components/landing/mechanic-section";
 import { ProcessSection } from "@/components/landing/process-section";
 import { ReviewsSection } from "@/components/landing/reviews-section";
 import { ServicesSection } from "@/components/landing/services-section";
+import { WorksSection } from "@/components/landing/works-section";
 import { Footer } from "@/components/landing/footer";
 import { SiteNavbar } from "@/components/landing/site-navbar";
 import { TrustStrip } from "@/components/landing/trust-strip";
@@ -83,7 +85,13 @@ export default function Home() {
           <DiagnosticsOffer />
         </div>
         <div className="section-atmosphere">
+          <WorksSection />
+        </div>
+        <div className="section-atmosphere">
           <MechanicSection />
+        </div>
+        <div className="section-atmosphere">
+          <GallerySection />
         </div>
         <div className="section-atmosphere">
           <ReviewsSection />

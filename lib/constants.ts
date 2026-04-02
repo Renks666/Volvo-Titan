@@ -41,6 +41,7 @@ export const CONTACT_INFO = {
 export const NAV_ITEMS = [
   { href: "#benefits", label: "Преимущества" },
   { href: "#services", label: "Услуги" },
+  { href: "#works", label: "Наши работы" },
   { href: "#lead", label: "Запись" },
   { href: "#contacts", label: "Контакты" },
 ] as const;
