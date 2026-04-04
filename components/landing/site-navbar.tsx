@@ -267,28 +267,6 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               <span className="truncate min-[390px]:hidden md:hidden">{LABELS.callShort}</span>
             </a>
 
-            <a
-              href={CONTACT_INFO.whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp"
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center border-r border-white/10 text-white transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] md:h-10 md:w-10 md:rounded-[1.1rem] md:border md:bg-white/6 md:hover:bg-white/10"
-              onClick={() => trackCtaEvent("messenger_click", { location: "navbar_mobile_whatsapp" })}
-            >
-              <img src="/icons/whatsapp.svg" alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
-            </a>
-
-            <a
-              href={CONTACT_INFO.telegramUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Telegram"
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center border-r border-white/10 text-white transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] md:h-10 md:w-10 md:rounded-[1.1rem] md:border md:bg-white/6 md:hover:bg-white/10"
-              onClick={() => trackCtaEvent("messenger_click", { location: "navbar_mobile_telegram" })}
-            >
-              <img src="/icons/telegram.svg" alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
-            </a>
-
             <button
               type="button"
               className="inline-flex h-11 w-11 shrink-0 items-center justify-center border-r border-white/10 text-white transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] md:h-10 md:w-10 md:rounded-[1.1rem] md:border md:bg-white/6 md:hover:bg-white/10"
@@ -424,28 +402,31 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                         href={CONTACT_INFO.whatsappUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="bg-[rgb(31,38,52)] px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white sm:border-r sm:border-white/10"
+                        className="flex items-center justify-center gap-2 bg-[rgb(31,38,52)] px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white sm:border-r sm:border-white/10"
                         onClick={() => {
                           closeMenu();
                           trackCtaEvent("messenger_click", { location: "navbar_mobile_whatsapp" });
                         }}
                       >
+                        <img src="/icons/whatsapp.svg" alt="" aria-hidden="true" className="h-4 w-4 shrink-0 object-contain" />
                         WhatsApp
                       </a>
                       <a
                         href={CONTACT_INFO.telegramUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="bg-[rgb(31,38,52)] px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white sm:border-r sm:border-white/10"
+                        className="flex items-center justify-center gap-2 bg-[rgb(31,38,52)] px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white sm:border-r sm:border-white/10"
                         onClick={() => {
                           closeMenu();
                           trackCtaEvent("messenger_click", { location: "navbar_mobile_telegram" });
                         }}
                       >
+                        <img src="/icons/telegram.svg" alt="" aria-hidden="true" className="h-4 w-4 shrink-0 object-contain" />
                         Telegram
                       </a>
                       <div className="bg-[rgb(31,38,52)] px-4 py-4 text-center">
-                        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
+                        <p className="flex items-center justify-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
+                          <img src="/icons/max.svg" alt="" aria-hidden="true" className="h-4 w-4 shrink-0 object-contain" />
                           MAX
                         </p>
                         <p className="mt-2 text-sm font-semibold text-white">
