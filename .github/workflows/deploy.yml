@@ -1,4 +1,4 @@
-name: Deploy to Beget
+name: Deploy to Coolify
 
 on:
   push:
@@ -8,16 +8,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.BEGET_HOST }}
-          username: ${{ secrets.BEGET_USER }}
-          password: ${{ secrets.BEGET_PASSWORD }}
-          script: |
-            cd /var/www/html/Volvo-Titan
-            git pull origin main
-            npm install
-            npm run build
-            fuser -k 3000/tcp 2>/dev/null || true
-            pm2 restart volvo-titan --update-env
+      - name: Trigger Coolify deployment
+        run: |
+          curl -s "http://62.113.37.209:8000/api/v1/deploy?uuid=z16gogz2sv3y6xyr6rfg3j0d&force=false"
