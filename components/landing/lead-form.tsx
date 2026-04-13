@@ -147,6 +147,16 @@ export function LeadForm() {
                   field.onChange(formatPhoneValue(event.target.value));
                   requestAnimationFrame(movePhoneCaret);
                 }}
+                onKeyDown={(event) => {
+                  if (event.key === "Backspace") {
+                    event.preventDefault();
+                    const digits = extractPhoneDigits(field.value);
+                    if (digits.length > 0) {
+                      field.onChange(formatPhoneValue(digits.slice(0, -1)));
+                      requestAnimationFrame(movePhoneCaret);
+                    }
+                  }
+                }}
                 onClick={() => {
                   requestAnimationFrame(movePhoneCaret);
                 }}
