@@ -85,6 +85,7 @@ export async function signInAction(
   const { error } = await supabase.auth.signInWithPassword(parsedValues.data);
 
   if (error) {
+    console.error("[signInAction] Supabase error:", error.message, error.status);
     return {
       success: false,
       message: "Не удалось войти. Проверьте email и пароль.",
