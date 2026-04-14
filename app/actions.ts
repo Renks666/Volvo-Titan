@@ -126,6 +126,33 @@ export async function updateLeadStatusAction(input: {
   revalidatePath("/admin/leads");
 }
 
+export async function updateLeadAction(input: {
+  id: string;
+  name: string;
+  model: string;
+  service: string;
+  comment: string;
+}) {
+  await requireAdminSession();
+
+  const supabase = createSupabaseAdminClient();
+  const { error } = await supabase
+    .from("leads")
+    .update({
+      name: input.name.trim() || null,
+      model: input.model.trim() || null,
+      service: input.service.trim() || null,
+      comment: input.comment.trim() || null,
+    })
+    .eq("id", input.id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidatePath("/admin/leads");
+}
+
 export async function deleteLeadAction(id: string) {
   await requireAdminSession();
 

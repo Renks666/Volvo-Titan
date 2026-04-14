@@ -2,15 +2,12 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoaderCircle, Send } from "lucide-react";
+import { LoaderCircle, Phone } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 
 import { submitLeadAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { SERVICE_OPTIONS, VOLVO_MODEL_OPTIONS } from "@/lib/constants";
 import type { LeadFormValues } from "@/lib/types";
 import { leadFormSchema } from "@/lib/validators";
 import { trackCtaEvent } from "@/utils/analytics";
@@ -61,7 +58,6 @@ export function LeadForm() {
 
   const {
     control,
-    register,
     handleSubmit,
     reset,
     setValue,
@@ -71,23 +67,17 @@ export function LeadForm() {
     defaultValues,
   });
 
+  // Слушаем выбор услуги из секции услуг
   useEffect(() => {
     const handleSelectedService = (event: Event) => {
       const customEvent = event as CustomEvent<{ serviceName?: string }>;
       const serviceName = customEvent.detail?.serviceName;
-
-      if (!serviceName) {
-        return;
+      if (serviceName) {
+        setValue("service", serviceName, { shouldDirty: true, shouldTouch: true });
       }
-
-      setValue("service", serviceName, {
-        shouldDirty: true,
-        shouldTouch: true,
-      });
     };
 
     window.addEventListener("lead-service:selected", handleSelectedService as EventListener);
-
     return () => {
       window.removeEventListener("lead-service:selected", handleSelectedService as EventListener);
     };
@@ -95,11 +85,7 @@ export function LeadForm() {
 
   const movePhoneCaret = () => {
     const input = phoneInputRef.current;
-
-    if (!input) {
-      return;
-    }
-
+    if (!input) return;
     const caretPosition = getPhoneCaretPosition(input.value);
     input.setSelectionRange(caretPosition, caretPosition);
   };
@@ -122,100 +108,45 @@ export function LeadForm() {
 
   return (
     <form id="lead-form" className="grid gap-3 sm:gap-4" onSubmit={onSubmit}>
-      <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-slate-300">
-          Имя
-          <Input placeholder="Как к вам обращаться" {...register("name")} />
-          {errors.name ? <span className="text-xs text-rose-300">{errors.name.message}</span> : null}
-        </label>
-        <label className="grid gap-2 text-sm text-slate-300">
-          Телефон *
-          <Controller
-            control={control}
-            name="phone"
-            render={({ field }) => (
-              <Input
-                {...field}
-                ref={(element) => {
-                  field.ref(element);
-                  phoneInputRef.current = element;
-                }}
-                autoComplete="tel"
-                inputMode="numeric"
-                type="tel"
-                onChange={(event) => {
-                  field.onChange(formatPhoneValue(event.target.value));
-                  requestAnimationFrame(movePhoneCaret);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Backspace") {
-                    event.preventDefault();
-                    const digits = extractPhoneDigits(field.value);
-                    if (digits.length > 0) {
-                      field.onChange(formatPhoneValue(digits.slice(0, -1)));
-                      requestAnimationFrame(movePhoneCaret);
-                    }
-                  }
-                }}
-                onClick={() => {
-                  requestAnimationFrame(movePhoneCaret);
-                }}
-                onFocus={() => {
-                  requestAnimationFrame(movePhoneCaret);
-                }}
-              />
-            )}
-          />
-          {errors.phone ? <span className="text-xs text-rose-300">{errors.phone.message}</span> : null}
-        </label>
-      </div>
-      <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-slate-300">
-          Услуга
-          <Controller
-            control={control}
-            name="service"
-            render={({ field }) => (
-              <Select
-                id="lead-service"
-                name={field.name}
-                value={field.value}
-                onValueChange={field.onChange}
-                options={SERVICE_OPTIONS}
-                placeholder="Выберите услугу"
-              />
-            )}
-          />
-        </label>
-        <label className="grid gap-2 text-sm text-slate-300">
-          Модель Volvo
-          <Controller
-            control={control}
-            name="model"
-            render={({ field }) => (
-              <Select
-                id="lead-model"
-                name={field.name}
-                value={field.value}
-                onValueChange={field.onChange}
-                options={VOLVO_MODEL_OPTIONS}
-                placeholder="Выберите модель"
-              />
-            )}
-          />
-          {errors.model ? <span className="text-xs text-rose-300">{errors.model.message}</span> : null}
-        </label>
-      </div>
       <label className="grid gap-2 text-sm text-slate-300">
-        Комментарий
-        <Textarea
-          placeholder="Опишите симптомы, модель Volvo или удобное время для звонка"
-          {...register("comment")}
+        Ваш телефон *
+        <Controller
+          control={control}
+          name="phone"
+          render={({ field }) => (
+            <Input
+              {...field}
+              ref={(element) => {
+                field.ref(element);
+                phoneInputRef.current = element;
+              }}
+              autoComplete="tel"
+              inputMode="numeric"
+              type="tel"
+              onChange={(event) => {
+                field.onChange(formatPhoneValue(event.target.value));
+                requestAnimationFrame(movePhoneCaret);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Backspace") {
+                  event.preventDefault();
+                  const digits = extractPhoneDigits(field.value);
+                  if (digits.length > 0) {
+                    field.onChange(formatPhoneValue(digits.slice(0, -1)));
+                    requestAnimationFrame(movePhoneCaret);
+                  }
+                }
+              }}
+              onClick={() => requestAnimationFrame(movePhoneCaret)}
+              onFocus={() => requestAnimationFrame(movePhoneCaret)}
+            />
+          )}
         />
-        {errors.comment ? (
-          <span className="text-xs text-rose-300">{errors.comment.message}</span>
+        {errors.phone ? (
+          <span className="text-xs text-rose-300">{errors.phone.message}</span>
         ) : null}
       </label>
+
       {serverMessage ? (
         <div
           className={
@@ -227,24 +158,29 @@ export function LeadForm() {
           {serverMessage.text}
         </div>
       ) : null}
+
       <Button
         type="submit"
-        className="w-full md:w-auto"
+        className="w-full"
         disabled={isPending}
         onClick={() => trackCtaEvent("lead_cta_click", { location: "cta_form_submit" })}
       >
         {isPending ? (
           <>
             <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-            Отправляем
+            Отправляем заявку
           </>
         ) : (
           <>
-            <Send className="mr-2 h-4 w-4" />
-            Оставить заявку
+            <Phone className="mr-2 h-4 w-4" />
+            Перезвоните мне
           </>
         )}
       </Button>
+
+      <p className="text-center text-xs text-slate-500">
+        Перезвоним в течение 15 минут в рабочее время
+      </p>
     </form>
   );
 }

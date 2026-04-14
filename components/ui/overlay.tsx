@@ -164,12 +164,14 @@ interface DismissableLayerOptions {
   active: boolean;
   refs: Array<RefObject<HTMLElement | null>>;
   onDismiss: () => void;
+  ignorePortalContent?: boolean;
 }
 
 export function useDismissableLayer({
   active,
   refs,
   onDismiss,
+  ignorePortalContent = false,
 }: DismissableLayerOptions) {
   const handlePointerDown = useEffectEvent((event: PointerEvent) => {
     const target = event.target;
@@ -180,9 +182,15 @@ export function useDismissableLayer({
 
     const clickedInside = refs.some((ref) => ref.current?.contains(target));
 
-    if (!clickedInside) {
-      onDismiss();
+    if (clickedInside) {
+      return;
     }
+
+    if (ignorePortalContent && (target as Element).closest?.("[data-overlay-variant]")) {
+      return;
+    }
+
+    onDismiss();
   });
 
   useEffect(() => {

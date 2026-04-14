@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Orbitron } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 
 import { BackgroundScene } from "@/components/background-scene";
@@ -12,9 +12,10 @@ const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
 });
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
+  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -76,7 +77,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${manrope.variable} ${orbitron.variable} h-full scroll-smooth antialiased`}
+      className={`${manrope.variable} ${plusJakartaSans.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
         <BackgroundScene />

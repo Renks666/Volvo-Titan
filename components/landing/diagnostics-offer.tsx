@@ -70,7 +70,7 @@ export function DiagnosticsOffer() {
                 </p>
                 <p className="mt-3 flex items-center gap-2 text-sm font-medium text-emerald-400">
                   <CheckCircle2 className="h-4 w-4 shrink-0" aria-hidden />
-                  Осталось 3 свободных места на этой неделе
+                  Запись ограничена — свяжитесь сегодня
                 </p>
               </div>
               <div className="md:shrink-0">

@@ -76,6 +76,13 @@ export function ServicesSection() {
                     <span className="shrink-0 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[0.68rem] font-semibold text-emerald-400 sm:px-3 sm:text-xs">
                       {service.price}
                     </span>
+                  ) : service.price === "по запросу" ? (
+                    <span
+                      className="shrink-0 rounded-full border border-white/10 px-2.5 py-1 text-[0.68rem] text-slate-400 transition group-hover:border-white/20 group-hover:text-slate-300 sm:px-3 sm:text-xs"
+                      title="Цена зависит от модели — уточним при звонке"
+                    >
+                      уточним при звонке
+                    </span>
                   ) : service.price ? (
                     <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-1 text-[0.68rem] text-slate-300 transition group-hover:border-white/20 group-hover:text-white sm:px-3 sm:text-xs">
                       {service.price}

@@ -1,4 +1,4 @@
-import { BadgeCheck, Star } from "lucide-react";
+import { BadgeCheck, ExternalLink, Star } from "lucide-react";
 
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
@@ -34,20 +34,14 @@ export function ReviewsSection() {
   return (
     <section className="px-0 py-[var(--landing-section-space)] md:py-24">
       <div className="section-shell">
-        <SectionHeading
-          eyebrow="Отзывы"
-          title="Что говорят владельцы Volvo"
-        />
+        <SectionHeading eyebrow="Отзывы" title="Что говорят владельцы Volvo" />
         <div className="mt-7 grid gap-3 sm:mt-10 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
           {reviews.map((review, index) => (
             <Reveal key={review.name} delay={index * 0.08}>
               <article className="glass-panel metal-border flex h-full flex-col rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-6">
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 fill-amber-400 text-amber-400"
-                    />
+                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
                 <p className="mt-4 flex-1 text-sm leading-6 text-slate-300 sm:leading-7">
@@ -57,7 +51,10 @@ export function ReviewsSection() {
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5">
                       <p className="text-sm font-semibold text-white">{review.name}</p>
-                      <BadgeCheck className="h-4 w-4 shrink-0 text-[var(--highlight)]" aria-label="Подтверждённый отзыв" />
+                      <BadgeCheck
+                        className="h-4 w-4 shrink-0 text-[var(--highlight)]"
+                        aria-label="Подтверждённый отзыв"
+                      />
                     </div>
                     <p className="text-xs text-slate-500">{review.date}</p>
                   </div>
@@ -66,6 +63,19 @@ export function ReviewsSection() {
               </article>
             </Reveal>
           ))}
+        </div>
+
+        {/* Ссылка на внешние отзывы */}
+        <div className="mt-6 flex justify-center sm:mt-8">
+          <a
+            href="https://yandex.com/maps/-/CPvunM12"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm text-slate-400 transition-colors hover:border-white/20 hover:text-slate-200"
+          >
+            Все отзывы на Яндекс.Картах
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
         </div>
       </div>
     </section>

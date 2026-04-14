@@ -4,6 +4,7 @@ import {
   ArrowRight,
   BadgeCheck,
   Calendar,
+  MessageCircle,
   PhoneCall,
   ShieldCheck,
   Star,
@@ -71,7 +72,7 @@ export function HeroSection() {
                 Специализированный сервис Volvo · Москва
               </div>
               <h1 className="mt-4 max-w-[12ch] font-heading text-[2.35rem] leading-[1.02] text-white sm:mt-5 sm:max-w-[14ch] sm:text-5xl md:mt-6 md:max-w-3xl md:text-6xl">
-                <span className="mr-3 inline-block">Ремонт</span>
+                <span className="mr-3 inline-block">Сервис</span>
                 <span
                   className="inline-block align-baseline text-[1.18em] font-bold leading-none tracking-[0.05em] text-[#1f4698] md:text-[1.24em]"
                   style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
@@ -80,10 +81,10 @@ export function HeroSection() {
                 </span>
                 <br className="hidden sm:block" />
                 <span className="block h-1.5 sm:hidden" aria-hidden />
-                без переплат
+                в Москве
               </h1>
               <p className="mt-4 max-w-[36rem] text-[0.98rem] leading-7 text-slate-300 sm:mt-5 sm:text-lg sm:leading-8">
-                Диагностируем честно, объясняем понятно — только то, что реально нужно.
+                30 лет специализации только на Volvo. Честная диагностика, прозрачная цена — принимаем в течение 1 рабочего дня.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:gap-4">
                 <a
@@ -99,9 +100,23 @@ export function HeroSection() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </a>
+                {/* На мобильных — WhatsApp, на десктопе — звонок */}
+                <a
+                  href={CONTACT_INFO.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackCtaEvent("messenger_click", { location: "hero", messenger: "whatsapp" })}
+                  className="sm:hidden"
+                >
+                  <Button className="w-full" variant="secondary">
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    Написать в WhatsApp
+                  </Button>
+                </a>
                 <a
                   href={CONTACT_INFO.phoneHref}
                   onClick={() => trackCtaEvent("phone_click", { location: "hero" })}
+                  className="hidden sm:block"
                 >
                   <Button className="w-full sm:w-auto" variant="secondary">
                     <PhoneCall className="mr-2 h-4 w-4" />

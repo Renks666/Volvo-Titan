@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 import { BenefitsSection } from "@/components/landing/benefits-section";
+import { FaqSection } from "@/components/landing/faq-section";
 import { ContactSection } from "@/components/landing/contact-section";
 import { CtaSection } from "@/components/landing/cta-section";
 import { DiagnosticsOffer } from "@/components/landing/diagnostics-offer";
-import { FloatingContactBar } from "@/components/landing/floating-contact-bar";
 import { GallerySection } from "@/components/landing/gallery-section";
 import { HeroSection } from "@/components/landing/hero-section";
 import { MapSection } from "@/components/landing/map-section";
@@ -97,22 +97,24 @@ export default function Home() {
           <ReviewsSection />
         </div>
         <div className="section-atmosphere">
+          <FaqSection />
+        </div>
+        <div className="section-atmosphere">
           <ProcessSection />
         </div>
         <div className="section-atmosphere">
           <CtaSection />
         </div>
         <div className="section-atmosphere">
-          <ContactSection />
+          <MapSection />
         </div>
         <div className="section-atmosphere">
-          <MapSection />
+          <ContactSection />
         </div>
         <div className="section-atmosphere">
           <FinalCta />
         </div>
       </main>
-      <FloatingContactBar />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

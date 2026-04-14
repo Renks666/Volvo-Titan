@@ -271,7 +271,7 @@ export function Select({
                 <OverlayPanel
                   ref={panelRef}
                   variant="popover"
-                  className="z-[110] rounded-[1.6rem] p-2"
+                  className="z-[200] rounded-[1.6rem] p-2"
                   style={panelStyle}
                 >
                   <div

@@ -128,7 +128,7 @@ export function ProcessSection() {
                 onClick={scrollToLead}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--highlight)] px-6 py-3 text-sm font-semibold text-[#050913] transition hover:bg-[var(--highlight)]/90"
               >
-                Записаться на диагностику
+                Оставить заявку за 2 минуты
                 <ArrowRight className="h-4 w-4" />
               </button>
               <a

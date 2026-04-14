@@ -64,7 +64,7 @@ export function BenefitsSection() {
                 scrollToLeadSection();
               }}
             >
-              Записаться на диагностику
+              Получить бесплатную диагностику
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>

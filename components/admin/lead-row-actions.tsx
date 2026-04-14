@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { LoaderCircle, RefreshCw, Trash2 } from "lucide-react";
+import { LoaderCircle, Pencil, RefreshCw, Trash2 } from "lucide-react";
 
 import { deleteLeadAction, updateLeadStatusAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { LeadEditDialog } from "./lead-edit-dialog";
 import type { LeadRecord } from "@/lib/types";
 
 interface LeadRowActionsProps {
@@ -15,6 +16,7 @@ interface LeadRowActionsProps {
 export function LeadRowActions({ lead }: LeadRowActionsProps) {
   const [isPending, startTransition] = useTransition();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   const nextStatus = lead.status === "new" ? "processed" : "new";
   const nextStatusLabel =
@@ -33,6 +35,15 @@ export function LeadRowActions({ lead }: LeadRowActionsProps) {
   return (
     <>
       <div className="flex flex-wrap gap-2">
+        <Button
+          variant="ghost"
+          className="h-10 w-full px-4 sm:w-auto"
+          disabled={isPending}
+          onClick={() => setIsEditOpen(true)}
+        >
+          <Pencil className="mr-2 h-4 w-4" />
+          Редактировать
+        </Button>
         <Button
           variant="ghost"
           className="h-10 w-full px-4 sm:w-auto"
@@ -60,6 +71,12 @@ export function LeadRowActions({ lead }: LeadRowActionsProps) {
           {"\u0423\u0434\u0430\u043b\u0438\u0442\u044c"}
         </Button>
       </div>
+
+      <LeadEditDialog
+        lead={lead}
+        open={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
+      />
 
       <ConfirmDialog
         open={isDeleteOpen}

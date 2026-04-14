@@ -15,7 +15,7 @@
   --color-highlight: var(--highlight);
   --color-danger: var(--danger);
   --font-sans: var(--font-manrope);
-  --font-heading: var(--font-orbitron);
+  --font-heading: var(--font-jakarta);
 }
 
 * {

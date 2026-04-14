@@ -41,7 +41,7 @@ export function WorksSection() {
             href="#lead"
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--highlight)] px-7 py-3.5 text-sm font-semibold text-[#050913] transition hover:bg-[var(--highlight)]/90"
           >
-            Записаться на диагностику
+            Узнать стоимость ремонта
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>
