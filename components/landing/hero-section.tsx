@@ -2,12 +2,10 @@
 
 import {
   ArrowRight,
-  BadgeCheck,
   Calendar,
-  MessageCircle,
   PhoneCall,
   ShieldCheck,
-  Star,
+  Wrench,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -18,18 +16,9 @@ import { CONTACT_INFO } from "@/lib/constants";
 import { trackCtaEvent } from "@/utils/analytics";
 
 const heroHighlights = [
-  {
-    icon: Calendar,
-    text: "Работаем с 1995 года",
-  },
-  {
-    icon: Star,
-    text: "5 000+ авто обслужено",
-  },
-  {
-    icon: BadgeCheck,
-    text: "Диагностика — бесплатно",
-  },
+  { icon: Wrench, text: "Оригинальные запчасти" },
+  { icon: ShieldCheck, text: "Гарантия на работы" },
+  { icon: Calendar, text: "Принимаем за 1 день" },
 ] as const;
 
 export function HeroSection() {
@@ -69,7 +58,7 @@ export function HeroSection() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.18em] text-slate-300 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.25em]">
                 <ShieldCheck className="h-4 w-4 text-[var(--highlight)]" />
-                Специализированный сервис Volvo · Москва
+                Специализированный сервис Volvo
               </div>
               <h1 className="mt-4 max-w-[12ch] font-heading text-[2.35rem] leading-[1.02] text-white sm:mt-5 sm:max-w-[14ch] sm:text-5xl md:mt-6 md:max-w-3xl md:text-6xl">
                 <span className="mr-3 inline-block">Сервис</span>
@@ -80,7 +69,7 @@ export function HeroSection() {
                   VOLVO
                 </span>
                 <br className="hidden sm:block" />
-                <span className="block h-1.5 sm:hidden" aria-hidden />
+                <br className="sm:hidden" />
                 в Москве
               </h1>
               <p className="mt-4 max-w-[36rem] text-[0.98rem] leading-7 text-slate-300 sm:mt-5 sm:text-lg sm:leading-8">
@@ -109,7 +98,7 @@ export function HeroSection() {
                   className="sm:hidden"
                 >
                   <Button className="w-full" variant="secondary">
-                    <MessageCircle className="mr-2 h-4 w-4" />
+                    <img src="/icons/whatsapp.svg" alt="" aria-hidden="true" className="mr-2 h-4 w-4 shrink-0 object-contain" />
                     Написать в WhatsApp
                   </Button>
                 </a>

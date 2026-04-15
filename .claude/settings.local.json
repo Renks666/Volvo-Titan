@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(grep -n \"Сервис VOLVO в Москве\" /c/Users/pluxury/Desktop/Volvo-Titan/components/landing/*.tsx)"
+    ]
+  }
+}

@@ -323,7 +323,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                 aria-hidden={!isOpen}
                 aria-label={LABELS.mobileMenu}
                 tabIndex={-1}
-                className="overlay-panel--flat mx-auto flex min-h-[calc(100dvh-var(--landing-nav-offset))] w-full max-w-none flex-col rounded-none border-x-0 border-b-0 border-t border-white/10 p-0 md:hidden"
+                className="overlay-panel--flat mx-auto flex min-h-[calc(100dvh-var(--landing-nav-offset))] w-full max-w-none flex-col overflow-y-auto rounded-none border-x-0 border-b-0 border-t border-white/10 p-0 md:hidden"
                 style={{
                   background: "rgb(31, 38, 52)",
                   boxShadow: "none",
