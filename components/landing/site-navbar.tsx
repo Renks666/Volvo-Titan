@@ -226,9 +226,6 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white">
                 Volvo Titan
               </p>
-              <p className="mt-1 text-[0.62rem] uppercase tracking-[0.18em] text-slate-400">
-                {LABELS.mobileTagline}
-              </p>
             </div>
             <div className="hidden min-w-0 md:block">
               <p className="font-heading text-sm uppercase tracking-[0.24em] text-white">
