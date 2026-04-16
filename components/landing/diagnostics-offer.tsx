@@ -33,7 +33,7 @@ export function DiagnosticsOffer() {
   };
 
   return (
-    <section className="px-0 py-[var(--landing-section-space)] md:py-12">
+    <section id="diagnostics" className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-12">
       <div className="section-shell">
         <Reveal>
           <div className="relative overflow-hidden rounded-[var(--landing-card-radius)] bg-gradient-to-br from-[#0d1e40] via-[#0a1830] to-[#060e1f] px-[var(--landing-card-padding-lg)] py-7 sm:rounded-[2rem] sm:px-10 sm:py-14 md:px-16">
@@ -48,7 +48,7 @@ export function DiagnosticsOffer() {
             <div className="relative grid gap-8 md:grid-cols-[1fr_auto] md:items-center md:gap-16">
               <div>
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--highlight)] sm:text-xs">
-                  Специальное предложение
+                  🎁 Специальное предложение
                 </p>
                 <h2 className="mt-3 font-heading text-2xl leading-tight text-white sm:text-3xl md:text-4xl">
                   Бесплатная диагностика

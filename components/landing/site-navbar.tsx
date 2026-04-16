@@ -222,12 +222,11 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               priority
               className="mr-3 h-10 w-auto object-contain md:hidden"
             />
-            <div className="min-w-0 md:hidden flex items-center gap-1.5">
+            <div className="min-w-0 md:hidden">
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white">
                 Volvo Titan
               </p>
-              <span className="text-white/20 text-[0.55rem]">·</span>
-              <p className="text-[0.62rem] uppercase tracking-[0.18em] text-slate-400">
+              <p className="mt-1 text-[0.62rem] uppercase tracking-[0.18em] text-slate-400">
                 {LABELS.mobileTagline}
               </p>
             </div>
@@ -337,15 +336,14 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                       <p className="text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-500">
                         {LABELS.contacts}
                       </p>
-                      <div className="mt-2 space-y-2.5">
-                        <p className="text-base font-semibold leading-none text-white">
-                          {CONTACT_INFO.phoneDisplay}
-                        </p>
-                        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-slate-300">
-                          {CONTACT_INFO.phoneContactName}
-                        </p>
-                      </div>
-                      <p className="mt-1 text-xs leading-5 text-slate-400">{shortAddress}</p>
+                      <p className="mt-2 text-base font-semibold leading-none text-white">
+                        {CONTACT_INFO.phoneDisplay}
+                        <span className="ml-1.5 text-sm font-normal text-slate-400">— {CONTACT_INFO.phoneContactName}</span>
+                      </p>
+                      <p className="mt-3 text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-500">
+                        Адрес
+                      </p>
+                      <p className="mt-1 text-xs leading-5 text-slate-300">{shortAddress}</p>
                     </div>
                     <a
                       href={CONTACT_INFO.phoneHref}
@@ -397,53 +395,6 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                     ))}
                   </nav>
 
-                  <div className="mt-auto border-t border-white/10">
-                    <div className="grid gap-px bg-white/10 sm:grid-cols-3 sm:gap-0">
-                      <a
-                        href={CONTACT_INFO.whatsappUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center justify-center gap-2 bg-[rgb(31,38,52)] px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white sm:border-r sm:border-white/10"
-                        onClick={() => {
-                          closeMenu();
-                          trackCtaEvent("messenger_click", { location: "navbar_mobile_whatsapp" });
-                        }}
-                      >
-                        <img src="/icons/whatsapp.svg" alt="" aria-hidden="true" className="h-4 w-4 shrink-0 object-contain" />
-                        WhatsApp
-                      </a>
-                      <a
-                        href={CONTACT_INFO.telegramUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center justify-center gap-2 bg-[rgb(31,38,52)] px-4 py-4 text-center text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-white/6 hover:text-white sm:border-r sm:border-white/10"
-                        onClick={() => {
-                          closeMenu();
-                          trackCtaEvent("messenger_click", { location: "navbar_mobile_telegram" });
-                        }}
-                      >
-                        <img src="/icons/telegram.svg" alt="" aria-hidden="true" className="h-4 w-4 shrink-0 object-contain" />
-                        Telegram
-                      </a>
-                      <div className="bg-[rgb(31,38,52)] px-4 py-4 text-center">
-                        <p className="flex items-center justify-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-300">
-                          <img src="/icons/max.svg" alt="" aria-hidden="true" className="h-4 w-4 shrink-0 object-contain" />
-                          MAX
-                        </p>
-                        <p className="mt-2 text-sm font-semibold text-white">
-                          {CONTACT_INFO.phoneDisplay}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="border-t border-white/10 px-4 py-3.5">
-                      <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500">
-                        {LABELS.serviceAddress}
-                      </p>
-                      <p className="mt-2 max-w-[28rem] text-sm leading-6 text-slate-300">
-                        {CONTACT_INFO.address}
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </OverlayPanel>
             </div>

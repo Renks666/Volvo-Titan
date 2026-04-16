@@ -24,8 +24,10 @@ const heroHighlights = [
 export function HeroSection() {
   const parallaxOffset = useParallax(0.16);
 
-  const scrollToLeadSection = () => {
-    const target = document.getElementById("lead")?.querySelector<HTMLElement>(".section-shell");
+  const scrollToHref = (href: string) => {
+    const id = href.replace(/^#/, "");
+    const section = document.getElementById(id);
+    const target = section?.querySelector<HTMLElement>(".section-shell") ?? section;
 
     if (!target) {
       return;
@@ -37,9 +39,11 @@ export function HeroSection() {
     const scrollOffset = Number.isFinite(landingNavOffset) ? landingNavOffset : 0;
     const nextTop = Math.max(window.scrollY + target.getBoundingClientRect().top - scrollOffset, 0);
 
-    window.history.pushState(null, "", "#lead");
+    window.history.pushState(null, "", href);
     window.scrollTo({ top: nextTop, behavior: "smooth" });
   };
+
+  const scrollToLeadSection = () => scrollToHref("#lead");
 
   return (
     <section
@@ -60,16 +64,17 @@ export function HeroSection() {
                 <ShieldCheck className="h-4 w-4 text-[var(--highlight)]" />
                 Специализированный сервис Volvo
               </div>
-              <h1 className="mt-4 max-w-[12ch] font-heading text-[2.35rem] leading-[1.02] text-white sm:mt-5 sm:max-w-[14ch] sm:text-5xl md:mt-6 md:max-w-3xl md:text-6xl">
-                <span className="mr-3 inline-block">Сервис</span>
-                <span
-                  className="inline-block align-baseline text-[1.18em] font-bold leading-none tracking-[0.05em] text-[#1f4698] md:text-[1.24em]"
-                  style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
-                >
-                  VOLVO
+              <h1 className="mt-4 font-heading text-[2.35rem] leading-[1.02] text-white sm:mt-5 sm:max-w-[14ch] sm:text-5xl md:mt-6 md:max-w-3xl md:text-6xl">
+                <span className="whitespace-nowrap">
+                  <span className="mr-3 inline-block">Сервис</span>
+                  <span
+                    className="inline-block align-baseline text-[1.18em] font-bold leading-none tracking-[0.05em] text-[#1f4698] md:text-[1.24em]"
+                    style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+                  >
+                    VOLVO
+                  </span>
                 </span>
-                <br className="hidden sm:block" />
-                <br className="sm:hidden" />
+                <br />
                 в Москве
               </h1>
               <p className="mt-4 max-w-[36rem] text-[0.98rem] leading-7 text-slate-300 sm:mt-5 sm:text-lg sm:leading-8">
@@ -113,12 +118,18 @@ export function HeroSection() {
                   </Button>
                 </a>
               </div>
-              <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-[var(--highlight)]/20 bg-[var(--highlight)]/5 px-4 py-2.5 text-sm text-slate-200 sm:mt-5 sm:inline-flex">
-                <span className="text-[var(--highlight)]">🔧</span>
-                <span className="font-medium">Диагностика бесплатно</span>
-                <span className="hidden text-slate-500 sm:inline">·</span>
-                <span className="text-slate-400">Замена масла от 1 500 ₽</span>
-              </div>
+              <a
+                href="#diagnostics"
+                onClick={(event) => {
+                  event.preventDefault();
+                  trackCtaEvent("lead_cta_click", { location: "hero_badge" });
+                  scrollToHref("#diagnostics");
+                }}
+                className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[var(--highlight)]/20 bg-[var(--highlight)]/5 px-4 py-2.5 text-sm text-slate-200 transition hover:border-[var(--highlight)]/35 hover:bg-[var(--highlight)]/10 sm:mt-5"
+              >
+                <span>🎁</span>
+                <span className="font-medium">Бесплатная диагностика</span>
+              </a>
               <div className="mt-6 grid gap-2 sm:mt-8 sm:grid-cols-2 lg:flex lg:flex-nowrap">
                 {heroHighlights.map(({ icon: Icon, text }) => (
                   <div
