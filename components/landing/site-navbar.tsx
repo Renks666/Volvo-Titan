@@ -222,11 +222,12 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               priority
               className="mr-3 h-10 w-auto object-contain md:hidden"
             />
-            <div className="min-w-0 md:hidden">
+            <div className="min-w-0 md:hidden flex items-center gap-1.5">
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white">
                 Volvo Titan
               </p>
-              <p className="mt-1 text-[0.62rem] uppercase tracking-[0.18em] text-slate-400">
+              <span className="text-white/20 text-[0.55rem]">·</span>
+              <p className="text-[0.62rem] uppercase tracking-[0.18em] text-slate-400">
                 {LABELS.mobileTagline}
               </p>
             </div>
@@ -323,7 +324,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                 aria-hidden={!isOpen}
                 aria-label={LABELS.mobileMenu}
                 tabIndex={-1}
-                className="overlay-panel--flat mx-auto flex min-h-[calc(100dvh-var(--landing-nav-offset))] w-full max-w-none flex-col overflow-y-auto rounded-none border-x-0 border-b-0 border-t border-white/10 p-0 md:hidden"
+                className="overlay-panel--flat mx-auto flex min-h-[calc(100dvh-var(--landing-nav-offset))] max-h-[calc(100dvh-var(--landing-nav-offset))] w-full max-w-none flex-col overflow-y-auto rounded-none border-x-0 border-b-0 border-t border-white/10 p-0 md:hidden"
                 style={{
                   background: "rgb(31, 38, 52)",
                   boxShadow: "none",
