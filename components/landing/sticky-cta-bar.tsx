@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Phone } from "lucide-react";
 
-import { CONTACT_INFO } from "@/lib/constants";
 import { trackCtaEvent } from "@/utils/analytics";
 
 const SHOW_AFTER_PX = 300;
@@ -42,15 +40,7 @@ export function StickyCtaBar() {
       className="fixed bottom-0 left-0 right-0 z-40 lg:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <div className="flex items-center gap-2 border-t border-white/10 bg-[#060d1b]/95 px-3 py-2.5 backdrop-blur-xl">
-        <a
-          href={CONTACT_INFO.phoneHref}
-          onClick={() => trackCtaEvent("phone_click", { location: "sticky_bar" })}
-          className="flex shrink-0 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm font-medium text-white transition hover:bg-white/10"
-        >
-          <Phone className="h-4 w-4 text-[var(--highlight)]" />
-          <span className="whitespace-nowrap text-xs">{CONTACT_INFO.phoneDisplay}</span>
-        </a>
+      <div className="flex items-center border-t border-white/10 bg-[#060d1b]/95 px-3 py-2.5 backdrop-blur-xl">
         <a
           href="#lead"
           onClick={() => trackCtaEvent("lead_cta_click", { location: "sticky_bar" })}
