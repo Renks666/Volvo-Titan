@@ -100,7 +100,7 @@ export function ServicesSection() {
             return (
               <Reveal key={service.slug} delay={index * 0.05} className="h-full">
                 {"landingSlug" in service ? (
-                  <a href={`/${service.landingSlug}`} className={cardClass}>
+                  <a href={`/${service.landingSlug}`} className={`block ${cardClass}`}>
                     {cardContent}
                   </a>
                 ) : (
