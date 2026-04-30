@@ -5,9 +5,8 @@ import { CheckCircle2, PhoneCall, ShieldCheck } from "lucide-react";
 import { Footer } from "@/components/landing/footer";
 import { LeadForm } from "@/components/landing/lead-form";
 import { Reveal } from "@/components/landing/reveal";
-import { ReviewsSection } from "@/components/landing/reviews-section";
 import { SiteNavbar } from "@/components/landing/site-navbar";
-import { CONTACT_INFO, SITE_URL, TRUST_METRICS } from "@/lib/constants";
+import { CONTACT_INFO, LANDING_NAV_ITEMS, SITE_URL, TRUST_METRICS } from "@/lib/constants";
 import { LANDING_PAGES } from "@/lib/landing-pages";
 
 interface Props {
@@ -36,8 +35,8 @@ export default async function LandingPage({ params }: Props) {
 
   return (
     <>
-      <SiteNavbar />
-      <main className="relative overflow-hidden">
+      <SiteNavbar items={LANDING_NAV_ITEMS} />
+      <main id="top" className="relative overflow-hidden">
 
         {/* Hero + Form */}
         <section className="px-0 pb-[var(--landing-section-space)] pt-[calc(var(--landing-nav-offset)+1rem)] md:pb-20 md:pt-36">
@@ -141,8 +140,6 @@ export default async function LandingPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Reviews */}
-        <ReviewsSection />
 
       </main>
       <Footer />

@@ -42,6 +42,10 @@ export const NAV_ITEMS = [
   { href: "#contacts", label: "Контакты" },
 ] as const;
 
+export const LANDING_NAV_ITEMS = [
+  { href: "#lead", label: "Записаться" },
+] as const;
+
 export const BENEFITS = [
   {
     title: "Только Volvo",
