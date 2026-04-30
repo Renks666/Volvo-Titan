@@ -60,14 +60,12 @@ export function ServicesSection() {
           </a>
         </div>
         <div className="mt-7 grid gap-3 sm:mt-10 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {SERVICES.map((service, index) => (
-            <Reveal key={service.slug} delay={index * 0.05} className="h-full">
-              <button
-                type="button"
-                className="glass-panel metal-border group h-full w-full rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] text-left transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/8 focus-visible:-translate-y-1 focus-visible:border-white/30 focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] active:scale-[0.99] sm:rounded-[2rem] sm:p-6"
-                onClick={() => handleServiceSelect(service.name)}
-                aria-label={`${service.name} - перейти к форме заявки`}
-              >
+          {SERVICES.map((service, index) => {
+            const cardClass =
+              "glass-panel metal-border group h-full w-full rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] text-left transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/8 focus-visible:-translate-y-1 focus-visible:border-white/30 focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] active:scale-[0.99] sm:rounded-[2rem] sm:p-6";
+
+            const cardContent = (
+              <>
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="max-w-44 text-lg font-semibold leading-6 text-white sm:max-w-52 sm:text-xl">
                     {service.name}
@@ -93,12 +91,31 @@ export function ServicesSection() {
                   {service.description}
                 </p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition group-hover:text-white sm:mt-6">
-                  Оставить заявку
+                  {"landingSlug" in service ? "Подробнее" : "Оставить заявку"}
                   <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
-              </button>
-            </Reveal>
-          ))}
+              </>
+            );
+
+            return (
+              <Reveal key={service.slug} delay={index * 0.05} className="h-full">
+                {"landingSlug" in service ? (
+                  <a href={`/${service.landingSlug}`} className={cardClass}>
+                    {cardContent}
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    className={cardClass}
+                    onClick={() => handleServiceSelect(service.name)}
+                    aria-label={`${service.name} - перейти к форме заявки`}
+                  >
+                    {cardContent}
+                  </button>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

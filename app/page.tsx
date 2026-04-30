@@ -15,6 +15,8 @@ import { ServicesSection } from "@/components/landing/services-section";
 import { WorksSection } from "@/components/landing/works-section";
 import { Footer } from "@/components/landing/footer";
 import { SiteNavbar } from "@/components/landing/site-navbar";
+import { StickyCtaBar } from "@/components/landing/sticky-cta-bar";
+import { SectionVisibilityTracker } from "@/components/landing/section-visibility-tracker";
 import { TrustStrip } from "@/components/landing/trust-strip";
 import { CONTACT_INFO, SITE_URL } from "@/lib/constants";
 import { createLocalBusinessSchema } from "@/lib/metadata";
@@ -122,6 +124,8 @@ export default function Home() {
         }}
       />
       <Footer />
+      <StickyCtaBar />
+      <SectionVisibilityTracker />
     </>
   );
 }

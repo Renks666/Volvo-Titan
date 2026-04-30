@@ -41,21 +41,12 @@ export const metadata: Metadata = {
     siteName: "Volvo Titan",
     locale: "ru_RU",
     type: "website",
-    images: [
-      {
-        url: "/brand/volvo-titan-logo.jpg",
-        width: 768,
-        height: 768,
-        alt: "Логотип Volvo Titan",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Volvo Titan | Ремонт Volvo в Москве с 1995 года",
     description:
       "Специализированный сервис Volvo в Москве. Честная диагностика, гарантия и минимальная очередь.",
-    images: ["/brand/volvo-titan-logo.jpg"],
   },
   icons: {
     icon: "/favicon.ico",

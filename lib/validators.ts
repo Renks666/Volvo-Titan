@@ -19,3 +19,11 @@ export const adminSignInSchema = z.object({
 });
 
 export const leadStatusSchema = z.enum(["new", "processed"]);
+
+export const reviewFormSchema = z.object({
+  author_name: z.string().trim().min(1, "Введите имя автора").max(100),
+  vehicle_model: z.string().trim().max(50).optional(),
+  rating: z.coerce.number().int().min(1).max(5),
+  review_text: z.string().trim().min(5, "Слишком короткий отзыв").max(1000),
+  review_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});

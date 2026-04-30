@@ -85,6 +85,7 @@ export const TRUST_METRICS = [
 export const SERVICES = [
   {
     slug: "computer-diagnostics",
+    landingSlug: "diagnostika-volvo",
     name: "Компьютерная диагностика",
     price: "БЕСПЛАТНО",
     badge: "free" as const,
@@ -93,6 +94,7 @@ export const SERVICES = [
   },
   {
     slug: "maintenance",
+    landingSlug: "to-volvo",
     name: "ТО",
     price: "от 800 ₽",
     description:
@@ -107,6 +109,7 @@ export const SERVICES = [
   },
   {
     slug: "chassis-repair",
+    landingSlug: "remont-hodovoj-volvo",
     name: "Ремонт ходовой",
     price: "от 2 500 ₽",
     description:

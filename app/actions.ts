@@ -8,7 +8,7 @@ import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { sendTelegramLeadNotification } from "@/lib/telegram";
 import type { ActionResult, AuthActionState, LeadFormValues, LeadStatus } from "@/lib/types";
-import { adminSignInSchema, leadFormSchema, leadStatusSchema } from "@/lib/validators";
+import { adminSignInSchema, leadFormSchema, leadStatusSchema, reviewFormSchema } from "@/lib/validators";
 
 export async function submitLeadAction(values: LeadFormValues): Promise<ActionResult> {
   const parsedValues = leadFormSchema.safeParse(values);
@@ -164,4 +164,62 @@ export async function deleteLeadAction(id: string) {
   }
 
   revalidatePath("/admin/leads");
+}
+
+export async function createReviewAction(formData: FormData): Promise<void> {
+  await requireAdminSession();
+
+  const parsed = reviewFormSchema.safeParse({
+    author_name: formData.get("author_name"),
+    vehicle_model: formData.get("vehicle_model") || undefined,
+    rating: formData.get("rating"),
+    review_text: formData.get("review_text"),
+    review_date: formData.get("review_date"),
+  });
+
+  if (!parsed.success) {
+    throw new Error(parsed.error.issues[0]?.message ?? "Проверьте форму");
+  }
+
+  const supabase = createSupabaseAdminClient();
+  const { error } = await supabase.from("reviews").insert({
+    author_name: parsed.data.author_name,
+    vehicle_model: parsed.data.vehicle_model || null,
+    rating: parsed.data.rating,
+    review_text: parsed.data.review_text,
+    review_date: parsed.data.review_date,
+    is_visible: true,
+  });
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/reviews");
+  revalidatePath("/");
+}
+
+export async function deleteReviewAction(id: string) {
+  await requireAdminSession();
+
+  const supabase = createSupabaseAdminClient();
+  const { error } = await supabase.from("reviews").delete().eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/reviews");
+  revalidatePath("/");
+}
+
+export async function toggleReviewVisibilityAction(id: string, isVisible: boolean) {
+  await requireAdminSession();
+
+  const supabase = createSupabaseAdminClient();
+  const { error } = await supabase
+    .from("reviews")
+    .update({ is_visible: isVisible })
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/reviews");
+  revalidatePath("/");
 }

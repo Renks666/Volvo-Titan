@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
+import { trackCtaEvent } from "@/utils/analytics";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
@@ -52,7 +53,10 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
       <button
         type="button"
         className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-white transition-colors hover:text-[var(--highlight)] sm:px-6 sm:py-5 sm:text-base"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => {
+          if (!open) trackCtaEvent("faq_open", { question });
+          setOpen((prev) => !prev);
+        }}
         aria-expanded={open}
       >
         <span>{question}</span>

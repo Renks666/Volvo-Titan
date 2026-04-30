@@ -12,6 +12,10 @@ const YM_GOAL_MAP: Record<string, string> = {
   phone_click: "phone_click",
   messenger_click: "messenger_click",
   lead_cta_click: "lead_cta_click",
+  scroll_depth: "scroll_depth",
+  section_visible: "section_visible",
+  faq_open: "faq_open",
+  form_field_focus: "form_field_focus",
 };
 
 function ymGoal(target: string) {

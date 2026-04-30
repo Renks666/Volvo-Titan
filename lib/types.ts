@@ -28,3 +28,19 @@ export interface AuthActionState {
   success: boolean;
   message: string;
 }
+
+export interface ReviewRecord {
+  id: string;
+  author_name: string;
+  vehicle_model: string | null;
+  rating: number;
+  review_text: string;
+  review_date: string;
+  is_visible: boolean;
+  created_at: string;
+}
+
+export interface YandexOrgRating {
+  value: number;
+  count: number;
+}

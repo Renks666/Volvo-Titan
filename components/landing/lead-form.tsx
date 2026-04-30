@@ -48,7 +48,7 @@ function getPhoneCaretPosition(value: string) {
   return nextPlaceholderIndex === -1 ? value.length : nextPlaceholderIndex;
 }
 
-export function LeadForm() {
+export function LeadForm({ defaultService = "" }: { defaultService?: string }) {
   const [serverMessage, setServerMessage] = useState<{
     type: "success" | "error";
     text: string;
@@ -64,7 +64,7 @@ export function LeadForm() {
     formState: { errors },
   } = useForm<LeadFormValues>({
     resolver: zodResolver(leadFormSchema),
-    defaultValues,
+    defaultValues: { ...defaultValues, service: defaultService },
   });
 
   // Слушаем выбор услуги из секции услуг
@@ -108,6 +108,25 @@ export function LeadForm() {
 
   return (
     <form id="lead-form" className="grid gap-3 sm:gap-4" onSubmit={onSubmit}>
+      <label className="grid gap-2 text-sm text-slate-300">
+        Ваше имя
+        <Controller
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <Input
+              {...field}
+              autoComplete="given-name"
+              placeholder="Как вас зовут?"
+              type="text"
+            />
+          )}
+        />
+        {errors.name ? (
+          <span className="text-xs text-rose-300">{errors.name.message}</span>
+        ) : null}
+      </label>
+
       <label className="grid gap-2 text-sm text-slate-300">
         Ваш телефон *
         <Controller

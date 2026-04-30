@@ -104,7 +104,19 @@ export function HeroSection() {
                 >
                   <Button className="w-full" variant="secondary">
                     <img src="/icons/whatsapp.svg" alt="" aria-hidden="true" className="mr-2 h-4 w-4 shrink-0 object-contain" />
-                    Написать в WhatsApp
+                    WhatsApp
+                  </Button>
+                </a>
+                <a
+                  href={CONTACT_INFO.telegramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackCtaEvent("messenger_click", { location: "hero", messenger: "telegram" })}
+                  className="sm:hidden"
+                >
+                  <Button className="w-full" variant="secondary">
+                    <img src="/icons/telegram.svg" alt="" aria-hidden="true" className="mr-2 h-4 w-4 shrink-0 object-contain" />
+                    Telegram
                   </Button>
                 </a>
                 <a
