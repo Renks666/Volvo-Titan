@@ -82,13 +82,22 @@ export const TRUST_METRICS = [
   { value: "100%", label: "прозрачный расчёт" },
 ] as const;
 
-export const SERVICES = [
+export interface ServiceConfig {
+  slug: string;
+  landingSlug?: string;
+  name: string;
+  price: string;
+  badge?: "free";
+  description: string;
+}
+
+export const SERVICES: ServiceConfig[] = [
   {
     slug: "computer-diagnostics",
     landingSlug: "diagnostika-volvo",
     name: "Компьютерная диагностика",
     price: "БЕСПЛАТНО",
-    badge: "free" as const,
+    badge: "free",
     description:
       "Сканируем все блоки управления, показываем ошибки и объясняем причины простым языком.",
   },
@@ -164,7 +173,7 @@ export const SERVICES = [
     description:
       "Локальное восстановление без покраски всей панели. Геометрия и внешний вид — как было.",
   },
-] as const;
+];
 
 export const SERVICE_OPTIONS: Array<{ value: string; label: string }> = [
   ...SERVICES.map((service) => ({

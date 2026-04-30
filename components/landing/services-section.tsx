@@ -91,7 +91,7 @@ export function ServicesSection() {
                   {service.description}
                 </p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition group-hover:text-white sm:mt-6">
-                  {"landingSlug" in service ? "Подробнее" : "Оставить заявку"}
+                  {service.landingSlug ? "Подробнее" : "Оставить заявку"}
                   <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </>
@@ -99,7 +99,7 @@ export function ServicesSection() {
 
             return (
               <Reveal key={service.slug} delay={index * 0.05} className="h-full">
-                {"landingSlug" in service ? (
+                {service.landingSlug ? (
                   <a href={`/${service.landingSlug}`} className={`block ${cardClass}`}>
                     {cardContent}
                   </a>
