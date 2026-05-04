@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { ArrowRight, Menu, PhoneCall, X } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -46,6 +47,7 @@ type SiteNavbarProps = {
 };
 
 export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeId, setActiveId] = useState<string>(HERO_SECTION_ID);
@@ -55,7 +57,12 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
 
   const navItems = useMemo(() => items.map((item) => ({ ...item })), [items]);
   const trackedSectionIds = useMemo(
-    () => [HERO_SECTION_ID, ...navItems.map((item) => item.href.replace(/^#/, ""))],
+    () => [
+      HERO_SECTION_ID,
+      ...navItems
+        .filter((item) => item.href.startsWith("#"))
+        .map((item) => item.href.replace(/^#/, "")),
+    ],
     [navItems],
   );
   const shortAddress = useMemo(
@@ -122,12 +129,18 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
   });
 
   const scrollToHref = (href: string) => {
+    if (!href.startsWith("#")) {
+      router.push(href);
+      return;
+    }
+
     const targetId = href.replace(/^#/, "");
     const isTopTarget = targetId === LANDING_TOP_ID;
     const target = getAnchorElement(targetId);
     const scrollOffset = getNavbarOffset();
 
     if (!target) {
+      router.push("/" + href);
       return;
     }
 

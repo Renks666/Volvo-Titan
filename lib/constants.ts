@@ -43,6 +43,9 @@ export const NAV_ITEMS = [
 ] as const;
 
 export const LANDING_NAV_ITEMS = [
+  { href: "/", label: "На главную" },
+  { href: "/#services", label: "Услуги" },
+  { href: "/#contacts", label: "Контакты" },
   { href: "#lead", label: "Записаться" },
 ] as const;
 
@@ -115,6 +118,7 @@ export const SERVICES: ServiceConfig[] = [
   },
   {
     slug: "suspension-diagnostics",
+    landingSlug: "diagnostika-hodovoj-volvo",
     name: "Диагностика ходовой",
     price: "от 1 500 ₽",
     description:
@@ -130,6 +134,7 @@ export const SERVICES: ServiceConfig[] = [
   },
   {
     slug: "electrician",
+    landingSlug: "elektrika-volvo",
     name: "Электрика",
     price: "от 1 500 ₽",
     description:
@@ -137,6 +142,7 @@ export const SERVICES: ServiceConfig[] = [
   },
   {
     slug: "cem-repair",
+    landingSlug: "remont-cem-volvo",
     name: "Ремонт блоков CEM",
     price: "по запросу",
     description:
@@ -144,6 +150,7 @@ export const SERVICES: ServiceConfig[] = [
   },
   {
     slug: "abs-repair",
+    landingSlug: "remont-abs-volvo",
     name: "Ремонт блоков ABS",
     price: "по запросу",
     description:
@@ -151,6 +158,7 @@ export const SERVICES: ServiceConfig[] = [
   },
   {
     slug: "unit-replacement",
+    landingSlug: "zamena-agregatov-volvo",
     name: "Замена агрегатов",
     price: "по запросу",
     description:
@@ -158,6 +166,7 @@ export const SERVICES: ServiceConfig[] = [
   },
   {
     slug: "unit-rebuild",
+    landingSlug: "pereborka-agregatov-volvo",
     name: "Переборка агрегатов",
     price: "по запросу",
     description:
@@ -165,6 +174,7 @@ export const SERVICES: ServiceConfig[] = [
   },
   {
     slug: "tire-service",
+    landingSlug: "shinomontazh-volvo",
     name: "Шиномонтаж",
     price: "по запросу",
     description:
@@ -172,6 +182,7 @@ export const SERVICES: ServiceConfig[] = [
   },
   {
     slug: "bodywork",
+    landingSlug: "kuzovnoj-remont-volvo",
     name: "Кузовной ремонт",
     price: "по запросу",
     description:

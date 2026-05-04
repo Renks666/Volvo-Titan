@@ -67,3 +67,16 @@ textarea {
     --landing-nav-offset: calc(var(--mobile-header-height) + var(--safe-area-top) + 0.5rem);
   }
 }
+
+/* Reliable navbar spacer — avoids Tailwind arbitrary-value parsing issues with CSS vars */
+.nav-offset-spacer {
+  display: block;
+  height: var(--landing-nav-offset);
+}
+
+@media (min-width: 768px) {
+  .nav-offset-spacer {
+    height: calc(var(--landing-nav-offset) + 2.5rem);
+  }
+}
+
