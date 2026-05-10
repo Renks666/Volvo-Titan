@@ -27,11 +27,8 @@ export function BenefitsSection() {
   };
 
   return (
-    <section
-      id="benefits"
-      className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-24"
-    >
-      <div className="section-shell">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-24">
+      <div id="benefits" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <SectionHeading
           eyebrow="Почему нам доверяют"
           title="Почему владельцы Volvo выбирают нас"

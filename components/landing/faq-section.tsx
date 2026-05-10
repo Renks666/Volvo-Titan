@@ -78,11 +78,8 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
 export function FaqSection() {
   return (
-    <section
-      id="faq"
-      className="scroll-mt-[var(--landing-nav-offset)] px-0 py-[var(--landing-section-space)] md:py-24"
-    >
-      <div className="section-shell">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-24">
+      <div id="faq" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <SectionHeading
           eyebrow="Вопросы и ответы"
           title="Отвечаем на частые вопросы"

@@ -91,8 +91,8 @@ export async function ReviewsSection() {
   const [reviews, rating] = await Promise.all([getReviews(), fetchYandexOrgRating()]);
 
   return (
-    <section id="reviews" className="px-0 py-[var(--landing-section-space)] md:py-24">
-      <div className="section-shell">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-24">
+      <div id="reviews" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading eyebrow="Отзывы" title="Что говорят владельцы Volvo" />
           {rating && <RatingBadge rating={rating} />}

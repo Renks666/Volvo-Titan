@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
 
 import { SERVICES, type ServiceConfig } from "@/lib/constants";
@@ -17,15 +19,30 @@ function ServiceCardLink({ service }: { service: ServiceConfig & { landingSlug: 
           {service.name}
         </h3>
         <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-1 text-[0.68rem] text-slate-300 transition group-hover:border-white/20 group-hover:text-white sm:px-3 sm:text-xs">
-          {service.price}
+          {service.originalPrice ? <span className="line-through">{service.originalPrice}</span> : service.price}
         </span>
       </div>
       <p className="mt-3 text-sm leading-6 text-slate-400 transition group-hover:text-slate-300 sm:mt-5 sm:leading-7">
         {service.description}
       </p>
-      <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition group-hover:text-white sm:mt-6">
-        Подробнее
-        <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      <div className="mt-4 flex items-center justify-between sm:mt-6">
+        <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition group-hover:text-white">
+          Подробнее
+          <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </div>
+        {service.badge === "free" && (
+          <span
+            role="link"
+            className="cursor-pointer rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[0.68rem] font-semibold text-emerald-400 sm:px-3 sm:text-xs"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              document.getElementById("diagnostics")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            🎁 {service.price}
+          </span>
+        )}
       </div>
     </a>
   );
@@ -33,11 +50,8 @@ function ServiceCardLink({ service }: { service: ServiceConfig & { landingSlug: 
 
 export function ServicesSection() {
   return (
-    <section
-      id="services"
-      className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-24"
-    >
-      <div className="section-shell">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-24">
+      <div id="services" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
             eyebrow="Услуги и цены"

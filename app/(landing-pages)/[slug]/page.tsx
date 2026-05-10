@@ -4,6 +4,7 @@ import { Award, CheckCircle2, Clock, MessageCircle, PhoneCall, ShieldCheck } fro
 
 import { Footer } from "@/components/landing/footer";
 import { LeadForm } from "@/components/landing/lead-form";
+import { PriceTableSection } from "@/components/landing/price-table-section";
 import { Reveal } from "@/components/landing/reveal";
 import { SiteNavbar } from "@/components/landing/site-navbar";
 import { StickyCtaBar } from "@/components/landing/sticky-cta-bar";
@@ -90,17 +91,17 @@ export default async function LandingPage({ params }: Props) {
                     <span className="text-lg font-bold text-[var(--highlight)]">{page.hero.price}</span>
                   </div>
 
-                  <div className="mt-4 hidden items-center gap-2 sm:flex">
-                    <PhoneCall className="h-4 w-4 text-slate-500" />
-                    <a
-                      href={CONTACT_INFO.phoneHref}
-                      className="text-sm font-semibold text-slate-300 transition hover:text-white"
-                    >
-                      {CONTACT_INFO.phoneDisplay}
-                    </a>
-                    <span className="text-slate-600">·</span>
-                    <span className="text-sm text-slate-500">{CONTACT_INFO.phoneContactName}</span>
-                  </div>
+                  {page.pricing && (
+                    <div className="mt-4">
+                      <a
+                        href="#pricing"
+                        className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-slate-300 transition hover:bg-white/10 hover:text-white"
+                      >
+                        Прайс-лист →
+                      </a>
+                    </div>
+                  )}
+
                 </div>
 
                 {/* Right — service details */}
@@ -176,6 +177,9 @@ export default async function LandingPage({ params }: Props) {
             </Reveal>
           </div>
         </section>
+
+        {/* ── Pricing table (optional) ────────────────────────── */}
+        {page.pricing && <PriceTableSection pricing={page.pricing} />}
 
         {/* ── Why Volvo Titan ─────────────────────────────────── */}
         <section className="px-0 pb-[var(--landing-section-space)] md:pb-20">

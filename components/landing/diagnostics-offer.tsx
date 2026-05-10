@@ -33,8 +33,8 @@ export function DiagnosticsOffer() {
   };
 
   return (
-    <section id="diagnostics" className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-12">
-      <div className="section-shell">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-12">
+      <div id="diagnostics" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <Reveal>
           <div className="relative overflow-hidden rounded-[var(--landing-card-radius)] bg-gradient-to-br from-[#0d1e40] via-[#0a1830] to-[#060e1f] px-[var(--landing-card-padding-lg)] py-7 sm:rounded-[2rem] sm:px-10 sm:py-14 md:px-16">
             <div

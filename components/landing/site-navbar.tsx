@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { ArrowRight, Menu, PhoneCall, X } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -48,6 +48,7 @@ type SiteNavbarProps = {
 
 export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeId, setActiveId] = useState<string>(HERO_SECTION_ID);
@@ -219,12 +220,16 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
           )}
         >
           <a
-            href="#top"
+            href="/"
             className="group flex min-w-0 items-center rounded-full py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
             aria-label={LABELS.top}
             onClick={(event) => {
-              event.preventDefault();
-              handleAnchorNavigation("#top", { closeMenu: isOpen });
+              if (pathname === "/") {
+                event.preventDefault();
+                handleAnchorNavigation("#top", { closeMenu: isOpen });
+              } else if (isOpen) {
+                setIsOpen(false);
+              }
             }}
           >
             <Image

@@ -94,6 +94,7 @@ export interface ServiceConfig {
   landingSlug?: string;
   name: string;
   price: string;
+  originalPrice?: string;
   badge?: "free";
   description: string;
 }
@@ -104,6 +105,7 @@ export const SERVICES: ServiceConfig[] = [
     landingSlug: "diagnostika-volvo",
     name: "Компьютерная диагностика",
     price: "БЕСПЛАТНО",
+    originalPrice: "1 500 ₽",
     badge: "free",
     description:
       "Сканируем все блоки управления, показываем ошибки и объясняем причины простым языком.",
@@ -144,7 +146,7 @@ export const SERVICES: ServiceConfig[] = [
     slug: "cem-repair",
     landingSlug: "remont-cem-volvo",
     name: "Ремонт блоков CEM",
-    price: "по запросу",
+    price: "от 8 000 ₽",
     description:
       "Восстанавливаем блоки CEM, когда проблема кроется в электронике, а не во внешних симптомах.",
   },
@@ -152,7 +154,7 @@ export const SERVICES: ServiceConfig[] = [
     slug: "abs-repair",
     landingSlug: "remont-abs-volvo",
     name: "Ремонт блоков ABS",
-    price: "по запросу",
+    price: "от 5 000 ₽",
     description:
       "Ремонт блоков ABS с поиском причины ошибок — корректная работа тормозов и электроники.",
   },
@@ -160,7 +162,7 @@ export const SERVICES: ServiceConfig[] = [
     slug: "unit-replacement",
     landingSlug: "zamena-agregatov-volvo",
     name: "Замена агрегатов",
-    price: "по запросу",
+    price: "от 5 000 ₽",
     description:
       "Подберём разумное решение под состояние автомобиля и ваш бюджет. Без навязывания.",
   },
@@ -168,7 +170,7 @@ export const SERVICES: ServiceConfig[] = [
     slug: "unit-rebuild",
     landingSlug: "pereborka-agregatov-volvo",
     name: "Переборка агрегатов",
-    price: "по запросу",
+    price: "от 2 500 ₽",
     description:
       "Восстановим агрегат, когда ремонт выгоднее полной замены. Честная оценка ресурса.",
   },
@@ -184,7 +186,7 @@ export const SERVICES: ServiceConfig[] = [
     slug: "bodywork",
     landingSlug: "kuzovnoj-remont-volvo",
     name: "Кузовной ремонт",
-    price: "по запросу",
+    price: "от 8 000 ₽",
     description:
       "Локальное восстановление без покраски всей панели. Геометрия и внешний вид — как было.",
   },

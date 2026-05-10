@@ -31,11 +31,8 @@ const MESSENGER_ITEMS = [
 
 export function ContactSection() {
   return (
-    <section
-      id="contacts"
-      className="px-0 py-[var(--landing-section-space)] scroll-mt-[var(--landing-nav-offset)] md:py-24"
-    >
-      <div className="section-shell">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-24">
+      <div id="contacts" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <Reveal>
           <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-5 md:p-6">
             <SectionHeading

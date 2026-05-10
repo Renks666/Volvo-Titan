@@ -26,8 +26,8 @@ export function WorksSection() {
   const works = WORKS.map((w) => ({ ...w, exists: fileExists(w.src) }));
 
   return (
-    <section id="works" className="px-0 py-[var(--landing-section-space)] md:py-24">
-      <div className="section-shell">
+    <section className="px-0 py-[var(--landing-section-space)] md:py-24">
+      <div id="works" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <SectionHeading
           eyebrow="Портфолио"
           title="Наши работы"
