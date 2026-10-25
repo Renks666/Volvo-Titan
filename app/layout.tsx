@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 
 import { BackgroundScene } from "@/components/background-scene";
@@ -7,15 +7,22 @@ import { SITE_URL } from "@/lib/constants";
 
 import "./globals.css";
 
-const manrope = Manrope({
+const manrope = localFont({
   variable: "--font-manrope",
-  subsets: ["latin", "cyrillic"],
+  src: "./fonts/manrope-latin-wght-normal.woff2",
+  weight: "200 800",
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const manropeCyrillic = localFont({
+  variable: "--font-manrope-cyrillic",
+  src: "./fonts/manrope-cyrillic-wght-normal.woff2",
+  weight: "200 800",
+});
+
+const plusJakartaSans = localFont({
   variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  src: "./fonts/plus-jakarta-sans-latin-wght-normal.woff2",
+  weight: "200 800",
 });
 
 export const metadata: Metadata = {
@@ -68,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${manrope.variable} ${plusJakartaSans.variable} h-full scroll-smooth antialiased`}
+      className={`${manrope.variable} ${manropeCyrillic.variable} ${plusJakartaSans.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
         <BackgroundScene />

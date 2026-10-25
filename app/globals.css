@@ -14,7 +14,7 @@
   --color-steel: var(--steel);
   --color-highlight: var(--highlight);
   --color-danger: var(--danger);
-  --font-sans: var(--font-manrope);
+  --font-sans: var(--font-manrope), var(--font-manrope-cyrillic);
   --font-heading: var(--font-jakarta);
 }
 
@@ -37,7 +37,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-manrope), sans-serif;
+  font-family: var(--font-manrope), var(--font-manrope-cyrillic), sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
