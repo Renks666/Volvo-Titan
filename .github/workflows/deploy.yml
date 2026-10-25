@@ -10,4 +10,6 @@ jobs:
     steps:
       - name: Trigger Coolify deployment
         run: |
-          curl -s "http://62.113.37.209:8000/api/v1/deploy?uuid=z16gogz2sv3y6xyr6rfg3j0d&force=false"
+          curl --fail-with-body -sS \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
+            "http://138.16.161.238:8000/api/v1/deploy?uuid=kayenj5dgczqppwuxksoxx4s&force=false"
