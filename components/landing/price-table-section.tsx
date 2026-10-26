@@ -12,7 +12,7 @@ function fmt(n: number) {
 
 export function PriceTableSection({ pricing }: Props) {
   return (
-    <section id="pricing" className="scroll-mt-28 px-0 pb-[var(--landing-section-space)] md:scroll-mt-36 md:pb-20">
+    <section id="pricing" className="scroll-mt-[var(--landing-nav-offset)] px-0 pb-[var(--landing-section-space)] md:pb-20">
       <div className="section-shell">
         <Reveal>
           <SectionHeading eyebrow={pricing.eyebrow} title={pricing.title} />
@@ -81,7 +81,7 @@ export function PriceTableSection({ pricing }: Props) {
                               {row.label}
                             </span>
                           </td>
-                          <td className="whitespace-nowrap py-4 px-3 text-left text-xs text-slate-500">
+                          <td className="whitespace-nowrap py-4 px-3 text-left text-xs text-slate-400">
                             {row.unit}
                           </td>
                           {row.prices.map((price, pi) => (
@@ -100,7 +100,7 @@ export function PriceTableSection({ pricing }: Props) {
                                   {fmt(price)}&nbsp;₽
                                 </span>
                               ) : (
-                                <span className="text-slate-600">—</span>
+                                <span className="text-slate-400">—</span>
                               )}
                             </td>
                           ))}
@@ -116,7 +116,7 @@ export function PriceTableSection({ pricing }: Props) {
           {pricing.footnotes && pricing.footnotes.length > 0 && (
             <ul className="mt-5 space-y-1.5 pl-1">
               {pricing.footnotes.map((note) => (
-                <li key={note} className="text-xs leading-5 text-slate-500">
+                <li key={note} className="text-xs leading-5 text-slate-400">
                   {note}
                 </li>
               ))}

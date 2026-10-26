@@ -3,6 +3,7 @@
 import {
   ArrowRight,
   Calendar,
+  Gift,
   PhoneCall,
   ShieldCheck,
   Wrench,
@@ -11,7 +12,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { useParallax } from "@/hooks/use-parallax";
 import { CONTACT_INFO } from "@/lib/constants";
 import { trackCtaEvent } from "@/utils/analytics";
 
@@ -22,8 +22,6 @@ const heroHighlights = [
 ] as const;
 
 export function HeroSection() {
-  const parallaxOffset = useParallax(0.16);
-
   const scrollToHref = (href: string) => {
     const id = href.replace(/^#/, "");
     const section = document.getElementById(id);
@@ -51,24 +49,23 @@ export function HeroSection() {
       className="relative isolate overflow-hidden px-0 pb-[var(--landing-section-space)] pt-[calc(var(--landing-nav-offset)+0.5rem)] scroll-mt-[var(--landing-nav-offset)] sm:pt-28 md:pb-28 md:pt-32"
     >
       <div className="section-shell">
-        <div className="glass-panel metal-border relative overflow-hidden rounded-[var(--landing-card-radius)] px-[var(--landing-card-padding-lg)] py-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:px-6 sm:py-8 md:px-10 md:py-12">
+        <div className="glass-panel metal-border relative overflow-hidden rounded-[var(--landing-card-radius)] px-[var(--landing-card-padding-lg)] py-[var(--landing-card-padding-lg)] sm:rounded-[1.5rem] sm:px-6 sm:py-8 md:px-10 md:py-12">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(191,214,255,0.18),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(73,116,225,0.2),transparent_28%)]" />
-          <motion.div
+          <div
             aria-hidden
             className="absolute -right-14 top-10 hidden h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(238,244,255,0.32),rgba(255,255,255,0.02)_65%,transparent_75%)] blur-xl md:block"
-            style={{ y: parallaxOffset * -0.35 }}
           />
           <div className="relative grid items-center gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
-            <div>
+            <div className="min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.18em] text-slate-300 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.25em]">
                 <ShieldCheck className="h-4 w-4 text-[var(--highlight)]" />
                 Специализированный сервис Volvo
               </div>
               <h1 className="mt-4 font-heading text-[2.35rem] leading-[1.02] text-white sm:mt-5 sm:max-w-[14ch] sm:text-5xl md:mt-6 md:max-w-3xl md:text-6xl">
-                <span className="whitespace-nowrap">
-                  <span className="mr-3 inline-block">Сервис</span>
+                <span className="xl:whitespace-nowrap">
+                  <span className="mr-2 inline-block sm:mr-3">Сервис</span>
                   <span
-                    className="inline-block align-baseline text-[1.18em] font-bold leading-none tracking-[0.05em] text-[#1f4698] md:text-[1.24em]"
+                    className="inline-block align-baseline text-[1.05em] font-bold leading-none tracking-[0.03em] text-[#4d7ce0] sm:text-[1.18em] sm:tracking-[0.05em] md:text-[1.24em]"
                     style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
                   >
                     VOLVO
@@ -103,7 +100,7 @@ export function HeroSection() {
                   className="sm:hidden"
                 >
                   <Button className="w-full" variant="secondary">
-                    <img src="/icons/whatsapp.svg" alt="" aria-hidden="true" className="mr-2 h-4 w-4 shrink-0 object-contain" />
+                    <Image src="/icons/whatsapp.svg" alt="" aria-hidden="true" width={20} height={20} unoptimized className="mr-2 h-4 w-4 shrink-0 object-contain" />
                     WhatsApp
                   </Button>
                 </a>
@@ -115,7 +112,7 @@ export function HeroSection() {
                   className="sm:hidden"
                 >
                   <Button className="w-full" variant="secondary">
-                    <img src="/icons/telegram.svg" alt="" aria-hidden="true" className="mr-2 h-4 w-4 shrink-0 object-contain" />
+                    <Image src="/icons/telegram.svg" alt="" aria-hidden="true" width={20} height={20} unoptimized className="mr-2 h-4 w-4 shrink-0 object-contain" />
                     Telegram
                   </Button>
                 </a>
@@ -139,7 +136,7 @@ export function HeroSection() {
                 }}
                 className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[var(--highlight)]/20 bg-[var(--highlight)]/5 px-4 py-2.5 text-sm text-slate-200 transition hover:border-[var(--highlight)]/35 hover:bg-[var(--highlight)]/10 sm:mt-5"
               >
-                <span>🎁</span>
+                <Gift className="h-4 w-4 text-[var(--highlight)]" aria-hidden />
                 <span className="font-medium">Бесплатная диагностика</span>
               </a>
               <div className="mt-6 grid gap-2 sm:mt-8 sm:grid-cols-2 lg:flex lg:flex-nowrap">
@@ -158,8 +155,7 @@ export function HeroSection() {
             </div>
             <div className="relative hidden sm:block">
               <motion.div
-                className="glass-panel metal-border relative mx-auto max-w-sm overflow-hidden rounded-[1.5rem] p-3.5 sm:max-w-md sm:rounded-[2rem] sm:p-5"
-                style={{ y: parallaxOffset * -0.22 }}
+                className="glass-panel metal-border relative mx-auto max-w-sm overflow-hidden rounded-[1.5rem] p-3.5 sm:max-w-md sm:rounded-[1.5rem] sm:p-5"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

@@ -17,6 +17,7 @@ export interface LeadFormValues {
   model: string;
   service: string;
   comment: string;
+  consent: boolean;
 }
 
 export interface ActionResult {

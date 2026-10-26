@@ -2,6 +2,7 @@
 
 import { ArrowRight, Phone } from "lucide-react";
 
+import { buttonVariants } from "@/components/ui/button";
 import { CONTACT_INFO } from "@/lib/constants";
 import { trackCtaEvent } from "@/utils/analytics";
 
@@ -72,7 +73,7 @@ export function ProcessSection() {
                     <button
                       type="button"
                       onClick={scrollToLead}
-                      className="glass-panel metal-border flex h-full w-full flex-col rounded-[var(--landing-card-radius)] p-4 text-left transition hover:border-[var(--highlight)]/40 hover:bg-[var(--highlight)]/5 sm:rounded-[2rem] sm:p-6"
+                      className="glass-panel metal-border flex h-full w-full flex-col rounded-[var(--landing-card-radius)] p-4 text-left transition hover:border-[var(--highlight)]/40 hover:bg-[var(--highlight)]/5 sm:rounded-[1.5rem] sm:p-6"
                     >
                       <p
                         className="font-heading text-4xl font-bold leading-none text-[var(--highlight)]/50 sm:text-5xl"
@@ -88,7 +89,7 @@ export function ProcessSection() {
                       </p>
                     </button>
                   ) : (
-                    <div className="glass-panel metal-border flex h-full flex-col rounded-[var(--landing-card-radius)] p-4 sm:rounded-[2rem] sm:p-6">
+                    <div className="glass-panel metal-border flex h-full flex-col rounded-[var(--landing-card-radius)] p-4 sm:rounded-[1.5rem] sm:p-6">
                       <p
                         className="font-heading text-4xl font-bold leading-none text-[var(--highlight)]/30 sm:text-5xl"
                         aria-hidden
@@ -108,7 +109,7 @@ export function ProcessSection() {
                       className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 lg:block"
                       aria-hidden
                     >
-                      <ArrowRight className="h-4 w-4 text-slate-600" />
+                      <ArrowRight className="h-4 w-4 text-slate-400" />
                     </div>
                   )}
                 </div>
@@ -126,7 +127,7 @@ export function ProcessSection() {
               <button
                 type="button"
                 onClick={scrollToLead}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--highlight)] px-6 py-3 text-sm font-semibold text-[#050913] transition hover:bg-[var(--highlight)]/90"
+                className={buttonVariants({ className: "gap-2" })}
               >
                 Оставить заявку за 2 минуты
                 <ArrowRight className="h-4 w-4" />
@@ -134,7 +135,7 @@ export function ProcessSection() {
               <a
                 href={CONTACT_INFO.phoneHref}
                 onClick={() => trackCtaEvent("phone_click", { location: "process" })}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/8"
+                className={buttonVariants({ variant: "secondary", className: "gap-2" })}
               >
                 <Phone className="h-4 w-4" />
                 {CONTACT_INFO.phoneDisplay}

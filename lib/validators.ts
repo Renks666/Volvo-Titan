@@ -11,6 +11,7 @@ export const leadFormSchema = z.object({
   model: z.string().trim().max(120, "Слишком длинное название модели"),
   service: z.string().trim().max(120, "Слишком длинное название услуги"),
   comment: z.string().trim().max(1000, "Комментарий слишком длинный"),
+  consent: z.boolean().refine((value) => value === true, "Необходимо согласие на обработку данных"),
 });
 
 export const adminSignInSchema = z.object({

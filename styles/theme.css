@@ -239,6 +239,10 @@
     linear-gradient(180deg, transparent 0%, rgba(150, 177, 235, 0.03) 40%, transparent 100%);
 }
 
+.section-atmosphere + .section-atmosphere {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 .section-atmosphere > * {
   position: relative;
   z-index: 1;
@@ -636,6 +640,17 @@
   filter: blur(6px);
 }
 
+[data-reveal] {
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
 @keyframes background-drift {
   0% {
     transform: translate3d(-1.5%, -1%, 0) scale(1.05);
@@ -652,6 +667,14 @@
   .page-background::before {
     animation: none;
     transform: scale(1.06);
+  }
+}
+
+@media (max-width: 767px) {
+  .page-background::before {
+    animation: none;
+    transform: scale(1.06);
+    filter: blur(32px);
   }
 }
 

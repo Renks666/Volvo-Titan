@@ -4,7 +4,6 @@ import { useState, useTransition } from "react";
 import { Eye, EyeOff, Star, Trash2 } from "lucide-react";
 
 import { deleteReviewAction, toggleReviewVisibilityAction } from "@/app/actions";
-import { Button } from "@/components/ui/button";
 import type { ReviewRecord } from "@/lib/types";
 
 export function ReviewsTable({ reviews }: { reviews: ReviewRecord[] }) {

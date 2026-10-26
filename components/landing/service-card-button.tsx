@@ -3,7 +3,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 const CARD_CLASS =
-  "glass-panel metal-border group h-full w-full rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] text-left transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/8 focus-visible:-translate-y-1 focus-visible:border-white/30 focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] active:scale-[0.99] sm:rounded-[2rem] sm:p-6";
+  "glass-panel metal-border group h-full w-full rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] text-left transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/8 focus-visible:-translate-y-1 focus-visible:border-white/30 focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)] active:scale-[0.99] sm:rounded-[1.5rem] sm:p-6";
 
 function scrollToLead() {
   const target = document.getElementById("lead")?.querySelector<HTMLElement>(".section-shell");

@@ -1,5 +1,7 @@
 import { Clock3, ExternalLink, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
 
+import { buttonVariants } from "@/components/ui/button";
 import { CONTACT_INFO } from "@/lib/constants";
 
 import { Reveal } from "./reveal";
@@ -34,7 +36,7 @@ export function ContactSection() {
     <section className="px-0 py-[var(--landing-section-space)] md:py-24">
       <div id="contacts" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <Reveal>
-          <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-5 md:p-6">
+          <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[1.5rem] sm:p-5 md:p-6">
             <SectionHeading
               eyebrow="Контакты"
               title={
@@ -67,7 +69,7 @@ export function ContactSection() {
 
                 <a
                   href={CONTACT_INFO.phoneHref}
-                  className="cta-shimmer mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--highlight)] py-3 text-sm font-bold text-white transition sm:py-3.5 sm:text-base"
+                  className={buttonVariants({ className: "mt-4 flex w-full gap-2" })}
                 >
                   <Phone className="h-4 w-4 shrink-0" />
                   Позвонить
@@ -84,12 +86,7 @@ export function ContactSection() {
                         rel="noreferrer"
                         className="flex items-center gap-2.5 rounded-[0.95rem] border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-slate-200 transition hover:border-[var(--highlight)]/40 hover:bg-white/[0.07] hover:text-white"
                       >
-                        <img
-                          src={item.iconSrc}
-                          alt=""
-                          aria-hidden="true"
-                          className="h-5 w-5 shrink-0 object-contain"
-                        />
+                        <Image src={item.iconSrc} alt="" aria-hidden="true" width={20} height={20} unoptimized className="h-5 w-5 shrink-0 object-contain" />
                         <div className="min-w-0">
                           <p className="text-sm font-semibold leading-none text-white">
                             {item.title}
@@ -104,12 +101,7 @@ export function ContactSection() {
                         key={item.title}
                         className="flex items-center gap-2.5 rounded-[0.95rem] border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-slate-200"
                       >
-                        <img
-                          src={item.iconSrc}
-                          alt=""
-                          aria-hidden="true"
-                          className="h-5 w-5 shrink-0 object-contain"
-                        />
+                        <Image src={item.iconSrc} alt="" aria-hidden="true" width={20} height={20} unoptimized className="h-5 w-5 shrink-0 object-contain" />
                         <div className="min-w-0">
                           <p className="text-sm font-semibold leading-none text-white">
                             {item.title}

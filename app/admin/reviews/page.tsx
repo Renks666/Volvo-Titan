@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LogOut, Plus } from "lucide-react";
+import Link from "next/link";
 
 import { createReviewAction, logoutAction } from "@/app/actions";
 import { ReviewsTable } from "@/components/admin/reviews-table";
@@ -42,12 +43,12 @@ export default async function AdminReviewsPage() {
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <a
+            <Link
               href="/admin/leads"
               className="rounded-xl border border-white/10 px-4 py-2.5 text-sm text-slate-300 transition hover:border-white/20 hover:text-white"
             >
               Заявки
-            </a>
+            </Link>
             <form action={logoutAction}>
               <Button variant="ghost" type="submit">
                 <LogOut className="mr-2 h-4 w-4" />

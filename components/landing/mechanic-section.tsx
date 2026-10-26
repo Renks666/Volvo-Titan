@@ -29,7 +29,7 @@ export function MechanicSection() {
     <section className="px-0 py-[var(--landing-section-space)] md:py-24">
       <div className="section-shell">
         <Reveal>
-          <div className="glass-panel metal-border grid gap-8 overflow-hidden rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-6 lg:grid-cols-2 lg:items-start lg:gap-16 lg:p-8 xl:p-10">
+          <div className="glass-panel metal-border grid gap-8 overflow-hidden rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[1.5rem] sm:p-6 lg:grid-cols-2 lg:items-start lg:gap-16 lg:p-8 xl:p-10">
             {/* 1. Заголовок — всегда первый */}
             <div className="lg:col-start-1 lg:row-start-1">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-slate-300 sm:px-4 sm:text-xs sm:tracking-[0.24em]">
@@ -56,10 +56,10 @@ export function MechanicSection() {
 
             {/* 2. Фото — второй на mobile, правая колонка (row 1–2) на desktop */}
             <div className="flex justify-center lg:col-start-2 lg:row-span-2 lg:row-start-1">
-              <div className="glass-panel metal-border relative mx-auto max-w-sm overflow-hidden rounded-[1.5rem] sm:max-w-md sm:rounded-[2rem]">
+              <div className="glass-panel metal-border relative mx-auto max-w-sm overflow-hidden rounded-[1.5rem] sm:max-w-md sm:rounded-[1.5rem]">
                 <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
                 <Image
-                  src="/brand/mechanic-volvo-titan.png"
+                  src="/brand/mechanic-volvo-titan.jpg"
                   alt="Мастер Volvo Titan"
                   width={600}
                   height={700}

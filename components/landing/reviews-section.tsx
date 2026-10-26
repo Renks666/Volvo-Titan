@@ -55,7 +55,7 @@ function RatingBadge({ rating }: { rating: YandexOrgRating }) {
 function ReviewCard({ review, index }: { review: ReviewRecord; index: number }) {
   return (
     <Reveal delay={index * 0.08}>
-      <article className="glass-panel metal-border flex h-full flex-col rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-6">
+      <article className="glass-panel metal-border flex h-full flex-col rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[1.5rem] sm:p-6">
         <div className="flex gap-0.5">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
@@ -70,7 +70,7 @@ function ReviewCard({ review, index }: { review: ReviewRecord; index: number }) 
         <div className="mt-5 border-t border-white/8 pt-4">
           <div className="flex items-center justify-between gap-2">
             <p className="text-sm font-semibold text-white">{review.author_name}</p>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-400">
               {new Date(review.review_date).toLocaleDateString("ru-RU", {
                 day: "numeric",
                 month: "long",
@@ -90,6 +90,10 @@ function ReviewCard({ review, index }: { review: ReviewRecord; index: number }) 
 export async function ReviewsSection() {
   const [reviews, rating] = await Promise.all([getReviews(), fetchYandexOrgRating()]);
 
+  if (reviews.length === 0) {
+    return null;
+  }
+
   return (
     <section className="px-0 py-[var(--landing-section-space)] md:py-24">
       <div id="reviews" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
@@ -98,21 +102,11 @@ export async function ReviewsSection() {
           {rating && <RatingBadge rating={rating} />}
         </div>
 
-        {reviews.length > 0 ? (
-          <div className="mt-7 grid gap-3 sm:mt-10 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {reviews.map((review, index) => (
-              <ReviewCard key={review.id} review={review} index={index} />
-            ))}
-          </div>
-        ) : (
-          <p className="mt-10 text-center text-sm text-slate-500">
-            Отзывы появятся здесь после добавления в&nbsp;
-            <a href="/admin/reviews" className="underline hover:text-slate-300">
-              панели управления
-            </a>
-            .
-          </p>
-        )}
+        <div className="mt-7 grid gap-3 sm:mt-10 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {reviews.map((review, index) => (
+            <ReviewCard key={review.id} review={review} index={index} />
+          ))}
+        </div>
 
         <div className="mt-6 flex justify-center sm:mt-8">
           <a

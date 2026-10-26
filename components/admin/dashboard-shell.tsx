@@ -1,4 +1,5 @@
 import { BarChart3, LogOut, Search } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { logoutAction } from "@/app/actions";
@@ -38,12 +39,12 @@ export function DashboardShell({ children, counts, filters }: DashboardShellProp
             </p>
           </div>
           <div className="grid gap-2 sm:flex sm:items-center sm:gap-3">
-            <a
+            <Link
               href="/admin/reviews"
               className="rounded-xl border border-white/10 px-4 py-2.5 text-center text-sm text-slate-300 transition hover:border-white/20 hover:text-white"
             >
               Отзывы
-            </a>
+            </Link>
             <a
               href={CONTACT_INFO.phoneHref}
               className="rounded-full border border-white/10 px-4 py-2.5 text-center text-sm text-slate-200 transition hover:border-white/20 hover:text-white sm:py-3"

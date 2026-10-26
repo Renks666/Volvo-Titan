@@ -37,8 +37,8 @@ export function BenefitsSection() {
         <div className="mt-7 grid gap-3 sm:mt-10 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
           {BENEFITS.map((benefit, index) => (
             <Reveal key={benefit.title} delay={index * 0.07}>
-              <article className="glass-panel metal-border h-full rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[2rem] sm:p-6">
-                <p className="text-[0.68rem] uppercase tracking-[0.22em] text-slate-500 sm:text-xs sm:tracking-[0.3em]">
+              <article className="glass-panel metal-border h-full rounded-[var(--landing-card-radius)] p-[var(--landing-card-padding-lg)] sm:rounded-[1.5rem] sm:p-6">
+                <p className="text-[0.68rem] uppercase tracking-[0.22em] text-slate-400 sm:text-xs sm:tracking-[0.3em]">
                   0{index + 1}
                 </p>
                 <h3 className="mt-4 text-lg font-semibold leading-6 text-white sm:mt-5 sm:text-xl">

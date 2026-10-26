@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { BenefitsSection } from "@/components/landing/benefits-section";
 import { FaqSection } from "@/components/landing/faq-section";
 import { ContactSection } from "@/components/landing/contact-section";
+import { buttonVariants } from "@/components/ui/button";
 import { CtaSection } from "@/components/landing/cta-section";
 import { DiagnosticsOffer } from "@/components/landing/diagnostics-offer";
 import { GallerySection } from "@/components/landing/gallery-section";
@@ -18,14 +19,14 @@ import { SiteNavbar } from "@/components/landing/site-navbar";
 import { StickyCtaBar } from "@/components/landing/sticky-cta-bar";
 import { SectionVisibilityTracker } from "@/components/landing/section-visibility-tracker";
 import { TrustStrip } from "@/components/landing/trust-strip";
-import { CONTACT_INFO, SITE_URL } from "@/lib/constants";
-import { createLocalBusinessSchema } from "@/lib/metadata";
+import { CONTACT_INFO, FAQS, SITE_URL } from "@/lib/constants";
+import { createFaqSchema, createLocalBusinessSchema } from "@/lib/metadata";
 
 function FinalCta() {
   return (
     <section className="px-0 py-[var(--landing-section-space)] md:py-12">
       <div className="section-shell">
-        <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] px-[var(--landing-card-padding-lg)] py-10 text-center sm:rounded-[2rem] sm:px-10 sm:py-14">
+        <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] px-[var(--landing-card-padding-lg)] py-10 text-center sm:rounded-[1.5rem] sm:px-10 sm:py-14">
           <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--highlight)] sm:text-xs">
             Первый шаг — бесплатно
           </p>
@@ -40,13 +41,13 @@ function FinalCta() {
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row sm:gap-4">
             <a
               href="#lead"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--highlight)] px-7 py-3.5 text-sm font-semibold text-[#050913] transition hover:bg-[var(--highlight)]/90"
+              className={buttonVariants({ className: "gap-2" })}
             >
               Записаться на диагностику →
             </a>
             <a
               href={CONTACT_INFO.phoneHref}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/8"
+              className={buttonVariants({ variant: "secondary", className: "gap-2" })}
             >
               Позвонить прямо сейчас
             </a>
@@ -121,6 +122,12 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(localBusinessSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(createFaqSchema(FAQS)),
         }}
       />
       <Footer />

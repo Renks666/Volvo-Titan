@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { existsSync } from "node:fs";
 import path from "node:path";
 
+import { buttonVariants } from "@/components/ui/button";
+
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
@@ -34,7 +36,7 @@ export function GallerySection() {
               photo.exists ? (
                 <div
                   key={photo.src}
-                  className="glass-panel metal-border overflow-hidden rounded-[var(--landing-card-radius)] sm:rounded-[2rem]"
+                  className="glass-panel metal-border overflow-hidden rounded-[var(--landing-card-radius)] sm:rounded-[1.5rem]"
                 >
                   <div className="relative aspect-[4/3]">
                     <Image
@@ -49,9 +51,9 @@ export function GallerySection() {
               ) : (
                 <div
                   key={photo.src}
-                  className="flex aspect-[4/3] items-center justify-center rounded-[var(--landing-card-radius)] border border-dashed border-white/15 bg-white/[0.03] sm:rounded-[2rem]"
+                  className="flex aspect-[4/3] items-center justify-center rounded-[var(--landing-card-radius)] border border-dashed border-white/15 bg-white/[0.03] sm:rounded-[1.5rem]"
                 >
-                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-slate-500">
+                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-slate-400">
                     {photo.alt}
                   </p>
                 </div>
@@ -63,7 +65,7 @@ export function GallerySection() {
         <div className="mt-7 flex justify-center sm:mt-10">
           <a
             href="#map"
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/8"
+            className={buttonVariants({ variant: "secondary", className: "gap-2" })}
           >
             Приезжайте — убедитесь сами
             <ArrowRight className="h-4 w-4" />

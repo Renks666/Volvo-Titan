@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Award, CheckCircle2, Clock, MessageCircle, PhoneCall, ShieldCheck } from "lucide-react";
 
+import { buttonVariants } from "@/components/ui/button";
 import { Footer } from "@/components/landing/footer";
 import { LeadForm } from "@/components/landing/lead-form";
 import { PriceTableSection } from "@/components/landing/price-table-section";
@@ -10,6 +12,7 @@ import { SiteNavbar } from "@/components/landing/site-navbar";
 import { StickyCtaBar } from "@/components/landing/sticky-cta-bar";
 import { CONTACT_INFO, LANDING_NAV_ITEMS, SITE_URL } from "@/lib/constants";
 import { LANDING_PAGES } from "@/lib/landing-pages";
+import { createBreadcrumbSchema, createServiceSchema } from "@/lib/metadata";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -24,9 +27,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = LANDING_PAGES[slug];
   if (!page) return {};
   return {
-    title: page.meta.title,
+    title: { absolute: page.meta.title },
     description: page.meta.description,
     alternates: { canonical: `${SITE_URL}/${slug}` },
+    openGraph: {
+      title: page.meta.title,
+      description: page.meta.description,
+      url: `${SITE_URL}/${slug}`,
+      siteName: "Volvo Titan",
+      locale: "ru_RU",
+      type: "website",
+    },
   };
 }
 
@@ -55,24 +66,48 @@ export default async function LandingPage({ params }: Props) {
 
   const ctaHeading = page.cta?.heading ?? "Не откладывайте";
   const ctaSubtext =
-    page.cta?.subtext ?? "Принимаем по записи — без очередей. Перезвоним в течение 15 минут.";
+    page.cta?.subtext ?? "Принимаем по записи — без очередей. Перезвоним и согласуем время.";
 
   return (
     <>
       <SiteNavbar items={LANDING_NAV_ITEMS} />
 
-      <div aria-hidden style={{ height: "144px" }} />
+      <div aria-hidden className="nav-offset-spacer" />
 
       <main id="top" className="relative overflow-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              createServiceSchema({
+                name: page.hero.title,
+                description: page.meta.description,
+                path: `/${slug}`,
+              }),
+              createBreadcrumbSchema([
+                { name: "Главная", path: "/" },
+                { name: "Услуги", path: "/#services" },
+                { name: page.hero.title, path: `/${slug}` },
+              ]),
+            ]),
+          }}
+        />
 
         {/* ── Hero + Details + Form (one unified panel) ── */}
         <section id="hero" className="px-0 pb-[var(--landing-section-space)] md:pb-20">
           <div className="section-shell">
             <Reveal>
-              <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] sm:rounded-[2rem] md:grid md:grid-cols-[1.15fr_0.85fr]">
+              <div className="glass-panel metal-border rounded-[var(--landing-card-radius)] sm:rounded-[1.5rem] md:grid md:grid-cols-[1.15fr_0.85fr]">
 
                 {/* Left — hero text */}
-                <div className="flex flex-col px-5 pb-5 pt-12 sm:px-7 sm:pb-7 sm:pt-14 md:px-10 md:pb-10 md:pt-16">
+                <div className="flex flex-col px-5 pb-5 pt-6 sm:px-7 sm:pb-7 sm:pt-8 md:px-10 md:pb-10 md:pt-10">
+                  <nav aria-label="Хлебные крошки" className="mb-5 flex flex-wrap items-center gap-1.5 text-xs text-slate-400 sm:mb-6">
+                    <Link href="/" className="transition hover:text-white">Главная</Link>
+                    <span aria-hidden>/</span>
+                    <Link href="/#services" className="transition hover:text-white">Услуги</Link>
+                    <span aria-hidden>/</span>
+                    <span aria-current="page" className="text-slate-300">{page.hero.eyebrow}</span>
+                  </nav>
                   <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.18em] text-slate-300 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.25em]">
                     <ShieldCheck className="h-4 w-4 text-[var(--highlight)]" />
                     {page.hero.eyebrow}
@@ -95,7 +130,7 @@ export default async function LandingPage({ params }: Props) {
                     <div className="mt-4">
                       <a
                         href="#pricing"
-                        className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-slate-300 transition hover:bg-white/10 hover:text-white"
+                        className={buttonVariants({ variant: "secondary", className: "gap-2" })}
                       >
                         Прайс-лист →
                       </a>
@@ -126,7 +161,7 @@ export default async function LandingPage({ params }: Props) {
                 {/* Bottom — lead form (spans both columns) */}
                 <div
                   id="lead"
-                  className="scroll-mt-28 border-t border-white/10 px-5 py-8 sm:px-8 sm:py-10 md:col-span-2 md:scroll-mt-36 md:grid md:grid-cols-[1fr_1.4fr] md:gap-10 md:px-12 md:py-12"
+                  className="scroll-mt-[var(--landing-nav-offset)] border-t border-white/10 px-5 py-8 sm:px-8 sm:py-10 md:col-span-2 md:grid md:grid-cols-[1fr_1.4fr] md:gap-10 md:px-12 md:py-12"
                 >
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.15em] text-slate-400">
@@ -136,7 +171,7 @@ export default async function LandingPage({ params }: Props) {
                       {page.formHeading}
                     </p>
                     <p className="mt-3 text-sm leading-7 text-slate-400">
-                      Перезвоним в течение 15 минут и согласуем удобное время.
+                      Перезвоним и согласуем удобное время.
                     </p>
                     <div className="mt-5 hidden flex-col gap-3 md:flex">
                       <a
@@ -207,7 +242,7 @@ export default async function LandingPage({ params }: Props) {
         <section className="px-0 pb-16 md:pb-24">
           <div className="section-shell">
             <Reveal>
-              <div className="flex flex-col items-center rounded-[var(--landing-card-radius)] border border-white/10 bg-white/[0.03] px-6 py-12 text-center sm:rounded-[2rem] sm:py-16">
+              <div className="flex flex-col items-center rounded-[var(--landing-card-radius)] border border-white/10 bg-white/[0.03] px-6 py-12 text-center sm:rounded-[1.5rem] sm:py-16">
                 <p className="font-heading text-2xl text-white sm:text-3xl md:text-4xl">
                   {ctaHeading}
                 </p>
@@ -217,7 +252,7 @@ export default async function LandingPage({ params }: Props) {
                 <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row">
                   <a
                     href="#lead"
-                    className="inline-flex items-center justify-center rounded-xl bg-[var(--highlight)] px-8 py-3.5 text-sm font-semibold text-[#050913] transition hover:opacity-90"
+                    className={buttonVariants({ className: "px-8" })}
                   >
                     Записаться онлайн →
                   </a>

@@ -19,7 +19,7 @@ export function MapSection() {
       {/* Desktop */}
       <div className="section-shell hidden md:block">
         <Reveal>
-          <div className="glass-panel metal-border overflow-hidden rounded-[var(--landing-card-radius)] sm:rounded-[2rem]">
+          <div className="glass-panel metal-border overflow-hidden rounded-[var(--landing-card-radius)] sm:rounded-[1.5rem]">
             <div className="border-b border-white/10 px-[var(--landing-card-padding-lg)] py-4 sm:px-6 sm:py-6 md:px-8">
               <SectionHeading
                 eyebrow="Карта"

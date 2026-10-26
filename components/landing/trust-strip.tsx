@@ -58,7 +58,7 @@ function AnimatedMetricValue({ value }: { value: string }) {
     let frameId = 0;
 
     const animate = (timestamp: number) => {
-      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const progress = Math.min(Math.max((timestamp - startTime) / duration, 0), 1);
       const easedProgress = 1 - (1 - progress) ** 3;
       const nextValue = Math.round((parsedValue.numericValue ?? 0) * easedProgress);
       setDisplayValue(nextValue);
@@ -79,7 +79,7 @@ function AnimatedMetricValue({ value }: { value: string }) {
       : value;
 
   return (
-    <p ref={valueRef} className="font-heading text-2xl text-white">
+    <p ref={valueRef} className="font-heading text-xl text-white sm:text-2xl">
       {content}
     </p>
   );
@@ -87,13 +87,13 @@ function AnimatedMetricValue({ value }: { value: string }) {
 
 export function TrustStrip() {
   return (
-    <section className="px-6 py-8 md:py-10">
+    <section className="px-0 py-8 md:py-10">
       <div className="section-shell">
-        <div className="glass-panel metal-border grid gap-4 rounded-[2rem] p-6 md:grid-cols-4">
+        <div className="glass-panel metal-border grid grid-cols-2 gap-3 rounded-[var(--landing-card-radius)] p-3 sm:gap-4 sm:rounded-[1.5rem] sm:p-6 md:grid-cols-4">
           {TRUST_METRICS.map((metric) => (
             <div
               key={metric.label}
-              className="rounded-[1.5rem] border border-white/10 bg-black/15 p-5"
+              className="rounded-[1.15rem] border border-white/10 bg-black/15 p-4 sm:rounded-[1.5rem] sm:p-5"
             >
               <AnimatedMetricValue value={metric.value} />
               <p className="mt-2 text-sm text-slate-400">{metric.label}</p>

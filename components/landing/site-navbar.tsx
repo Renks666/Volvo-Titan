@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { ArrowRight, Menu, PhoneCall, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -219,7 +220,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
               : "bg-[rgba(6,10,17,0.92)] shadow-[0_10px_24px_rgba(0,0,0,0.2)] backdrop-blur-xl md:bg-[rgba(7,13,24,0.42)] md:shadow-[0_10px_30px_rgba(0,0,0,0.16)]",
           )}
         >
-          <a
+          <Link
             href="/"
             className="group flex min-w-0 items-center rounded-full py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(126,164,255,0.65)]"
             aria-label={LABELS.top}
@@ -250,7 +251,7 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                 Volvo Titan
               </p>
             </div>
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-2 lg:flex" aria-label={LABELS.primaryNav}>
             {navItems.map((item) => (
@@ -348,14 +349,14 @@ export function SiteNavbar({ items = NAV_ITEMS }: SiteNavbarProps) {
                 <div className="relative flex min-h-full flex-1 flex-col">
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] border-b border-white/10">
                     <div className="border-r border-white/10 px-4 py-3.5">
-                      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-500">
+                      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-400">
                         {LABELS.contacts}
                       </p>
                       <p className="mt-2 text-base font-semibold leading-none text-white">
                         {CONTACT_INFO.phoneDisplay}
                         <span className="ml-1.5 text-sm font-normal text-slate-400">— {CONTACT_INFO.phoneContactName}</span>
                       </p>
-                      <p className="mt-3 text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-500">
+                      <p className="mt-3 text-[0.64rem] font-semibold uppercase tracking-[0.26em] text-slate-400">
                         Адрес
                       </p>
                       <p className="mt-1 text-xs leading-5 text-slate-300">{shortAddress}</p>

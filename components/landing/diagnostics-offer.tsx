@@ -2,7 +2,6 @@
 
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { trackCtaEvent } from "@/utils/analytics";
 
 import { Reveal } from "./reveal";
@@ -36,7 +35,7 @@ export function DiagnosticsOffer() {
     <section className="px-0 py-[var(--landing-section-space)] md:py-12">
       <div id="diagnostics" className="section-shell scroll-mt-[var(--landing-nav-offset)]">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[var(--landing-card-radius)] bg-gradient-to-br from-[#0d1e40] via-[#0a1830] to-[#060e1f] px-[var(--landing-card-padding-lg)] py-7 sm:rounded-[2rem] sm:px-10 sm:py-14 md:px-16">
+          <div className="relative overflow-hidden rounded-[var(--landing-card-radius)] bg-gradient-to-br from-[#0d1e40] via-[#0a1830] to-[#060e1f] px-[var(--landing-card-padding-lg)] py-7 sm:rounded-[1.5rem] sm:px-10 sm:py-14 md:px-16">
             <div
               aria-hidden
               className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(126,164,255,0.18),transparent_65%)] blur-3xl"
@@ -48,7 +47,7 @@ export function DiagnosticsOffer() {
             <div className="relative grid gap-8 md:grid-cols-[1fr_auto] md:items-center md:gap-16">
               <div>
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--highlight)] sm:text-xs">
-                  🎁 Специальное предложение
+                  Специальное предложение
                 </p>
                 <h2 className="mt-3 font-heading text-2xl leading-tight text-white sm:text-3xl md:text-4xl">
                   Бесплатная диагностика
@@ -67,10 +66,6 @@ export function DiagnosticsOffer() {
                   При записи через сайт или по телефону.
                   Занимает 30–40 минут.{" "}
                   <span className="text-slate-300">Никаких обязательств делать ремонт.</span>
-                </p>
-                <p className="mt-3 flex items-center gap-2 text-sm font-medium text-emerald-400">
-                  <CheckCircle2 className="h-4 w-4 shrink-0" aria-hidden />
-                  Запись ограничена — свяжитесь сегодня
                 </p>
               </div>
               <div className="md:shrink-0">

@@ -1,8 +1,11 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import { CONTACT_INFO, NAV_ITEMS } from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black/50 backdrop-blur-xl">
+    <footer className="border-t border-white/10 bg-black/60">
       {/* Main content */}
       <div className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-8 lg:px-8">
         <div className="grid gap-7 md:grid-cols-3 md:gap-6 lg:gap-10">
@@ -22,7 +25,7 @@ export function Footer() {
 
           {/* Navigation column */}
           <div>
-            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-500">
+            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-400">
               Навигация
             </p>
             <nav className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2 md:grid-cols-1 md:gap-y-1.5">
@@ -40,7 +43,7 @@ export function Footer() {
 
           {/* Contact column */}
           <div>
-            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-500">
+            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-400">
               Контакты
             </p>
             <div className="mt-2.5 space-y-2.5">
@@ -51,7 +54,7 @@ export function Footer() {
                 <span className="block text-[0.96rem] font-semibold leading-none text-slate-200 transition group-hover:text-white">
                   {CONTACT_INFO.phoneDisplay}
                 </span>
-                <span className="mt-1 block text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-500">
+                <span className="mt-1 block text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-400">
                   {CONTACT_INFO.phoneContactName}
                 </span>
               </a>
@@ -69,12 +72,7 @@ export function Footer() {
                   aria-label="WhatsApp"
                   className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] transition hover:border-white/20 hover:bg-white/[0.08]"
                 >
-                  <img
-                    src="/icons/whatsapp.svg"
-                    alt=""
-                    aria-hidden="true"
-                    className="h-4 w-4 object-contain"
-                  />
+                  <Image src="/icons/whatsapp.svg" alt="" aria-hidden="true" width={20} height={20} unoptimized className="h-4 w-4 object-contain" />
                 </a>
                 <a
                   href={CONTACT_INFO.telegramUrl}
@@ -83,12 +81,7 @@ export function Footer() {
                   aria-label="Telegram"
                   className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] transition hover:border-white/20 hover:bg-white/[0.08]"
                 >
-                  <img
-                    src="/icons/telegram.svg"
-                    alt=""
-                    aria-hidden="true"
-                    className="h-4 w-4 object-contain"
-                  />
+                  <Image src="/icons/telegram.svg" alt="" aria-hidden="true" width={20} height={20} unoptimized className="h-4 w-4 object-contain" />
                 </a>
               </div>
             </div>
@@ -99,10 +92,13 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/[0.07]">
         <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p className="text-[0.72rem] text-slate-500">
-            © 2026 Volvo Titan. Все права защищены.
+          <p className="text-[0.72rem] text-slate-400">
+            © 2026 Volvo Titan. Все права защищены.{" "}
+            <Link href="/privacy" className="underline underline-offset-2 transition hover:text-white">
+              Политика конфиденциальности
+            </Link>
           </p>
-          <p className="text-[0.72rem] text-slate-600">
+          <p className="text-[0.72rem] text-slate-400">
             {CONTACT_INFO.workHours.map((h, i) => (
               <span key={h.label}>
                 {i > 0 && " · "}

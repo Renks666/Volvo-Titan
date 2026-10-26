@@ -2,6 +2,8 @@ import { ArrowRight } from "lucide-react";
 import { existsSync } from "node:fs";
 import path from "node:path";
 
+import { buttonVariants } from "@/components/ui/button";
+
 import { SectionHeading } from "./section-heading";
 import { WorksGallery } from "./works-gallery";
 
@@ -39,7 +41,7 @@ export function WorksSection() {
         <div className="mt-7 flex justify-center sm:mt-10">
           <a
             href="#lead"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--highlight)] px-7 py-3.5 text-sm font-semibold text-[#050913] transition hover:bg-[var(--highlight)]/90"
+            className={buttonVariants({ className: "gap-2" })}
           >
             Узнать стоимость ремонта
             <ArrowRight className="h-4 w-4" />

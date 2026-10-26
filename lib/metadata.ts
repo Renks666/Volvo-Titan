@@ -38,3 +38,45 @@ export function createLocalBusinessSchema() {
     areaServed: "Москва",
   };
 }
+
+export function createFaqSchema(items: ReadonlyArray<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}
+
+export function createServiceSchema(input: { name: string; description: string; path: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: input.name,
+    description: input.description,
+    url: `${SITE_URL}${input.path}`,
+    areaServed: "Москва",
+    provider: {
+      "@type": "AutoRepair",
+      name: CONTACT_INFO.companyName,
+      url: SITE_URL,
+      telephone: CONTACT_INFO.phoneDisplay,
+    },
+  };
+}
+
+export function createBreadcrumbSchema(items: ReadonlyArray<{ name: string; path: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
+  };
+}

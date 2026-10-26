@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s | Volvo Titan",
   },
   description:
-    "Volvo Titan: ремонт Volvo в Москве с 1995 года. Диагностика, ТО, ремонт агрегатов и CRM для обработки заявок.",
+    "Volvo Titan: ремонт Volvo в Москве с 1995 года. Диагностика, ТО, ремонт агрегатов, электрика и ходовая.",
   keywords: [
     "ремонт volvo москва",
     "автосервис volvo",
@@ -78,6 +78,12 @@ export default function RootLayout({
       className={`${manrope.variable} ${manropeCyrillic.variable} ${plusJakartaSans.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
+        <a
+          href="#top"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:!text-slate-950"
+        >
+          Перейти к содержимому
+        </a>
         <BackgroundScene />
         {children}
         {process.env.NEXT_PUBLIC_YM_ID && (
@@ -91,6 +97,7 @@ export default function RootLayout({
             />
             <noscript>
               <div>
+                {/* eslint-disable-next-line @next/next/no-img-element -- пиксель Метрики для noscript */}
                 <img
                   src={`https://mc.yandex.ru/watch/${process.env.NEXT_PUBLIC_YM_ID}`}
                   style={{ position: "absolute", left: "-9999px" }}

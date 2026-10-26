@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 import { Reveal } from "./reveal";
-import { useBodyScrollLock, useEscapeKey } from "@/components/ui/overlay";
+import { useBodyScrollLock, useEscapeKey, useFocusTrap } from "@/components/ui/overlay";
 
 export type WorkItem = {
   src: string;
@@ -55,8 +55,12 @@ export function WorksGallery({ works }: WorksGalleryProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen, goPrev, goNext]);
 
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
   useBodyScrollLock(isOpen);
   useEscapeKey(isOpen, closeLightbox);
+  useFocusTrap({ active: isOpen, containerRef: dialogRef, initialFocusRef: closeButtonRef });
 
   const imageWorks = works.filter((w) => w.exists);
 
@@ -64,27 +68,29 @@ export function WorksGallery({ works }: WorksGalleryProps) {
     <>
       {/* Mobile: horizontal snap scroll — no Reveal wrappers to avoid float glitch */}
       <div className="-mx-4 mt-7 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:hidden">
-        {works.map((work, index) => (
+        {works.map((work) => (
           <div
             key={work.src}
             className="glass-panel metal-border w-[82vw] max-w-[18rem] shrink-0 snap-center overflow-hidden rounded-[var(--landing-card-radius)]"
-            onClick={() => work.exists && openLightbox(imageWorks.indexOf(work))}
-            style={{ cursor: work.exists ? "pointer" : "default" }}
           >
             {work.exists ? (
-              <div className="relative aspect-[4/3]">
+              <button
+                type="button"
+                className="relative block aspect-[4/3] w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[rgba(126,164,255,0.65)]"
+                onClick={() => openLightbox(imageWorks.indexOf(work))}
+                aria-label={`Открыть фото: ${work.title}, ${work.model}`}
+              >
                 <Image
                   src={work.src}
-                  alt={`${work.title} · ${work.model}`}
+                  alt=""
                   fill
                   sizes="82vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-black/0 transition-colors hover:bg-black/10" />
-              </div>
+              </button>
             ) : (
               <div className="flex aspect-[4/3] items-center justify-center border-b border-dashed border-white/15 bg-white/[0.04]">
-                <p className="text-[0.65rem] uppercase tracking-[0.2em] text-slate-500">
+                <p className="text-[0.65rem] uppercase tracking-[0.2em] text-slate-400">
                   Фото работы
                 </p>
               </div>
@@ -102,23 +108,26 @@ export function WorksGallery({ works }: WorksGalleryProps) {
         {works.map((work, index) => (
           <Reveal key={work.src} delay={index * 0.08}>
             <div
-              className="glass-panel metal-border overflow-hidden rounded-[var(--landing-card-radius)] sm:rounded-[2rem]"
-              onClick={() => work.exists && openLightbox(imageWorks.indexOf(work))}
-              style={{ cursor: work.exists ? "pointer" : "default" }}
+              className="glass-panel metal-border overflow-hidden rounded-[var(--landing-card-radius)] sm:rounded-[1.5rem]"
             >
               {work.exists ? (
-                <div className="relative aspect-[4/3]">
+                <button
+                  type="button"
+                  className="relative block aspect-[4/3] w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[rgba(126,164,255,0.65)]"
+                  onClick={() => openLightbox(imageWorks.indexOf(work))}
+                  aria-label={`Открыть фото: ${work.title}, ${work.model}`}
+              >
                   <Image
                     src={work.src}
-                    alt={`${work.title} · ${work.model}`}
+                    alt=""
                     fill
                     sizes="(max-width: 768px) 45vw, 25vw"
-                    className="object-cover transition-transform duration-500 hover:scale-105"
+                    className="object-cover transition-transform duration-500 hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100"
                   />
-                </div>
+                </button>
               ) : (
                 <div className="flex aspect-[4/3] items-center justify-center border-b border-dashed border-white/15 bg-white/[0.04]">
-                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-slate-500">
+                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-slate-400">
                     Фото работы
                   </p>
                 </div>
@@ -149,6 +158,11 @@ export function WorksGallery({ works }: WorksGalleryProps) {
 
             {/* Content */}
             <motion.div
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Просмотр фото работы"
+              tabIndex={-1}
               className="fixed inset-0 z-[91] flex items-center justify-center p-4"
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -179,7 +193,7 @@ export function WorksGallery({ works }: WorksGalleryProps) {
                       {imageWorks[lightboxIndex].model}
                     </p>
                   </div>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-400">
                     {lightboxIndex + 1} / {imageWorks.length}
                   </p>
                 </div>
@@ -187,6 +201,7 @@ export function WorksGallery({ works }: WorksGalleryProps) {
 
               {/* Close button */}
               <button
+                ref={closeButtonRef}
                 type="button"
                 className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/60 text-white backdrop-blur-sm transition hover:bg-white/15"
                 onClick={closeLightbox}
